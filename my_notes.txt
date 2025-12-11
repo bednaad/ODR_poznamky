@@ -1,0 +1,1610 @@
+25. 9. 25
+
+
+
+
+            1
+1      Separace proměnných
+Tato metoda se použı́vá pro rovnice tvaru y ′ = g(x)h(y).
+Obecný postup:
+    1. Najdeme konstantnı́ řešenı́ (kde h(y) = 0).
+                               1
+    2. Separujeme proměnné: h(y) dy = g(x)dx.
+                               R 1         R
+    3. Integrujeme obě strany: h(y) dy = g(x)dx + C.
+    4. Pokud je to možné, vyjádřı́me y explicitně.
+
+1.1     Přı́klad 1: y ′ = x(y − 1)
+Zadánı́: Nalezněte řešenı́ splňujı́cı́ počátečnı́ podmı́nku y(−20) = 0.
+1. **Separace:**
+                                                       dy
+                                                          = xdx
+                                                      y−1
+(Všimneme si, že y = 1 je konstantnı́ řešenı́, ale to nesplňuje podmı́nku y(−20) = 0).
+2. **Integrace:**                                Z                    Z
+                                                       dy
+                                                          =               xdx
+                                                      y−1
+                                                                      x2
+                                                ln |y − 1| =             +C
+                                                                      2
+
+3. **Úprava na explicitnı́ tvar:**
+                                                            x2                  x2
+                                            |y − 1| = e 2 +C = eC · e 2
+Položme K = ±eC .
+                                                      x2                             x2
+                                        y − 1 = Ke 2 =⇒ y = 1 + Ke 2
+
+4. **Dosazenı́ počátečnı́ podmı́nky y(−20) = 0:**
+                                                           (−20)2
+                                          0 = 1 + Ke         2        = 1 + Ke200
+
+                                                      K = −e−200
+
+5. **Výsledek:**
+                                                                     x2         x2
+                                      y(x) = 1 − e−200 · e 2 = 1 − e 2 −200
+
+1.2     Přı́klad 2: y ′ = xy 3
+Zadánı́: Nalezněte řešenı́ pro y(0) = 1.
+1. **Separace:**
+                                           dy
+                                              = xdx =⇒ y −3 dy = xdx
+                                           y3
+
+2. **Integrace:**
+                                                     y −2   x2
+                                                          =    +C
+                                                     −2     2
+                                                       1     x2
+                                                  −      2
+                                                           =    +C
+                                                      2y     2
+Vynásobı́me −2:
+                                     1
+                                        = −x2 − 2C           (označme C2 = −2C)
+                                     y2
+
+
+
+                                                                 2
+                                                                   1
+                                                        y2 =
+                                                               C 2 − x2
+
+3. **Explicitnı́ tvar a podmı́nka:**                          r
+                                                                      1
+                                                     y=±
+                                                                  C 2 − x2
+Pro y(0) = 1 volı́me kladnou větev:
+                                                    r
+                                                           1
+                                               1=               =⇒ C2 = 1
+                                                         C2 − 0
+                             q
+                                   1
+**Výsledek:** y(x) =            1−x2 , definováno pro x ∈ (−1, 1).
+
+
+
+2     Bernoulliho rovnice a metoda y = uv
+Pro rovnice, které nejsou separovatelné, můžeme zkusit substituci y(x) = u(x)v(x).
+
+2.1     Přı́klad 3: y ′ − xy = 2x3
+Jde o lineárnı́ rovnici, kterou v poznámkách řešı́me metodou součinu funkcı́ (Bernoulliho metodou).
+1. **Dosazenı́ y = uv:**
+                                                       y ′ = u′ v + uv ′
+                                                                  uv
+                                                 (u′ v + uv ′ ) −     = 2x3
+                                                                   x
+                                                                  v
+                                                  u′ v + u(v ′ − ) = 2x3
+                                                                  x
+
+2. **Nulovánı́ závorky (hledáme v):**
+
+                                                       v        v′   1
+                                                v′ −     = 0 =⇒    =
+                                                       x        v    x
+                                                ln |v| = ln |x| =⇒ v = x
+
+3. **Výpočet u (dosadı́me v = x):**
+                                                           u′ · x = 2x3
+                                                            u′ = 2x2
+                                                     Z
+                                                                    2
+                                                u=         2x2 dx = x3 + C
+                                                                    3
+
+4. **Celkové řešenı́:**                                       
+                                                           2 3        2
+                                         y =u·v =            x + C x = x4 + Cx
+                                                           3          3
+
+3     Lineárnı́ ODR 1. řádu
+Tvar: y ′ + a(x)y = g(x).
+
+3.1     Metoda 1: Variace konstant
+Postup: 1. Vyřešı́me homogennı́ rovnici y ′ + a(x)y = 0 (separacı́). 2. Konstantu C nahradı́me funkcı́ C(x)
+a dosadı́me do původnı́ rovnice.
+
+
+
+
+                                                                3
+3.1.1    Přı́klad 4: xy ′ + 3y = x2
+Upravı́me dělenı́m x: y ′ + x3 y = x.
+1. **Homogennı́ řešenı́:**
+                                        3                                C
+                                 y ′ = − y =⇒ ln |y| = −3 ln |x| =⇒ yh = 3
+                                        x                               x
+
+2. **Variace:** Hledáme y = C(x)             ′   ′
+                              x3 . Derivace: y = C (x)x
+                                                        −3
+                                                           − 3C(x)x−4 . Dosazenı́ do xy ′ + 3y = x2 :
+                                         x(C ′ x−3 − 3Cx−4 ) + 3(Cx−3 ) = x2
+                                           C ′ x−2 − 3Cx−3 + 3Cx−3 = x2
+                                                C ′ x−2 = x2 =⇒ C ′ = x4
+                                                             x5
+                                                      C(x) =    +K
+                                                              5
+3. **Výsledek:**                                 5
+                                                                x2
+                                                        
+                                                  x       1         K
+                                          y(x) =     +K     3
+                                                              =    + 3
+                                                   5      x     5   x
+
+3.2     Metoda 2: Integračnı́ faktor
+                                                         R
+Celou rovnici vynásobı́me faktorem µ(x) = e a(x)dx , čı́mž převedeme levou stranu na derivaci součinu.
+
+3.2.1    Přı́klad 5: y ′ + x1 y = x12
+1. **Faktor:** a(x) = x1 =⇒ µ(x) = eln |x| = x. 2. **Násobenı́:**
+                                                                            1
+                                                     x · y′ + 1 · y =
+                                                                            x
+                                                                       1
+                                                             (xy)′ =
+                                                                       x
+3. **Integrace:**
+                                                                                ln |x| + C
+                                         xy = ln |x| + C =⇒ y =
+                                                                                     x
+
+3.2.2    Přı́klad 6: Goniometrická rovnice
+Zadánı́: y ′ + y tan x = 2 sin x cos x (s podmı́nkou y(0) = ...).
+1. **Faktor:**
+                                                                           sin x
+                                                    a(x) = tan x =
+                                                                           cos x
+                                                Z
+                                                   sin x
+                                                         dx = − ln | cos x|
+                                                   cos x
+                                                                          1
+                                                µ(x) = e− ln | cos x| =
+                                                                        cos x
+2. **Násobenı́ rovnice faktorem cos1 x :**
+                                                 1      sin x 2 sin x cos x
+                                          y′         +y 2 =
+                                               cos x   cos x      cos x
+Levá strana je derivace součinu (y · cos1 x )′ .
+                                                      y ′
+                                                            = 2 sin x
+                                                      cos x
+
+3. **Integrace:**                                    Z
+                                           y
+                                               =         2 sin xdx = −2 cos x + C
+                                         cos x
+                                               y(x) = −2 cos2 x + C cos x
+
+
+                                                                 4
+2. 10. 25
+
+
+
+
+            5
+4       Teorie: Existence a Jednoznačnost
+4.1     Picard-Lindelöfova věta
+Uvažujme počátečnı́ problém:
+                                                     y ′ = f (x, y),          y(x0 ) = y0
+               2
+Necht’ G ⊆ R je oblast obsahujı́cı́ bod (x0 , y0 ).
+    • **Existence:** Pokud je f (x, y) spojitá na G, řešenı́ existuje.
+    • **Jednoznačnost:** Pokud je navı́c parciálnı́ derivace ∂f
+                                                               ∂y spojitá na G, je toto řešenı́ jediné.
+
+
+4.2     Protipřı́klad (Porušenı́ jednoznačnosti)
+                                                                         p
+                                                                  y′ =        |y|
+    • Funkce f (x, y) =
+                            p
+                                |y| je spojitá všude.
+                    sgn(y)
+    • Derivace ∂f
+               ∂y =
+                     √ nenı́ definována pro y = 0.
+                        2   |y|
+
+    • **Důsledek:** Bodem (x0 , 0) může procházet vı́ce řešenı́ (např. triviálnı́ y = 0 a parabolické větve).
+
+
+5       Metody řešenı́ ODR 1. řádu
+5.1     Separace proměnných
+                                           dy
+Tvar: y ′ = g(x)h(y). Postup:
+                                      R              R
+                                          h(y) =         g(x)dx.
+
+5.1.1    Přı́klad 1: y ′ = |y|
+Pro y > 0:                        Z              Z
+                                      dy
+                                         =           dx =⇒ ln |y| = x + C =⇒ y = Kex
+                                       y
+Pro y < 0:                    Z              Z
+                                   dy
+                                      =          dx =⇒ − ln |y| = x + C =⇒ y = Ke−x
+                                   −y
+                              p
+5.1.2    Přı́klad 2: y ′ =       1 − y2
+                                                           Z                    Z
+                                                                   dy
+                                                                p       =           dx
+                                                                 1 − y2
+                                                               arcsin y = x + C
+                                                               y = sin(x + C)
+Podmı́nka existence: x + C ∈ (− π2 , π2 ).
+
+5.2     Lineárnı́ rovnice a metoda y = uv
+5.2.1    Přı́klad: xy ′ − y = 3x2 ,         y(0) = 1
+Řešı́me pomocı́ substituce y = u(x) · v(x). Derivace součinu je y ′ = u′ v + uv ′ .
+1. **Dosazenı́ do rovnice:**
+                                                         x(u′ v + uv ′ ) − uv = 3x2
+Roznásobı́me a vytkneme u ze členů obsahujı́cı́ch v:
+
+                                                         xu′ v + xuv ′ − uv = 3x2
+
+                                                         xu′ v + u(xv ′ − v ) = 3x2
+                                                                   | {z }
+                                                                         =0
+
+
+
+
+                                                                        6
+2. **Výpočet v(x) (řešenı́ závorky):** Položı́me závorku rovnu nule:
+                                                                  dv
+                                            xv ′ − v = 0 =⇒ x        =v
+                                                                  dx
+Separace proměnných:
+                                     dv   dx
+                                        =    =⇒ ln |v| = ln |x| =⇒ v = x
+                                      v   x
+
+3. **Výpočet u(x) (dosazenı́ v):** Vrátı́me se k rovnici xu′ v = 3x2 a dosadı́me v = x:
+
+                                                 x · u′ · x = 3x2
+
+                              x2 u′ = 3x2    (zde se často chybuje v mocninách)
+             2
+Vydělı́me x (pro x ̸= 0):
+                                                        u′ = 3
+Integracı́ zı́skáme u:                            Z
+                                              u=       3 dx = 3x + C
+
+4. **Obecné řešenı́ (y = uv):**
+                                         y(x) = (3x + C) · x = 3x2 + Cx
+
+5. **Počátečnı́ podmı́nka y(0) = 1:** Dosadı́me x = 0:
+
+                                            y(0) = 3(0)2 + C(0) = 0
+
+To se nerovná zadané hodnotě 1. Závěr: Úloha nemá řešenı́ (singulárnı́ bod v x = 0, integrálnı́ křivky
+procházejı́ počátkem 0, nikoliv bodem [0,1]).
+
+
+6      Aplikace ODR (Fyzika a Populace)
+6.1      Dynamika (Odpor vzduchu)
+Z Newtonova zákona F = ma:
+    1. **Pouze odpor** (F = −kv):
+                                                                              k
+                                            mv ′ = −kv =⇒ v(t) = v0 e− m t
+
+    2. **Odpor + Gravitace** (F = −kv − mg):
+                                                              k
+                                                       v′ +     v = −g
+                                                              m
+                                     k
+       Řešenı́: v(t) = − mg
+                           k + Ce
+                                 −mt
+                                     .
+
+6.2      Mı́chacı́ model (Nádrž)
+                                            V · c′ = qin Cin − qout c(t)
+Pokud qin = qout = q:
+                                                       q    q
+                                                c′ +     c = Cin
+                                                       V    V
+
+6.3      Malthusův model (Exponenciálnı́ růst)
+Základnı́ rovnice: Rychlost růstu je úměrná velikosti populace.
+
+                                                  P ′ (t) = kP (t)
+
+Řešenı́:
+                                                   P (t) = P0 ekt
+
+
+                                                          7
+6.3.1     Konkrétnı́ přı́klad z poznámek (výpočet k)
+Zadánı́: Populace vzrostla o 10 % za 10 hodin. Jaké je k?
+                                                          P (10) = 1.1P0
+                                                      P0 ek·10 = 1.1P0
+                                                   e10k = 1.1
+                                                           ln(1.1)
+                                    10k = ln(1.1) =⇒ k =           ≈ 0.009531
+                                                             10
+
+6.3.2     Aplikace na COVID (data z poznámek)
+Poznámky uvádı́ data z roku 2020:
+    • 22.8.: 234 přı́padů (P0 )
+    • Předpoklad: Exponenciálnı́ růst s konstantou k ≈ 0.00953 (nebo podobnou vypočtenou z dat).
+    • Predikce pro 21.9. (cca 30 dnı́):
+                                                  P (30) = 234 · e0.00953·30 ≈ . . .
+        (Poznámky obsahujı́ konkrétnı́ numerické výpočty predikcı́ pro různé dny).
+
+6.4      Logistický model (Omezený růst)
+Růst je brzděn kapacitou prostředı́ (K = 1).
+                                                          y ′ = y(1 − y)
+                                dy                                                    1
+                                                                                          = y1 + 1−y
+                                                                                                  1
+                          R              R
+Řešenı́: 1. Separace:       y(1−y) =       dx. 2. Rozklad na parciálnı́ zlomky: y(1−y)            . 3. Integrace:
+
+                                                 ln |y| − ln |1 − y| = x + C
+                                                            y
+                                                     ln        =x+C
+                                                           1−y
+4. Odlogaritmovánı́ a úprava:
+                                                                  Kex
+                                                      y(x) =
+                                                                1 + Kex
+(Grafem je tzv. S-křivka / sigmoida).
+
+
+7       Kvalitativnı́ teorie - Stabilita
+Uvažujme autonomnı́ rovnici y ′ = f (y). Stacionárnı́ body jsou řešenı́ rovnice f (y) = 0.
+
+7.1      Určenı́ stability z fázové přı́mky
+Analyzujeme znaménko f (y) v okolı́ stacionárnı́ho bodu c:
+    1. Stabilnı́ (II):
+          • Nalevo od c: f (y) > 0 (řešenı́ roste k c).
+          • Napravo od c: f (y) < 0 (řešenı́ klesá k c).
+          • Šipky směřujı́ **k bodu**.
+    2. Nestabilnı́ (I):
+          • Nalevo od c: f (y) < 0 (řešenı́ klesá pryč).
+          • Napravo od c: f (y) > 0 (řešenı́ roste pryč).
+          • Šipky směřujı́ **od bodu**.
+    3. Semistabilnı́: Znaménko se neměnı́ (např. inflexnı́ bod).
+
+
+                                                                8
+7.2    Analýza logistické rovnice y ′ = y(1 − y)
+Funkce f (y) = y − y 2 (parabola otočená dolů). Kořeny: y = 0 a y = 1.
+   • **Bod 0:** f (y) přecházı́ z mı́nusu do plusu =⇒ **Nestabilnı́**.
+   • **Bod 1:** f (y) přecházı́ z plusu do mı́nusu =⇒ **Stabilnı́**.
+
+
+9. 10. 25
+
+
+
+
+                                                     9
+8     Úvod do lineárnı́ch systémů
+Uvažujme systém lineárnı́ch diferenciálnı́ch rovnic 1. řádu s konstantnı́mi koeficienty:
+
+                                                    X ′ = AX
+
+kde X(t) je vektor neznámých funkcı́ a A je čtvercová matice n × n.
+Analogie se skalárnı́ rovnicı́:
+    • Skalárnı́ rovnice: y ′ = ay =⇒ y(t) = Ceat .
+    • Systém rovnic: X ′ = AX =⇒ X(t) = etA C (kde etA je maticová exponenciála).
+
+
+9     Řešenı́ pomocı́ vlastnı́ch čı́sel a vektorů
+Hledáme řešenı́ ve tvaru X(t) = eλt v. Dosazenı́m do X ′ = AX zı́skáme podmı́nku:
+
+                                                       Av = λv
+
+To znamená, že λ je vlastnı́ čı́slo a v je vlastnı́ vektor matice A.
+
+9.1     Přı́klad 1: Reálná různá vlastnı́ čı́sla
+Zadánı́:                                                       
+                                                ′          10 −6
+                                              X =                  X
+                                                           18 −11
+
+1. **Charakteristická rovnice:**
+                                                        10 − λ     −6
+                                       det(A − λI) =                     =0
+                                                          18     −11 − λ
+
+                     (10 − λ)(−11 − λ) − (−108) = λ2 + λ − 110 + 108 = λ2 + λ − 2 = 0
+                                               (λ + 2)(λ − 1) = 0
+Vlastnı́ čı́sla: λ1 = 1,   λ2 = −2.
+2. **Vlastnı́ vektory:**
+    • Pro λ1 = 1:                                         
+                                                            9 −6
+                                                           vx   0
+                                         (A − I)v =           =
+                                                           18 −12
+                                                           vy   0
+                                                         
+                                                         2
+      Rovnice 9vx − 6vy = 0 =⇒ 3vx = 2vy . Volı́me v1 =     .
+                                                         3
+    • Pro λ2 = −2:                                          
+                                                    12 −6
+                                    (A + 2I)v =              v=0
+                                                    18 −9
+                                                       
+                                                       1
+      Rovnice 2vx − vy = 0 =⇒ vy = 2vx . Volı́me v2 =    .
+                                                       2
+3. **Obecné řešenı́:**                                            
+                                                         2             1
+                                         X(t) = C1 et       + C2 e−2t
+                                                         3             2
+                                                                                           
+                                                                         2t              −2t 1
+Poznámka k fundamentálnı́mu systému: Vektory X1 (t) = e                   a X2 (t) = e          jsou lineárně
+                                                                         3                   2
+nezávislá řešenı́. Tyto vektory tvořı́ tzv. fundamentálnı́ systém řešenı́. Fundamentálnı́ matice Φ(t)
+by měla tyto vektory jako své sloupce.
+
+
+
+
+                                                            10
+10      Maticová exponenciála etA
+10.1     Definice a vlastnosti
+Maticová exponenciála je definována mocninnou řadou (analogicky k ex ):
+                                               ∞ k k
+                                               X t A                                 t2 A2
+                                   etA =                        = I + tA +                 + ...
+                                                      k!                               2!
+                                               k=0
+
+
+Klı́čové vlastnosti:
+      d tA
+   1. dt e = AetA
+   2. e(t+s)A = etA esA
+   3. e0 = I (jednotková matice)
+   4. Je vždy invertibilnı́: (etA )−1 = e−tA
+
+10.2     Řešenı́ počátečnı́ úlohy a vztah k vlastnı́m vektorům
+Pro systém X ′ = AX s podmı́nkou X(0) = X0 je řešenı́ dáno vzorcem:
+
+                                                        X(t) = etA X0
+
+Důležitý vztah pro vlastnı́ vektor uj : Pokud uj je vlastnı́ vektor přı́slušný vlastnı́mu čı́slu λj , pak
+platı́:
+                                            eAt uj = eλj t uj
+Odvozenı́ pomocı́ řady (z poznámek):
+                                                                               (A − λj I)2 t2
+                                                                                                    
+                 At       λj t (A−λj I)t             λj t
+                e uj = e     e              uj = e           I + (A − λj I)t +                + . . . uj
+                                                                                    2!
+Protože (A − λj I)uj = 0 (z definice vlastnı́ho vektoru), všechny členy řady kromě prvnı́ho vypadnou.
+
+                                            = eλj t (I · uj + 0 + . . . ) = eλj t uj
+
+
+11      Výpočet etA
+11.1     Metoda 1: Jordanův tvar (Násobná vlastnı́ čı́sla)
+Pokud má matice násobná vlastnı́ čı́sla a nelze ji diagonalizovat, použijeme rozklad etA = eλt eN t .
+Přı́klad 2:                                                                
+                                                                        1   1
+                                                        A=
+                                                                        0   1
+                                                                                                   
+                                                                                            0     1
+Vlastnı́ čı́slo λ = 1 (násobnost 2). Matice A = I + N , kde N =                                     .
+                                                                                            0     0
+                                                                                       t
+                                                                                                tet
+                                                                                                  
+                                       tA       tI tN       1   t           t          e
+                                   e        =e e        =e                          =
+                                                            0               1          0         et
+
+11.2     Metoda 2: Diagonalizace
+Pokud je A diagonalizovatelná, platı́ A = W ΛW −1 , a tedy:
+                                                        λt                                   
+                                                        e 1                            0
+                               etA = W etΛ W −1 = W                                               W −1
+                                                          0                           eλ2 t
+
+(V poznámkách značeno také jako W Λ(t)W −1 , kde Λ(t) = diag(eλi t )).
+                                                                                                                            
+                                                            ′                           ′                            −2   −3
+Přı́klad 3 (kompletnı́ výpočet): Systém: x = −2x − 3y,                             y = 6x + 7y. Matice A =                 .
+                                                                                                                      6    7
+
+                                                                    11
+   1. **Vlastnı́ čı́sla:** λ1 = 1, λ2 = 4.
+   2. **Vlastnı́ vektory (tvořı́ matici W ):**
+                                               
+                          −3 −3                  1
+        • Pro λ1 = 1:                  =⇒ v1 =      .
+                           6      6              −1
+                                               
+                          −6 −3                  1
+        • Pro λ2 = 4:                  =⇒ v2 =      .
+                           6      3              −2
+   3. **Sestavenı́ matic:**                                                t         
+                                                        1    1               e     0
+                                          W =                    ,   Λ(t) =
+                                                       −1   −2               0    e4t
+
+   4. **Inverznı́ matice W −1 :**
+                                              det(W ) = 1(−2) − 1(−1) = −1
+                                                                         
+                                             −1    1 −2 −1            2   1
+                                            W =                  =
+                                                  −1 1       1       −1 −1
+
+   5. **Výpočet etA :**                                    t                
+                                            tA       1     1     e    0      2   1
+                                        e        =
+                                                    −1 −2        0 e4t      −1 −1
+                                                     t
+                                                             e4t
+                                                                             
+                                                       e               2     1
+                                                  =
+                                                      −et −2e4t       −1 −1
+                                                       2et − e4t      et − e4t
+                                                                              
+                                                  =
+                                                     −2et + 2e4t −et + 2e4t
+
+
+12      Fundamentálnı́ matice Φ(t)
+Fundamentálnı́ matice Φ(t) je matice, jejı́ž sloupce tvořı́ lineárně nezávislá řešenı́ systému. Obecné řešenı́
+lze zapsat jako X(t) = Φ(t)K.
+Vztah k maticové exponenciále:
+                                                       etA = Φ(t)Φ(0)−1
+Pokud zvolı́me počátečnı́ podmı́nku v t = 0 tak, že Φ(0) = I, pak přı́mo Φ(t) = etA .
+Výpočet konstanty K z počátečnı́ch podmı́nek: Pokud máme zadán počátečnı́ vektor X(0) = I (v
+poznámkách značeno I nebo L), pak konstantu K určı́me vztahem:
+
+                                                        K = Φ−1 (0) · I
+
+
+13      Cayley-Hamiltonova věta a polynomy
+Každá čtvercová matice je kořenem svého charakteristického polynomu P (λ) = det(A − λI) = 0.
+
+                                                  P (A) = 0
+                         
+                     1 1
+Napřı́klad pro A =         je P (λ) = (λ − 1)2 = λ2 − 2λ + 1. Platı́: A2 − 2A + I = 0, tedy A2 = 2A − I.
+                     0 1
+Tato vlastnost umožňuje vyjádřit etA jako polynom matice A stupně n − 1:
+
+                                                   etA = b0 (t)I + b1 (t)A
+
+
+16. 10. 25
+
+
+
+
+                                                              12
+14      Násobná vlastnı́ čı́sla (Jordanův tvar)
+Pokud má matice A násobné vlastnı́ čı́slo λ a k němu existuje pouze jeden lineárně nezávislý vlastnı́
+vektor, musı́me pro sestavenı́ fundamentálnı́ho systému hledat tzv. **zobecněné vlastnı́ vektory**.
+
+14.1        Postup hledánı́ řešenı́
+Necht’ λ je dvojnásobné vlastnı́ čı́slo.
+   1. **Prvnı́ řešenı́:** Najdeme vlastnı́ vektor K řešenı́m rovnice:
+
+                                                       (A − λI)K = 0
+
+       Prvnı́ řešenı́ systému je pak X1 (t) = Keλt .
+   2. **Druhé řešenı́:** Hledáme druhé lineárně nezávislé řešenı́ ve tvaru:
+
+                                                   X2 (t) = (Kt + P )eλt
+
+       Dosazenı́m do rovnice X ′ = AX zı́skáme podmı́nku pro vektor P (zobecněný vlastnı́ vektor):
+
+                                                       (A − λI)P = K
+
+Obecné řešenı́ je pak lineárnı́ kombinacı́:
+
+                                         X(t) = C1 Keλt + C2 (Kt + P )eλt
+
+
+14.2        Přı́klad 1 (z poznámek)
+Zadánı́:                                                              
+                                                   ′  3             −18
+                                                 X =                      X
+                                                      2             −9
+
+1. **Vlastnı́ čı́sla:**
+
+                           det(A − λI) = λ2 + 6λ + 9 = (λ + 3)2 = 0 =⇒ λ1,2 = −3
+
+2. **Vlastnı́ vektor K:**                              
+                                                     
+                                               −18   k1   06
+                              (A + 3I)K =               =
+                                               −6    k2   02
+                                                   
+                                                   3
+2k1 − 6k2 = 0 =⇒ k1 = 3k2 . Volı́me k2 = 1 =⇒ K =    .
+                                                   1
+3. **Zobecněný vlastnı́ vektor P :** Hledáme P řešenı́m (A + 3I)P = K:
+                                                     
+                                            6 −18       p1       3
+                                                             =
+                                            2 −6        p2       1
+                                                                            
+                                                                          1/2
+2p1 − 6p2 = 1. Volı́me p2 = 0 =⇒ p1 = 1/2. Tedy P =                            .
+                                                                           0
+4. **Výsledek:**                                                    
+                                                   3              3    1/2
+                                X(t) = C1 e−3t        + C2 e−3t t   +
+                                                   1              1     0
+
+
+
+
+                                                               13
+15      Komplexnı́ vlastnı́ čı́sla
+Necht’ λ = α + iβ je vlastnı́ čı́slo a v = u + iw je přı́slušný vlastnı́ vektor. Reálný fundamentálnı́ systém
+zı́skáme rozkladem komplexnı́ho řešenı́ na reálnou a imaginárnı́ část.
+Obecný tvar řešenı́:
+
+                     X(t) = C1 eαt (u cos(βt) − w sin(βt)) + C2 eαt (u sin(βt) + w cos(βt))
+
+15.1        Přı́klad 2 (z poznámek)
+Zadánı́:                                                                
+                                                   ′            1        1
+                                                X =                         X
+                                                                −1       1
+
+1. **Vlastnı́ čı́sla:**
+                              (1 − λ)2 + 1 = 0 =⇒ λ1,2 = 1 ± i                  (α = 1, β = 1)
+
+2. **Vlastnı́ vektor pro λ = 1 + i:**
+                                                                            
+                                                                    −i    1   v1
+                                    (A − (1 + i)I)v =                            =0
+                                                                    −1    −i  v2
+
+−iv1 + v2 = 0 =⇒ v2 = iv1 . Volı́me v1 = 1.
+                                                             
+                                               1          1       0
+                                         v=         =        +i
+                                                i         0       1
+                                                              
+                                  1                             0
+Tedy reálná část vektoru u =     a imaginárnı́ část w =      .
+                                  0                             1
+3. **Sestavenı́ obecného řešenı́:** Dosadı́me do obecného vzorce:
+                                                                                
+                                 t     1          0               t   1           0
+                   X(t) = C1 e           cos t −     sin t + C2 e        sin t +     cos t
+                                       0          1                   0           1
+
+Po úpravě vektorů:                                                            
+                                                   t        cos t           t sin t
+                                     X(t) = C1 e                     + C2 e
+                                                           − sin t            cos t
+
+
+16      Nehomogennı́ systémy (Variace konstant)
+Uvažujme systém:
+                                                 X ′ = AX + F (t)
+Obecné řešenı́ má tvar X(t) = XH (t) + XP (t), kde XH je řešenı́ homogennı́ho systému a XP je parti-
+kulárnı́ řešenı́.
+
+16.1        Metoda variace konstant
+Necht’ Φ(t) je fundamentálnı́ matice homogennı́ho systému (XH = Φ(t)C). Hledáme řešenı́ ve tvaru
+XP (t) = Φ(t)U (t), kde U (t) je vektorová funkce.
+Dosazenı́m do rovnice zı́skáme vztah pro derivaci U (t):
+
+                                                 Φ(t)U ′ (t) = F (t)
+
+                                               U ′ (t) = Φ−1 (t)F (t)
+                                                       Z
+                                             U (t) = Φ−1 (t)F (t)dt
+
+Výsledný vzorec:                                                   Z
+                                     X(t) = Φ(t)C + Φ(t)                  Φ−1 (t)F (t)dt
+
+
+                                                                14
+16.2        Přı́klad 3 (z poznámek)
+Zadánı́:                                                               
+                                                           −3     1        3t
+                                             X′ =                     X + −t
+                                                           2     −4       e
+                                                                                            
+                                                           −3 − λ                     1
+1. **Homogennı́ část (Vlastnı́ čı́sla a vektory):** det                                       = (−3 − λ)(−4 − λ) − 2 =
+                                                             2                      −4 − λ
+λ2 + 7λ + 12 − 2 = λ2 + 7λ + 10 = 0.
+
+                                    (λ + 2)(λ + 5) = 0 =⇒ λ1 = −2, λ2 = −5
+
+Vlastnı́ vektory:
+                                              
+                          −1      1             1
+    • Pro λ1 = −2:                    =⇒ v1 =      .
+                           2     −2             1
+                                           
+                          2    1              1
+    • Pro λ2 = −5:                  =⇒ v2 =      .
+                          2    1             −2
+2. **Fundamentálnı́ matice Φ(t):**
+                                                             −2t
+                                                                        e−5t
+                                                                                
+                                                             e
+                                               Φ(t) =
+                                                             e−2t      −2e−5t
+
+3. **Inverznı́ matice Φ−1 (t):** Determinant W (t) = −2e−7t − e−7t = −3e−7t .
+
+                                           −2e−5t −e−5t        1 2e2t e2t
+                                                                           
+                          −1          1
+                        Φ (t) =                             =
+                                   −3e−7t −e−2t      e−2t      3 e5t −e5t
+
+4. **Výpočet U (t):**
+
+                                                               2e2t (3t) + e2t (e−t )
+                                                                                     2t 1 t 
+                                          3t           1                                 2te + 3 e
+                     U ′ (t) = Φ−1 (t)             =                                   =
+                                         e−t           3        e5t (3t) − e5t (e−t )    te5t − 13 e4t
+
+                                                       U ′ (t)dt se provádı́ per partes, v poznámkách je naznačen
+                                                   R
+(Poznámka: Výpočet integrálů U (t) =
+výsledek).
+5. **Alternativnı́ zápis soustavy pro variaci:** Mı́sto inverze matice lze řešit soustavu rovnic:
+
+                                                   e−2t u′1 + e−5t u′2 = 3t
+
+                                               e−2t u′1 − 2e−5t u′2 = e−t
+Odečtenı́m rovnic zı́skáme 3e−5t u′2 = 3t − e−t , odkud vyjádřı́me u′2 a následně u′1 .
+
+
+23. 10. 25
+
+
+
+
+                                                                  15
+17      Lineárnı́ transformace a Ekvivalence systémů
+Systém X ′ = AX lze transformovat pomocı́ X = T Y na Y ′ = BY , kde B = T −1 AT . Matice T je obvykle
+sestavena z vlastnı́ch vektorů matice A.
+
+17.1     Přı́klad 1: Transformace 3 × 3 matice
+Zadánı́: Mějme systém Ẋ = AX, kde:
+                                                                     
+                                                     −2         −4   2
+                                                A = −2          1   2
+                                                      4          2   5
+
+1. **Vlastnı́ čı́sla a vektory:** Z poznámek vyplývajı́ vlastnı́ čı́sla a přı́slušné vlastnı́ vektory:
+   • λ1 = 3 =⇒ v1 = (2, −4, −1)T (pozn: v textu je v1 s otaznı́ky, rekonstruováno z kontextu).
+   • λ2 = −5 =⇒ v2 = (4, −1, 1)T .
+   • λ3 = 6 =⇒ v3 = (1, 0, 1)T .
+2. **Sestavenı́ transformačnı́ matice P a matice B:** Matice P (v textu označena jako T nebo P ) je
+tvořena vlastnı́mi vektory. Matice B bude diagonálnı́:
+                                                         
+                                                  3 0 0
+                                           B = 0 −5 0
+                                                  0 0 6
+
+3. **Řešenı́ transformovaného systému Ẏ = BY :** Soustava se rozpadne na nezávislé rovnice:
+
+                                            ẏ1 = 3y1 =⇒ y1 (t) = c1 e3t
+
+                                          ẏ2 = −5y2 =⇒ y2 (t) = c2 e−5t
+                                            ẏ3 = 6y3 =⇒ y3 (t) = c3 e6t
+
+4. **Zpětná transformace:** Obecné řešenı́ původnı́ho systému je X(t) = P Y (t).
+
+
+18      Tok lineárnı́ho systému (Flow)
+Množina zobrazenı́ ϕt : Rn → Rn (parametrizovaná časem t) se nazývá **tokem** lineárnı́ho systému.
+Matematicky je tok dán maticovou exponenciálou:
+
+                                                  ϕ(t, X0 ) = eAt X0
+
+**Vlastnosti toku:**
+    • ϕ0 (x) = x (Identita v čase 0).
+    • ϕt+s (x) = ϕt (ϕs (x)) (Grupová vlastnost).
+
+18.1     Hyperbolický systém
+Lineárnı́ systém se nazývá **hyperbolický**, jestliže všechna vlastnı́ čı́sla matice A majı́ **nenulovou
+reálnou část** (Re(λj ) ̸= 0). U takových systémů neexistujı́ centrálnı́ podprostory, pouze stabilnı́ a
+nestabilnı́.
+
+
+
+
+                                                           16
+19       Invariantnı́ podprostory
+Množina M ⊆ Rn je **invariantnı́** vůči toku, jestliže pro každé x ∈ M a t ∈ R platı́ ϕt (x) ∈ M .
+Prostor Rn se rozpadá na součet invariantnı́ch podprostorů:
+                                                    Rn = E s ⊕ E u ⊕ E c
+    • **E s (Stabilnı́):** Generován vektory pro Re(λ) < 0.
+    • **E u (Nestabilnı́):** Generován vektory pro Re(λ) > 0.
+    • **E c (Centrálnı́):** Generován vektory pro Re(λ) = 0.
+
+19.1      Přı́klad 2: Rozklad na podprostory
+Mějme matici A v blokovém tvaru:                                      
+                                                       −2         −1    0
+                                                    A= 1         −2    0
+                                                        0          0    1
+
+1. **Vlastnı́ čı́sla:** Charakteristický polynom: ((−2 − λ)2 + 1)(1 − λ) = 0.
+                                                   λ1,2 = −2 ± i,      λ3 = 1
+
+2. **Podprostory:**
+    • Vlastnı́ čı́sla −2 ± i majı́ zápornou reálnou část (−2 < 0). Odpovı́dajı́cı́ vektory generujı́ **stabilnı́
+      podprostor E s **. V tomto přı́padě jde o rovinu xy (resp. podprostor generovaný prvnı́mi dvěma
+      bázovými vektory). Trajektorie zde spirálovitě konvergujı́ k nule.
+    • Vlastnı́ čı́slo 1 má kladnou reálnou část. Odpovı́dajı́cı́ vektor v3 = (0, 0, 1)T generuje **nestabilnı́
+      podprostor E u ** (osa z).
+
+
+20       Nelineárnı́ ODR – Speciálnı́ přı́pady (Snı́ženı́ řádu)
+U rovnic 2. řádu (nebo vyššı́ch) lze často snı́žit řád pomocı́ substituce.
+
+20.1      Typ I: y ′′ = f (t, y ′ )
+Rovnice neobsahuje explicitně y. **Substituce:** z(t) = y ′ (t) =⇒ z ′ = y ′′ .
+Přı́klad 3: ty ′′ +y ′ = 0 (Eulerova rovnice typu). 1. Substituce z = y ′ : tz ′ +z = 0. 2. Separace proměnných:
+                                                   dz         dz    dt
+                                               t      = −z =⇒    =−
+                                                   dt          z    t
+                                                                                K
+                                          ln |z| = − ln |t| + C =⇒ z(t) =
+                                                                                t
+3. Návrat k y:
+                                                   K
+                                           y′ =      =⇒ y(t) = K ln |t| + C2
+                                                   t
+
+20.2      Typ II: y ′′ = f (y, y ′ )
+Rovnice neobsahuje explicitně čas t. **Substituce:** z(y) = y ′ . Derivace složené funkce: y ′′ = dt
+                                                                                                      d
+                                                                                                         z(y(t)) =
+dz dy       dz
+dy · dt = z dy .
+Přı́klad 4: y ′′ · y = (y ′ )2 . Zadánı́ v poznámkách vede na separaci. Uvažujme přı́klad s podmı́nkou
+                                                   dz
+y(0) = 1/2: Rovnice po úpravě vede na tvar dy       = y (nebo ekvivalentnı́).
+                                                             1 2
+                                                        z=     y +C
+                                                             2
+Protože z = y ′ , řešı́me následně y ′ = 21 y 2 + C.
+
+
+                                                             17
+21      Nelineárnı́ systémy a Stabilita (Konec dokumentu)
+Uvažujme nelineárnı́ systém ẋ = f (x) s bodem rovnováhy xR = 0 (BR).
+
+21.1     Definice stability
+Bod rovnováhy xR se nazývá:
+1. **Stabilnı́ (Ljapunov):** Jestliže pro každé ϵ > 0 existuje δ > 0 tak, že pokud ∥x(0)∥ < δ, pak
+∥x(t)∥ < ϵ pro všechna t ≥ 0. *(Řešenı́ neutı́ká daleko).*
+2. **Atraktor:** Jestliže existuje okolı́, ze kterého všechna řešenı́ konvergujı́ k xR . limt→∞ x(t) = 0.
+3. **Asymptoticky stabilnı́:** Jestliže je stabilnı́ a zároveň atraktor.
+4. **Nestabilnı́:** Pokud nenı́ stabilnı́.
+
+21.2     Oblast atraktivity
+Množina všech bodů x0 , pro které řešenı́ x(t, x0 ) konverguje k bodu rovnováhy, se nazývá **oblast atrak-
+tivity** (nebo pánev atraktivity). Pokud je touto oblastı́ celý prostor Rn , jde o **globálnı́ atraktor**.
+
+21.3     Hurwitzovo kritérium (Poznámka)
+Pro analýzu stability (polynomu charakteristické rovnice) lze využı́t Hurwitzovu matici sestavenou z
+koeficientů polynomu P (λ) = λn + a1 λn−1 + · · · + an .
+                                                                  
+                                               a1 1 0 . . .
+                                       H = a3 a2 a1 . . .
+                                                                  
+                                                ..    ..  .. . .
+                                                 .     .   .     .
+
+
+30. 10. 25
+
+
+
+
+                                                        18
+22      Teorie linearizace
+Mějme nelineárnı́ autonomnı́ systém:
+
+                                          ẋ = F (x),        x ∈ Rn ,     F ∈ C 1 (E)
+
+Necht’ x0 je bod rovnováhy (stacionárnı́ bod), tedy platı́ F (x0 ) = 0.
+
+22.1        Taylorův rozvoj a Jacobiho matice
+Chovánı́ systému v malém okolı́ bodu x0 aproximujeme lineárnı́m systémem u̇ = Au, kde u = x − x0 a
+A je **Jacobiho matice**:
+                                                 ∂f1         ∂f1 
+                                                  ∂x1  · · · ∂x  n
+
+                                 A = DF (x0 ) =  ...   ..     .. 
+                                                
+                                                           .    . 
+                                                  ∂fn         ∂fn
+                                                  ∂x1  · · · ∂xn x=x
+                                                                                        0
+
+
+
+22.2        Věta o linearizované stabilitě
+Necht’ λ1 , . . . , λn jsou vlastnı́ čı́sla matice A.
+    • Pokud ∀i : Re(λi ) < 0 =⇒ bod x0 je **asymptoticky stabilnı́**.
+    • Pokud ∃i : Re(λi ) > 0 =⇒ bod x0 je **nestabilnı́**.
+    • Pokud ∀i : Re(λi ) ≤ 0 a existuje λ s nulovou reálnou částı́ =⇒ nelze rozhodnout (kritický přı́pad).
+
+
+23      Přı́klad 1: Polynomiálnı́ systém v počátku
+Zadánı́:
+                                                 ẋ = −x + y + x2 + 3y 2
+                                                    ẏ = x − 3y + 2xy
+Bod rovnováhy: [0, 0].
+1. **Jacobiho matice obecně:**
+                                                                                   
+                                                             −1 + 2x 1 + 6y
+                                           J(x, y) =
+                                                              1 + 2y −3 + 2x
+
+2. **Vyčı́slenı́ v bodě [0, 0]:**                                            
+                                                                         −1 1
+                                               A = J(0, 0) =
+                                                                         1 −3
+
+3. **Stabilita:**
+                                            det(A − λI) = λ2 + 4λ + 2 = 0
+                                                               √
+                                                   λ1,2 = −2 ± 2
+Obě vlastnı́ čı́sla jsou záporná (≈ −0.59, −3.41). Závěr: Bod [0, 0] je **stabilnı́ uzel**.
+
+
+24      Přı́klad 2: Transcendentnı́ funkce (Goniometrie)
+Zadánı́ (rekonstruováno z poznámek):
+
+                                                    ẋ = e−x+y − cos x
+
+                                                    ẏ = − sin(x − 3y)
+Bod rovnováhy: [0, 0] (protože e0 − 1 = 0 a sin 0 = 0).
+
+
+
+
+                                                                19
+1. **Jacobiho matice obecně:**
+                                     ∂ ẋ                               ∂ ẋ
+                                          = −e−x+y + sin x,                  = e−x+y
+                                     ∂x                                 ∂y
+                       ∂ ẏ                      ∂ ẏ
+                            = − cos(x − 3y),          = − cos(x − 3y) · (−3) = 3 cos(x − 3y)
+                       ∂x                        ∂y
+2. **Vyčı́slenı́ v [0, 0]:**                                          
+                                                         −1         1
+                                                   A=
+                                                         −1         3
+
+3. **Stabilita:**
+           det(A − λI) = (−1 − λ)(3 − λ) − (−1) = λ2 − 2λ − 3 + 1 = λ2 − 2λ − 2 = 0
+                                                                 √
+                                          p
+                                       2 ± 4 − 4(1)(−2)
+                                λ1,2 =                     =1± 3
+                                               2
+        √                          √
+λ1 = 1 + 3 > 0 (kladné), λ2 = 1 − 3 < 0 (záporné). Závěr: Bod [0, 0] je **sedlo (nestabilnı́)**.
+
+
+25      Přı́klad 3: Systém se 4 body rovnováhy
+Zadánı́ (opraveno dle tvé připomı́nky):
+                                                    ẋ = x2 − y 2
+                                                  ẏ = y 2 − 5x + 6
+
+1. **Nalezenı́ bodů rovnováhy:** Z prvnı́ rovnice: x2 = y 2 =⇒ y = ±x. Dosazenı́ do druhé rovnice (kde
+y 2 = x2 ):
+                                 x2 − 5x + 6 = 0 =⇒ (x − 2)(x − 3) = 0
+Tedy x1 = 2, x2 = 3. Kombinacı́ s y = ±x zı́skáme 4 body:
+                                 M1 [2, 2],    M2 [2, −2],      M3 [3, 3],      M4 [3, −3]
+
+2. **Jacobiho matice obecně:**                                            
+                                                               2x    −2y
+                                               J(x, y) =
+                                                               −5     2y
+
+3. **Klasifikace bodů:**
+a) Bod M1 [2, 2]:                                                     
+                                                            4       −4
+                                                  A=
+                                                           −5        4
+det A = 16 − 20 = −4. Determinant je záporný (součin vl. čı́sel je záporný) =⇒ jedno kladné, jedno
+záporné. Závěr: **Sedlo (Nestabilnı́)**.
+b) Bod M2 [2, −2]:                                                    
+                                                            4        4
+                                                  A=
+                                                           −5       −4
+Tr A = 0, det A = −16 + 20 = 4. Char. rovnice: λ2 + 4 = 0 =⇒ λ = ±2i. Závěr: V lineárnı́
+aproximaci **střed**. V nelineárnı́m systému nelze rozhodnout (kritický přı́pad, často nestabilnı́ nebo
+limitnı́ cyklus).
+c) Bod M3 [3, 3]:                                                     
+                                                            6       −6
+                                                  A=
+                                                           −5        6
+Tr A = 12 > 0, det A = 36 − 30 = 6 > 0. Diskriminant D = 122 − 4 · 6 = 120 > 0. Obě vlastnı́ čı́sla jsou
+reálná a kladná. Závěr: **Nestabilnı́ uzel**.
+d) Bod M4 [3, −3]:                                                    
+                                                            6        6
+                                                  A=
+                                                           −5       −6
+det A = −36 + 30 = −6 < 0. Závěr: **Sedlo (Nestabilnı́)**.
+
+
+                                                           20
+26     Posunutı́ souřadnic
+Pro analýzu bodu h ̸= 0 zavedeme u = x − h. Linearizovaný systém je u̇ = DF (h)u.
+
+
+27     Globálnı́ vlastnosti řešenı́ (Barrowův vzorec)
+Pro jednorozměrnou autonomnı́ rovnici ẋ = F (x) s počátečnı́ podmı́nkou x(t0 ) = x0 můžeme explicitně
+určit čas, za který se řešenı́ dostane z bodu a do bodu b.
+
+27.1     Barrowův vzorec
+Separacı́ proměnných dx             dx
+                       dt = F (x) =⇒ F (x) = dt a následnou integracı́ zı́skáme vztah pro časový interval
+T = t1 − t0 :
+
+                                                       Z x(t1 )
+                                                                    1
+                                                 T =                    dz
+                                                        x(t0 )    F (z)
+
+Pokud tento integrál konverguje, řešenı́ dosáhne hodnoty x(t1 ) v konečném čase.
+
+27.2     Exploze řešenı́ (Blow-up)
+Pokud řešenı́ x(t) roste nade všechny meze (x(t) → ∞) v **konečném čase** Tmax , řı́káme, že řešenı́
+exploduje (blow-up). Nastává to tehdy, pokud konverguje integrál:
+                                            Z ∞
+                                                   1
+                                                       dz < ∞
+                                              x0 F (z)
+
+
+Přı́klad (z poznámek): ẋ = x2 ,      x(0) = x0 > 0.
+                                        Z x(t)            x(t)
+                                                 dz      1         1     1
+                                   t=               =  −         =    −
+                                         x0      z2      z x0      x0   x(t)
+                                                            x0
+Pro x(t) → ∞ je čas exploze Tmax = x10 . Řešenı́ x(t) = 1−x 0t
+                                                                  existuje pouze na intervalu (−∞, x10 ).
+
+27.3     Existence a jednoznačnost na intervalu
+Necht’ E ⊂ Rn je otevřená množina a F ∈ C 1 (E). Potom pro každou počátečnı́ podmı́nku existuje
+**maximálnı́ interval** existence řešenı́ I = (α, β). Pokud je interval omezený (např. β < ∞), řešenı́
+musı́ opustit každou kompaktnı́ podmnožinu E (bud’ jde do nekonečna, nebo k hranici definicnı́ho oboru).
+
+
+13. 11. 25
+
+
+
+
+                                                           21
+28      Přı́klady ve 2D (Strana 3)
+28.1        Přı́klad 1: Výpočet řešenı́ a variety
+Zadánı́:
+                                                     ẋ = −x
+                                                    ẏ = y + x2
+Bod rovnováhy: [0, 0].
+1. **Řešenı́ prvnı́ rovnice:**
+                                                  x(t) = x0 e−t
+
+2. **Řešenı́ druhé rovnice (dosazenı́):**
+
+                                        ẏ − y = x2 = (x0 e−t )2 = x20 e−2t
+
+Toto je lineárnı́ nehomogennı́ rovnice. Partikulárnı́ řešenı́ hledáme ve tvaru Ce−2t . Po dosazenı́ a výpočtu
+(metoda variace konstant nebo odhad) a aplikaci počátečnı́ podmı́nky y(0) = y0 dostáváme v poznámkách
+uvedený tvar:
+                                                              x0 e−t
+                                                                           !
+                                      x(t)
+                                             =              x2         x2
+                                                 
+                                      y(t)         y0 + 30 et − 30 e−2t
+
+3. **Analýza chovánı́ (Variety):** * Aby řešenı́ konvergovalo k nule pro t → ∞ (leželo na **stabilnı́
+varietě**), musı́ člen u et zmizet:
+                                               x2                    x2
+                                         y0 + 0 = 0 =⇒ y = −
+                                                3                     3
+                                           
+                                       −1 0
+* Jacobiho matice v [0, 0] je J =             , což potvrzuje, že jde o **hyperbolický bod (sedlo)**.
+                                        0 1
+
+28.2        Přı́klad 2: Určenı́ bodů rovnováhy a stability
+Zadánı́:                                               2
+                                                        x − y2 − 1
+                                                                  
+                                            F (x, y) =
+                                                           2y
+Hledáme body rovnováhy (BR):
+                                               2y = 0 =⇒ y = 0
+                                   x − 0 − 1 = 0 =⇒ x2 = 1 =⇒ x = ±1
+                                    2
+
+
+Máme dva body rovnováhy: A = [1, 0] a B = [−1, 0].
+**Jacobiho matice obecně:**                                        
+                                                         2x    −2y
+                                                J=
+                                                          0     2
+
+1. **Bod A = [1, 0]:**                                   
+                                                2     0
+                                          JA =                =⇒ λ1,2 = 2
+                                                0     2
+Obě vlastnı́ čı́sla kladná =⇒ **Nestabilnı́ uzel (Zdroj)**.
+2. **Bod B = [−1, 0]:**                            
+                                          −2       0
+                                    JB =              =⇒ λ1 = −2, λ2 = 2
+                                           0       2
+Vlastnı́ čı́sla majı́ různá znaménka =⇒ **Sedlo**.
+
+
+
+
+                                                          22
+29      Přı́klad ve 3D a Definice variety (Strana 4)
+29.1     Přı́klad 3: Trojrozměrný systém (Detailnı́ rozbor)
+Zadánı́: Uvažujme systém třı́ diferenciálnı́ch rovnic:
+                                                    ẋ = −x
+                                                    ẏ = −y + x2
+                                                    ż = z + x2
+Bod rovnováhy je zjevně v počátku [0, 0, 0]. Linearizace (Jacobiho matice) je diagonálnı́ matice diag(−1, −1, 1).
+Vlastnı́ čı́sla jsou λ1 = −1, λ2 = −1 (stabilnı́ směr) a λ3 = 1 (nestabilnı́ směr).
+1. Řešenı́ prvnı́ rovnice:
+                                            ẋ = −x =⇒ x(t) = C1 e−t
+(Kde C1 = x0 ).
+2. Řešenı́ druhé rovnice (pro y): Dosadı́me x(t) do rovnice pro y:
+                                        ẏ + y = x2 = (C1 e−t )2 = C12 e−2t
+Toto je lineárnı́ rovnice 1. řádu s pravou stranou. - **Homogennı́ řešenı́:** yh (t) = C2 e−t . - **Partikulárnı́
+řešenı́:** Hledáme ve tvaru yp (t) = Ae−2t .
+                                     ẏp + yp = −2Ae−2t + Ae−2t = −Ae−2t
+Porovnánı́m s pravou stranou C12 e−2t dostáváme:
+                                             −A = C12 =⇒ A = −C12
+- **Obecné řešenı́ pro y:**
+                                              y(t) = C2 e−t − C12 e−2t
+
+3. Řešenı́ třetı́ rovnice (pro z): Dosadı́me x(t) do rovnice pro z:
+                                               ż − z = x2 = C12 e−2t
+- **Homogennı́ řešenı́:** zh (t) = C3 et (pozor na znaménko, λ3 = 1). - **Partikulárnı́ řešenı́:** Hledáme
+ve tvaru zp (t) = Be−2t .
+                                    żp − zp = −2Be−2t − Be−2t = −3Be−2t
+Porovnánı́m s pravou stranou C12 e−2t dostáváme:
+                                                                        C12
+                                            −3B = C12 =⇒ B = −
+                                                                         3
+- **Obecné řešenı́ pro z:**
+                                                                C12 −2t
+                                               z(t) = C3 et −      e
+                                                                 3
+4. Analýza stabilnı́ variety (W s ): Hledáme podmı́nku pro počátečnı́ konstanty (C1 , C2 , C3 ), aby
+řešenı́ konvergovalo k počátku [0, 0, 0] pro t → ∞. - x(t) → 0 vždy (člen e−t ). - y(t) → 0 vždy (členy
+e−t , e−2t ). - z(t) obsahuje člen C3 et . Tento člen jde do ±∞, pokud C3 ̸= 0. Aby řešenı́ konvergovalo,
+musı́ být koeficient u nestabilnı́ho členu nulový:
+                                                       C3 = 0
+Vyjádřeno pomocı́ počátečnı́ch podmı́nek v čase t = 0:
+                                                     C12             x2
+                                       z(0) = C3 −       =⇒ C3 = z0 + 0
+                                                      3               3
+Podmı́nka C3 = 0 tedy definuje plochu stabilnı́ variety:
+                                                          x2
+                                                     z+      =0
+                                                          3
+Toto je parabolická plocha v prostoru, po které se trajektorie blı́žı́ k počátku.
+
+
+                                                          23
+29.2        Definice variety
+**n-rozměrná diferencovatelná varieta** je souvislý metrický prostor M s otevřeným pokrytı́m {Uα },
+kde:
+   • Pro každé α existuje homeomorfismus hα zobrazujı́cı́ Uα na otevřenou jednotkovou kouli K ⊂ Rn
+     (K = {x ∈ Rn : |x| < 1}).
+   • Přechodová zobrazenı́ jsou diferencovatelná (hladká).
+
+
+30      Věty o varietách (Strana 5)
+30.1        Věta o stabilnı́ varietě
+Necht’ E ⊂ Rn je otevřená, F ∈ C 1 (E) a F (0) = 0. Necht’ A = DF (0) má k vlastnı́ch čı́sel se zápornou
+reálnou částı́ a n − k s kladnou (žádné s nulovou).
+Potom existuje k-rozměrná diferencovatelná varieta W s (0) (stabilnı́ varieta) procházejı́cı́ počátkem, která
+je v bodě 0 tečná k podprostoru generovanému stabilnı́mi vlastnı́mi vektory. Trajektorie startujı́cı́ na
+W s (0) konvergujı́ k počátku pro t → ∞.
+Stejně tak existuje (n − k)-rozměrná **nestabilnı́ varieta** W u (0), tečná k nestabilnı́mu podprostoru
+(trajektorie jdou do 0 pro t → −∞).
+Diagram z poznámek: Zobrazuje rozdělenı́ prostoru na W s (stable), W u (unstable) a přı́padně W c
+(central) podle reálné části vlastnı́ch čı́sel.
+
+
+31      Dalšı́ přı́klady a Centrálnı́ varieta (Strana 6)
+31.1        Přı́klad 4
+Zadánı́:
+                                                    ẋ = −x − y 2
+                                                     ẏ = y + x2
+Bod rovnováhy: [0, 0]. Také (−1, −1). Jacobiho matice v [0, 0]:
+                                                                         
+                                           −1 −2y              −1         0
+                                    J=                   =
+                                           2x    1 (0,0)        0         1
+
+Vlastnı́ čı́sla: λ1 = −1, λ2 = 1. Jde o hyperbolický bod (sedlo). Existuje stabilnı́ varieta dimenze 1 a
+nestabilnı́ varieta dimenze 1.
+
+31.2        Věta o centrálnı́ varietě
+Pokud má linearizace v bodě rovnováhy vlastnı́ čı́sla s **nulovou reálnou částı́**, existuje **centrálnı́
+varieta** W c (0), která je tečná k podprostoru přı́slušnému těmto vlastnı́m čı́slům.
+
+31.3        Přı́klad 5 (Kritický přı́pad)
+Zadánı́:
+                                     ẋ = xy    (nebo x2 dle kontextu řešenı́)
+                                                       ẏ = −y
+Linearizace v [0, 0]:                                              
+                                                             0    0
+                                                   J=
+                                                             0   −1
+Vlastnı́ čı́sla: λ1 = 0 (centrálnı́), λ2 = −1 (stabilnı́).
+
+
+
+
+                                                          24
+                                                                                                           −1
+**Řešenı́:** Z rovnice ẏ = −y máme y(t) = c2 e−t . Z poznámek pro x(t): Řešenı́ má tvar x(t) = t+c     .
+                                                                            
+                                                                             1
+(To odpovı́dá rovnici ẋ = x2 ). - **Vlastnı́ vektor pro λ1 = 0:** Vektor        (osa x). Odpovı́dá centrálnı́
+                                                                           0
+                                                         0
+varietě. - **Vlastnı́ vektor pro λ2 = −1:** Vektor         (osa y). Odpovı́dá stabilnı́ varietě.
+                                                         1
+
+
+32      Hartman-Grobmanova věta (Strana 7)
+32.1        Zněnı́ věty
+Necht’ x0 je hyperbolický bod rovnováhy (Re(λi ) ̸= 0) systému ẋ = F (x). Pak existuje okolı́ U bodu x0
+a **homeomorfismus** h, který převádı́ trajektorie nelineárnı́ho systému na trajektorie jeho linearizace:
+
+                                             h(Φt (x)) = eAt h(x)
+
+Tato věta řı́ká, že v okolı́ hyperbolického bodu je fázový portrét nelineárnı́ho systému ”kvalitativně
+stejný”(topologicky ekvivalentnı́) jako u lineárnı́ho systému.
+
+32.2        Přı́klad 6: Jednorozměrný systém (Detailnı́ rozbor)
+Zadánı́:
+                                                   ẋ = x − x3
+Hledáme body rovnováhy položenı́m pravé strany rovné nule:
+
+                              x(1 − x2 ) = 0 =⇒ x1 = 0,          x2 = 1,   x3 = −1
+
+**Linearizace a stabilita:** Derivace funkce f (x) = x − x3 je f ′ (x) = 1 − 3x2 . Toto čı́slo hraje roli
+vlastnı́ho čı́sla λ v 1D.
+1. **Bod x = 0:**
+                                          λ = f ′ (0) = 1 − 3(0)2 = 1
+Protože λ > 0, bod 0 je **nestabilnı́** (zdroj). Trajektorie se od nuly vzdalujı́.
+2. **Bod x = 1:**
+                                         λ = f ′ (1) = 1 − 3(1)2 = −2
+Protože λ < 0, bod 1 je **stabilnı́** (stoka). Trajektorie v okolı́ konvergujı́ k 1.
+3. **Bod x = −1:**
+                                       λ = f ′ (−1) = 1 − 3(−1)2 = −2
+Protože λ < 0, bod -1 je **stabilnı́** (stoka).
+**Globálnı́ chovánı́:** Systém má dva stabilnı́ stavy (±1) a jeden nestabilnı́ stav (0) uprostřed. - Pro
+x ∈ (−1, 0) je ẋ < 0, pohyb doleva k −1. - Pro x ∈ (0, 1) je ẋ > 0, pohyb doprava k 1. - Pro |x| > 1 je ẋ
+opačného znaménka než x, pohyb směrem k počátku (tedy k ±1).
+
+
+20. 11. 25
+
+
+
+
+                                                       25
+33      Topologie okolı́ bodu rovnováhy
+Zkoumáme chovánı́ trajektoriı́ Γ(t) v okolı́ bodu rovnováhy x0 , kde F (x0 ) = 0. Zatı́mco u hyperbolických
+bodů (sedlo, uzel, ohnisko) je situace jasná z linearizace, u nehyperbolických bodů (např. vlastnı́ čı́sla s
+nulovou reálnou částı́) je struktura složitějšı́.
+
+33.1     Sektory a Separatrixy
+Okolı́ bodu rovnováhy může být rozděleno tzv. **separatrixami** (speciálnı́ trajektorie Γ, které pro
+t → ±∞ konvergujı́ přı́mo k bodu rovnováhy) na sektory s odlišným chovánı́m.
+Rozlišujeme tři základnı́ typy sektorů:
+   1. **Hyperbolický sektor:** Trajektorie Γ v tomto sektoru se k bodu rovnováhy přiblı́žı́, ”minou ho”a
+      opět se vzdálı́. (Typické pro okolı́ sedla).
+   2. **Parabolický sektor:** Všechny trajektorie Γ v tomto sektoru konvergujı́ k bodu rovnováhy (pro
+      t → ∞) nebo z něj všechny divergujı́ (pro t → −∞). Chová se to jako výseč uzlu.
+   3. **Eliptický sektor:** Trajektorie Γ vycházejı́ z bodu rovnováhy, opı́šı́ smyčku a vracejı́ se zpět do
+      bodu rovnováhy (homoklinické orbity). Celý sektor je vyplněn uzavřenými smyčkami.
+
+
+34      Analýza v polárnı́ch souřadnicı́ch (Blow-up metoda)
+Pokud linearizace selhává (např. Jacobiho matice je nulová), je nutné zkoumat nelineárnı́ členy. Často
+pomůže transformace do polárnı́ch souřadnic, která ”nafoukne”bod rovnováhy na kružnici.
+
+34.1     Odvozenı́ transformačnı́ch vztahů
+Mějme systém ẋ = P (x, y), ẏ = Q(x, y). Zavedeme substituci:
+                                              x = r cos φ,      y = r sin φ
+Z toho plyne r2 = x2 + y 2 a tan φ = xy .
+**1. Rovnice pro r:** Derivujeme r2 :
+                                                                        x     y
+                                      2rṙ = 2xẋ + 2y ẏ =⇒ ṙ =         ẋ + ẏ
+                                                                        r     r
+Dosadı́me za x, y:
+                                                 ṙ = ẋ cos φ + ẏ sin φ
+
+**2. Rovnice pro φ:** Derivujeme tan φ = y/x:
+                                                   1         ẏx − y ẋ
+                                                        φ̇ =
+                                                 cos2 φ         x2
+Vynásobı́me cos2 φ = (x/r)2 :
+                                              xẏ − y ẋ  1
+                                      φ̇ =               = (ẏ cos φ − ẋ sin φ)
+                                                  r2      r
+
+34.2     Přı́klad z tabule
+Uvažujme systém, který po převodu dává rovnice typu:
+                                                      ṙ = rk f (φ)
+                                                    φ̇ = rk−1 g(φ)
+
+Konkrétnı́ analýza na tabuli (zřejmě pro určitý systém) ukazuje hledánı́ směrů, kde φ̇ = 0 (invariantnı́
+paprsky). * Pokud pro nějaké φ0 platı́ φ̇ = 0, pak polopřı́mka s úhlem φ0 je invariantnı́ (trajektorie Γ
+se pohybuje po přı́mce). * Na této přı́mce rozhoduje znaménko ṙ: * ṙ < 0: Trajektorie Γ jde do počátku
+(stabilnı́ směr). * ṙ > 0: Trajektorie Γ jde od počátku (nestabilnı́ směr). * Tı́mto způsobem určı́me, zda
+se v daném sektoru mezi paprsky trajektorie chovajı́ jako u sedla, uzlu atd.
+
+
+                                                           26
+35      Hamiltonovské systémy
+Konzervativnı́ systémy, kde nedocházı́ ke ztrátě energie (neexistuje třenı́).
+
+35.1       Definice a Hamiltonián
+Systém je Hamiltonovský, pokud existuje funkce H(x, y) taková, že:
+
+                                                    ∂H               ∂H
+                                             ẋ =      ,    ẏ = −
+                                                    ∂y               ∂x
+
+**Důsledek:**                                                                          
+                           dH    ∂H      ∂H      ∂H             ∂H         ∂H         ∂H
+                               =    ẋ +    ẏ =                         +          −          =0
+                            dt   ∂x      ∂y      ∂x             ∂y         ∂y         ∂x
+Hamiltonián H(x, y) je **prvnı́m integrálem** systému. Trajektorie Γ ležı́ na hladinách konstantnı́ ener-
+gie H(x, y) = C.
+
+35.2       Přı́klad z poznámek (dokončenı́)
+Systém:
+                                                ẋ = y + x2 − y 2
+                                                    ẏ = −x − 2xy
+
+**1. Nalezenı́ Hamiltoniánu:** Integrujeme ẋ podle y:
+
+                                                       y2          y3
+                                  Z
+                            H = (y + x2 − y 2 )dy =       + x2 y −    + C(x)
+                                                        2          3
+Derivujeme podle x a porovnáme s −ẏ:
+                      ∂H
+                         = 2xy + C ′ (x)      musı́ se rovnat        − (−x − 2xy) = x + 2xy
+                      ∂x
+                                                                           x2
+                                          C ′ (x) = x =⇒ C(x) =
+                                                                           2
+Výsledný Hamiltonián:
+                                                    1 2                  1
+                                      H(x, y) =       (x + y 2 ) + x2 y − y 3
+                                                    2                    3
+
+**2. Analýza bodů rovnováhy:** Body rovnováhy systému odpovı́dajı́ stacionárnı́m bodům funkce H(x, y)
+(kde ∇H = 0). Zde BR [0, 0]. Hessián funkce H v [0, 0]:
+                                                                      
+                                            Hxx Hxy                1 0
+                                 Hess H =                     =
+                                             Hyx Hyy (0,0)         0 1
+
+Determinant > 0, stopa > 0 (nebo vlastnı́ čı́sla 1, 1 > 0). Bod [0, 0] je **lokálnı́ minimum** funkce
+H. Závěr: Protože H má v počátku ostré lokálnı́ minimum, jsou trajektorie Γ v okolı́ uzavřené křivky
+obı́hajı́cı́ počátek. Bod [0, 0] je **střed** (Center).
+
+
+36      Newtonovské systémy
+Fyzikálnı́ systémy popisujı́cı́ pohyb částice v potenciálovém poli V (x). Rovnice: mẍ = F (x) = −V ′ (x).
+Převedeno na systém 1. řádu (pro m = 1):
+                                                       ẋ = y
+                                                     ẏ = −V ′ (x)
+
+
+
+
+                                                           27
+36.1     Hamiltonián (Celková energie)
+                                                               1 2
+                                     H(x, y) = Ekin + Epot =     y + V (x)
+                                                               2
+                                                                                                       p
+Trajektorie Γ jsou dány rovnicı́ 21 y 2 +V (x) = E (konstanta). Odtud lze vyjádřit rychlost y = ±       2(E − V (x)).
+Pohyb je možný jen tam, kde E ≥ V (x).
+
+36.2     Vztah potenciálu V (x) a fázového portrétu
+Z tvaru funkce V (x) můžeme přı́mo nakreslit fázový portrét:
+   • **Lokálnı́ minimum V (x):** Odpovı́dá bodu rovnováhy typu **STŘED**. Částice kmitá v ”dolı́ku”potenciálu.
+     Fázové trajektorie Γ jsou uzavřené smyčky kolem tohoto bodu.
+   • **Lokálnı́ maximum V (x):** Odpovı́dá bodu rovnováhy typu **SEDLO**. Částice je na vrcholu
+     kopce, což je nestabilnı́ poloha. Separatrixy oddělujı́ pohyb na jednu a druhou stranu kopce.
+
+
+37      Gradientnı́ systémy
+Systémy, kde pohyb sleduje největšı́ spád potenciálu (opak konzervativnı́ch systémů - zde se energie
+maximálně ”ztrácı́”).
+                                               ẋ = −∇V (x)
+
+**Vlastnosti:**
+   • Trajektorie Γ jsou kolmé na vrstevnice V (x).
+   • Funkce V (x) podél řešenı́ klesá: dV
+                                           dt ≤ 0.
+
+   • Neexistujı́ žádné uzavřené cykly (limitnı́ cykly).
+   • Všechna řešenı́ konvergujı́ k bodům rovnováhy (lokálnı́m extrémům V ).
+   • **Lokálnı́ minima V ** jsou **asymptoticky stabilnı́** uzly.
+   • **Lokálnı́ maxima V ** jsou **nestabilnı́** uzly (zdroje).
+   • **Sedlové body V ** jsou **sedla** ve fázovém portrétu.
+
+
+27. 11. 25
+
+
+
+
+                                                        28
+38      Dynamický systém a Tok
+38.1       Definice toku
+Necht’ E ⊂ Rn je otevřená množina. Zobrazenı́ ϕ : R × E → E se nazývá **dynamický systém** (nebo
+tok), pokud ϕ ∈ C 1 a splňuje vlastnosti grupy:
+   1. **Identita:** ϕ(0, x) = x pro všechna x ∈ E.
+   2. **Grupová vlastnost:** ϕ(t + s, x) = ϕ(t, ϕ(s, x)).
+Zobrazenı́ ϕ(·, x0 ) : I → E popisuje trajektorii systému procházejı́cı́ bodem x0 .
+
+
+39      Globálnı́ existence a Blow-up (Výbuch)
+U lineárnı́ch systémů existuje řešenı́ pro všechna t ∈ R. U nelineárnı́ch systémů to neplatı́ – řešenı́ může
+v konečném čase utéct do nekonečna. Tomuto jevu se řı́ká **blow-up**.
+
+39.1       Přı́klad: Konečný čas zániku
+Rovnice:
+                                                      ẋ = x2 ,    x(0) = x0
+Řešenı́ separacı́ proměnných:       Z                   Z
+                                                −2                            1
+                                            x        dx =       dt =⇒ −         =t+C
+                                                                              x
+                                                                        1
+                                                         x(t) = −
+                                                                       t+C
+Z počátečnı́ podmı́nky x(0) = x0 plyne C = − x10 .
+
+                                                              1        x0
+                                                 x(t) =     1      =
+                                                            x0 − t
+                                                                     1 − x0 t
+
+**Analýza intervalu existence:**
+    • Pokud x0 > 0: Jmenovatel se blı́žı́ nule pro t → x10 . Řešenı́ existuje pouze na intervalu (−∞, x10 ).
+      V čase T = 1/x0 docházı́ k ”výbuchu”(x → ∞).
+    • Pokud x0 < 0: Řešenı́ existuje na ( x10 , ∞). Pro t → ∞ jde x → 0.
+    • Pokud x0 = 0: x(t) ≡ 0 (globálnı́ řešenı́).
+
+39.2       Barrowův vzorec (Čas zániku)
+Pokud řešenı́ opustı́ každý kompakt v konečném čase T (jde do nekonečna), lze tento čas vyjádřit:
+                                                    Z ∞
+                                                            1
+                                               T =             dz
+                                                      x0 F (z)
+                      R∞
+(V našem přı́kladu x0 z −2 dz = [−z −1 ]∞      1
+                                          x0 = x0 , což odpovı́dá).
+
+
+39.3       Normalizace vektorového pole
+Každý systém ẋ = F (x) lze ”zbrzdit”, aby měl globálnı́ řešenı́, aniž by se změnily trajektorie (změnı́ se
+jen rychlost pohybu po nich). Nový systém:
+
+                                                                   F (x)
+                                                        ẋ =
+                                                                1 + |F (x)|
+
+Tento systém je topologicky ekvivalentnı́ původnı́mu, ale řešenı́ existujı́ pro všechna t.
+
+
+
+
+                                                                  29
+40      Limitnı́ množiny
+Definujeme, kam trajektorie směřuje v nekonečnu. Označme Γx0 jako trajektorii procházejı́cı́ bodem x0 .
+
+40.1      Definice limitnı́ch bodů
+   • **ω-limitnı́ bod (p):** Bod p je ω-limitnı́m bodem trajektorie ϕ(t, x), pokud existuje posloupnost
+     tn → ∞ taková, že ϕ(tn , x) → p.
+   • **α-limitnı́ bod (q):** Analogicky pro posloupnost tn → −∞.
+
+40.2      Vlastnosti ω-limitnı́ množiny ω(Γ)
+   • Je to uzavřená podmnožina E.
+   • Je invariantnı́ (skládá se z celých trajektoriı́).
+   • Pokud je trajektorie omezená (ležı́ v kompaktu), pak je ω(Γ) neprázdná, kompaktnı́ a souvislá.
+
+
+41      Přı́klad: Limitnı́ cyklus
+Zkoumáme nelineárnı́ systém v rovině:
+
+                                            ẋ = −y + x(1 − x2 − y 2 )
+                                            ẏ = x + y(1 − x2 − y 2 )
+
+
+41.1      Převod do polárnı́ch souřadnic
+Transformace: x = r cos φ, y = r sin φ. Platı́ r2 = x2 + y 2 , derivacı́ zı́skáme rṙ = xẋ + y ẏ.
+**Dosazenı́:**
+                                   rṙ = x[−y + x(1 − r2 )] + y[x + y(1 − r2 )]
+                                   rṙ = −xy + x2 (1 − r2 ) + yx + y 2 (1 − r2 )
+                                      rṙ = (x2 + y 2 )(1 − r2 ) = r2 (1 − r2 )
+Vydělenı́m r (pro r ̸= 0):
+                                                   ṙ = r(1 − r2 )
+
+Pro úhel (z poznámek):
+                                                       φ̇ = 1
+
+41.2      Analýza fázového portrétu
+   1. **Bod rovnováhy r = 0 (Počátek):** Linearizace ṙ ≈ r (pro malé r). Poloměr exponenciálně roste.
+      Bod [0, 0] je **nestabilnı́ ohnisko** (zdroj). Je to α-limitnı́ množina pro vnitřek cyklu.
+   2. **Kružnice r = 1 (Limitnı́ cyklus):** Rovnice ṙ = r(1 − r2 ) má stacionárnı́ bod r = 1.
+          • Pro r < 1 je ṙ > 0 (poloměr roste k 1).
+          • Pro r > 1 je ṙ < 0 (poloměr klesá k 1).
+       Tato kružnice je **stabilnı́ limitnı́ cyklus**. Je to ω-limitnı́ množina pro všechny trajektorie x0 ̸= 0.
+
+
+
+
+                                                         30
+

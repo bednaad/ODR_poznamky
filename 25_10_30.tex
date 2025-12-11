@@ -1,0 +1,150 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+\title{Studijní Materiál: Linearizace a Stabilita (Kompletní)}
+\author{Zpracováno z poznámek: 30.10.}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Teorie linearizace}
+
+Mějme nelineární autonomní systém:
+$$ \dot{x} = F(x), \quad x \in \mathbb{R}^n, \quad F \in C^1(E) $$
+Nechť $x_0$ je bod rovnováhy (stacionární bod), tedy platí $F(x_0) = 0$.
+
+\subsection{Taylorův rozvoj a Jacobiho matice}
+Chování systému v malém okolí bodu $x_0$ aproximujeme lineárním systémem $\dot{u} = Au$, kde $u = x - x_0$ a $A$ je **Jacobiho matice**:
+$$ A = DF(x_0) = \left. \begin{pmatrix} \frac{\partial f_1}{\partial x_1} & \cdots & \frac{\partial f_1}{\partial x_n} \\ \vdots & \ddots & \vdots \\ \frac{\partial f_n}{\partial x_1} & \cdots & \frac{\partial f_n}{\partial x_n} \end{pmatrix} \right|_{x=x_0} $$
+
+\subsection{Věta o linearizované stabilitě}
+Nechť $\lambda_1, \dots, \lambda_n$ jsou vlastní čísla matice $A$.
+\begin{itemize}
+    \item Pokud $\forall i: \text{Re}(\lambda_i) < 0 \implies$ bod $x_0$ je **asymptoticky stabilní**.
+    \item Pokud $\exists i: \text{Re}(\lambda_i) > 0 \implies$ bod $x_0$ je **nestabilní**.
+    \item Pokud $\forall i: \text{Re}(\lambda_i) \le 0$ a existuje $\lambda$ s nulovou reálnou částí $\implies$ nelze rozhodnout (kritický případ).
+\end{itemize}
+
+\section{Příklad 1: Polynomiální systém v počátku}
+
+\textbf{Zadání}:
+$$ \dot{x} = -x + y + x^2 + 3y^2 $$
+$$ \dot{y} = x - 3y + 2xy $$
+\textbf{Bod rovnováhy:} $[0,0]$.
+
+1. **Jacobiho matice obecně:**
+   $$ J(x,y) = \begin{pmatrix} -1+2x & 1+6y \\ 1+2y & -3+2x \end{pmatrix} $$
+
+2. **Vyčíslení v bodě $[0,0]$:**
+   $$ A = J(0,0) = \begin{pmatrix} -1 & 1 \\ 1 & -3 \end{pmatrix} $$
+
+3. **Stabilita:**
+   $$ \det(A - \lambda I) = \lambda^2 + 4\lambda + 2 = 0 $$
+   $$ \lambda_{1,2} = -2 \pm \sqrt{2} $$
+   Obě vlastní čísla jsou záporná ($\approx -0.59, -3.41$).
+   \textbf{Závěr:} Bod $[0,0]$ je **stabilní uzel**.
+
+\section{Příklad 2: Transcendentní funkce (Goniometrie)}
+
+\textbf{Zadání} (rekonstruováno z poznámek):
+$$ \dot{x} = e^{-x+y} - \cos x $$
+$$ \dot{y} = -\sin(x-3y) $$
+\textbf{Bod rovnováhy:} $[0,0]$ (protože $e^0 - 1 = 0$ a $\sin 0 = 0$).
+
+1. **Jacobiho matice obecně:**
+   $$ \frac{\partial \dot{x}}{\partial x} = -e^{-x+y} + \sin x, \quad \frac{\partial \dot{x}}{\partial y} = e^{-x+y} $$
+   $$ \frac{\partial \dot{y}}{\partial x} = -\cos(x-3y), \quad \frac{\partial \dot{y}}{\partial y} = -\cos(x-3y) \cdot (-3) = 3\cos(x-3y) $$
+
+2. **Vyčíslení v $[0,0]$:**
+   $$ A = \begin{pmatrix} -1 & 1 \\ -1 & 3 \end{pmatrix} $$
+
+3. **Stabilita:**
+   $$ \det(A-\lambda I) = (-1-\lambda)(3-\lambda) - (-1) = \lambda^2 - 2\lambda - 3 + 1 = \lambda^2 - 2\lambda - 2 = 0 $$
+   $$ \lambda_{1,2} = \frac{2 \pm \sqrt{4 - 4(1)(-2)}}{2} = 1 \pm \sqrt{3} $$
+   $\lambda_1 = 1 + \sqrt{3} > 0$ (kladné), $\lambda_2 = 1 - \sqrt{3} < 0$ (záporné).
+   \textbf{Závěr:} Bod $[0,0]$ je **sedlo (nestabilní)**.
+
+\section{Příklad 3: Systém se 4 body rovnováhy}
+
+\textbf{Zadání} (opraveno dle tvé připomínky):
+$$ \dot{x} = x^2 - y^2 $$
+$$ \dot{y} = y^2 - 5x + 6 $$
+
+1. **Nalezení bodů rovnováhy:**
+   Z první rovnice: $x^2 = y^2 \implies y = \pm x$.
+   Dosazení do druhé rovnice (kde $y^2 = x^2$):
+   $$ x^2 - 5x + 6 = 0 \implies (x-2)(x-3) = 0 $$
+   Tedy $x_1 = 2, x_2 = 3$.
+   Kombinací s $y = \pm x$ získáme 4 body:
+   $$ M_1[2,2], \quad M_2[2,-2], \quad M_3[3,3], \quad M_4[3,-3] $$
+
+2. **Jacobiho matice obecně:**
+   $$ J(x,y) = \begin{pmatrix} 2x & -2y \\ -5 & 2y \end{pmatrix} $$
+
+3. **Klasifikace bodů:**
+
+   \textbf{a) Bod $M_1[2,2]$:}
+   $$ A = \begin{pmatrix} 4 & -4 \\ -5 & 4 \end{pmatrix} $$
+   $\det A = 16 - 20 = -4$.
+   Determinant je záporný (součin vl. čísel je záporný) $\implies$ jedno kladné, jedno záporné.
+   \textbf{Závěr:} **Sedlo (Nestabilní)**.
+
+   \textbf{b) Bod $M_2[2,-2]$:}
+   $$ A = \begin{pmatrix} 4 & 4 \\ -5 & -4 \end{pmatrix} $$
+   $\text{Tr } A = 0, \det A = -16 + 20 = 4$.
+   Char. rovnice: $\lambda^2 + 4 = 0 \implies \lambda = \pm 2i$.
+   \textbf{Závěr:} V lineární aproximaci **střed**. V nelineárním systému nelze rozhodnout (kritický případ, často nestabilní nebo limitní cyklus).
+
+   \textbf{c) Bod $M_3[3,3]$:}
+   $$ A = \begin{pmatrix} 6 & -6 \\ -5 & 6 \end{pmatrix} $$
+   $\text{Tr } A = 12 > 0, \det A = 36 - 30 = 6 > 0$.
+   Diskriminant $D = 12^2 - 4\cdot 6 = 120 > 0$.
+   Obě vlastní čísla jsou reálná a kladná.
+   \textbf{Závěr:} **Nestabilní uzel**.
+
+   \textbf{d) Bod $M_4[3,-3]$:}
+   $$ A = \begin{pmatrix} 6 & 6 \\ -5 & -6 \end{pmatrix} $$
+   $\det A = -36 + 30 = -6 < 0$.
+   \textbf{Závěr:} **Sedlo (Nestabilní)**.
+
+\section{Posunutí souřadnic}
+Pro analýzu bodu $h \neq 0$ zavedeme $u = x - h$. Linearizovaný systém je $\dot{u} = DF(h)u$.
+
+\section{Globální vlastnosti řešení (Barrowův vzorec)}
+
+Pro jednorozměrnou autonomní rovnici $\dot{x} = F(x)$ s počáteční podmínkou $x(t_0) = x_0$ můžeme explicitně určit čas, za který se řešení dostane z bodu $a$ do bodu $b$.
+
+\subsection{Barrowův vzorec}
+Separací proměnných $\frac{dx}{dt} = F(x) \implies \frac{dx}{F(x)} = dt$ a následnou integrací získáme vztah pro časový interval $T = t_1 - t_0$:
+
+$$ T = \int_{x(t_0)}^{x(t_1)} \frac{1}{F(z)} dz $$
+
+Pokud tento integrál konverguje, řešení dosáhne hodnoty $x(t_1)$ v konečném čase.
+
+\subsection{Exploze řešení (Blow-up)}
+Pokud řešení $x(t)$ roste nade všechny meze ($x(t) \to \infty$) v **konečném čase** $T_{max}$, říkáme, že řešení exploduje (blow-up).
+Nastává to tehdy, pokud konverguje integrál:
+$$ \int_{x_0}^{\infty} \frac{1}{F(z)} dz < \infty $$
+
+\textbf{Příklad (z poznámek):} $\dot{x} = x^2, \quad x(0) = x_0 > 0$.
+$$ t = \int_{x_0}^{x(t)} \frac{dz}{z^2} = \left[ -\frac{1}{z} \right]_{x_0}^{x(t)} = \frac{1}{x_0} - \frac{1}{x(t)} $$
+Pro $x(t) \to \infty$ je čas exploze $T_{max} = \frac{1}{x_0}$.
+Řešení $x(t) = \frac{x_0}{1 - x_0 t}$ existuje pouze na intervalu $(-\infty, \frac{1}{x_0})$.
+
+\subsection{Existence a jednoznačnost na intervalu}
+Nechť $E \subset \mathbb{R}^n$ je otevřená množina a $F \in C^1(E)$.
+Potom pro každou počáteční podmínku existuje **maximální interval** existence řešení $I = (\alpha, \beta)$.
+Pokud je interval omezený (např. $\beta < \infty$), řešení musí opustit každou kompaktní podmnožinu $E$ (buď jde do nekonečna, nebo k hranici definicního oboru).
+
+\end{document}

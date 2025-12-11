@@ -1,0 +1,178 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+% --- Místo pro obrázky ---
+% \newcommand{\ObrSektory}{\includegraphics[width=0.8\textwidth]{sektory_tabule.jpg}}
+% \newcommand{\ObrNewton}{\includegraphics[width=0.8\textwidth]{newton_potencial.jpg}}
+
+\title{Studijní Materiál: Topologie fázového portrétu a Konzervativní systémy}
+\author{Zpracováno z poznámek: 20.11.}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Topologie okolí bodu rovnováhy}
+
+Zkoumáme chování trajektorií $\Gamma(t)$ v okolí bodu rovnováhy $x_0$, kde $F(x_0)=0$.
+Zatímco u hyperbolických bodů (sedlo, uzel, ohnisko) je situace jasná z linearizace, u nehyperbolických bodů (např. vlastní čísla s nulovou reálnou částí) je struktura složitější.
+
+\subsection{Sektory a Separatrixy}
+Okolí bodu rovnováhy může být rozděleno tzv. **separatrixami** (speciální trajektorie $\Gamma$, které pro $t \to \pm \infty$ konvergují přímo k bodu rovnováhy) na sektory s odlišným chováním.
+
+Rozlišujeme tři základní typy sektorů:
+\begin{enumerate}
+    \item **Hyperbolický sektor:**
+    Trajektorie $\Gamma$ v tomto sektoru se k bodu rovnováhy přiblíží, "minou ho" a opět se vzdálí. (Typické pro okolí sedla).
+    
+    \item **Parabolický sektor:**
+    Všechny trajektorie $\Gamma$ v tomto sektoru konvergují k bodu rovnováhy (pro $t \to \infty$) nebo z něj všechny divergují (pro $t \to -\infty$). Chová se to jako výseč uzlu.
+    
+    \item **Eliptický sektor:**
+    Trajektorie $\Gamma$ vycházejí z bodu rovnováhy, opíší smyčku a vracejí se zpět do bodu rovnováhy (homoklinické orbity). Celý sektor je vyplněn uzavřenými smyčkami.
+\end{enumerate}
+
+% \begin{figure}[h]
+%     \centering
+%     %\ObrSektory
+%     \caption{Klasifikace sektorů v okolí degenerovaného bodu rovnováhy.}
+% \end{figure}
+
+\subsection{Složené body rovnováhy}
+Složený bod rovnováhy vzniká splynutím více jednoduchých bodů rovnováhy (např. při změně parametru).
+Jeho index (topologická charakteristika) je roven součtu indexů bodů, které splynuly.
+Například splynutím sedla (index -1) a uzlu (index +1) vznikne bod s indexem 0 (např. sedlo-uzel).
+Okolí takového bodu se skládá z kombinace hyperbolických, parabolických a eliptických sektorů.
+Vztah pro počet sektorů:
+$$ 2 + E - H = 2I $$
+kde $E$ je počet eliptických sektorů, $H$ počet hyperbolických sektorů a $I$ je index bodu.
+
+\section{Analýza v polárních souřadnicích (Blow-up metoda)}
+
+Pokud linearizace selhává (např. Jacobiho matice je nulová), je nutné zkoumat nelineární členy. Často pomůže transformace do polárních souřadnic, která "nafoukne" bod rovnováhy na kružnici.
+
+\subsection{Odvození transformačních vztahů}
+Mějme systém $\dot{x} = P(x,y), \dot{y} = Q(x,y)$.
+Zavedeme substituci:
+$$ x = r \cos \varphi, \quad y = r \sin \varphi $$
+Z toho plyne $r^2 = x^2 + y^2$ a $\tan \varphi = \frac{y}{x}$.
+
+**1. Rovnice pro $r$:**
+Derivujeme $r^2$:
+$$ 2r\dot{r} = 2x\dot{x} + 2y\dot{y} \implies \dot{r} = \frac{x}{r}\dot{x} + \frac{y}{r}\dot{y} $$
+Dosadíme za $x, y$:
+$$ \dot{r} = \dot{x} \cos \varphi + \dot{y} \sin \varphi $$
+
+**2. Rovnice pro $\varphi$:**
+Derivujeme $\tan \varphi = y/x$:
+$$ \frac{1}{\cos^2 \varphi} \dot{\varphi} = \frac{\dot{y}x - y\dot{x}}{x^2} $$
+Vynásobíme $\cos^2 \varphi = (x/r)^2$:
+$$ \dot{\varphi} = \frac{x\dot{y} - y\dot{x}}{r^2} = \frac{1}{r} (\dot{y} \cos \varphi - \dot{x} \sin \varphi) $$
+
+\subsection{Příklad z tabule}
+Uvažujme systém, který po převodu dává rovnice typu:
+$$ \dot{r} = r^k f(\varphi) $$
+$$ \dot{\varphi} = r^{k-1} g(\varphi) $$
+
+Konkrétní analýza na tabuli (zřejmě pro určitý systém) ukazuje hledání směrů, kde $\dot{\varphi} = 0$ (invariantní paprsky).
+* Pokud pro nějaké $\varphi_0$ platí $\dot{\varphi}=0$, pak polopřímka s úhlem $\varphi_0$ je invariantní (trajektorie $\Gamma$ se pohybuje po přímce).
+* Na této přímce rozhoduje znaménko $\dot{r}$:
+    * $\dot{r} < 0$: Trajektorie $\Gamma$ jde do počátku (stabilní směr).
+    * $\dot{r} > 0$: Trajektorie $\Gamma$ jde od počátku (nestabilní směr).
+* Tímto způsobem určíme, zda se v daném sektoru mezi paprsky trajektorie chovají jako u sedla, uzlu atd.
+
+\section{Hamiltonovské systémy}
+
+Konzervativní systémy, kde nedochází ke ztrátě energie (neexistuje tření).
+
+\subsection{Definice a Hamiltonián}
+Systém je Hamiltonovský, pokud existuje funkce $H(x,y)$ taková, že:
+$$ \dot{x} = \frac{\partial H}{\partial y}, \quad \dot{y} = -\frac{\partial H}{\partial x} $$
+
+**Důsledek:**
+$$ \frac{dH}{dt} = \frac{\partial H}{\partial x}\dot{x} + \frac{\partial H}{\partial y}\dot{y} = \frac{\partial H}{\partial x}\left(\frac{\partial H}{\partial y}\right) + \frac{\partial H}{\partial y}\left(-\frac{\partial H}{\partial x}\right) = 0 $$
+Hamiltonián $H(x,y)$ je **prvním integrálem** systému. Trajektorie $\Gamma$ leží na hladinách konstantní energie $H(x,y) = C$.
+
+\subsection{Příklad z poznámek (dokončení)}
+Systém:
+$$ \dot{x} = y + x^2 - y^2 $$
+$$ \dot{y} = -x - 2xy $$
+
+**1. Nalezení Hamiltoniánu:**
+Integrujeme $\dot{x}$ podle $y$:
+$$ H = \int (y + x^2 - y^2) dy = \frac{y^2}{2} + x^2y - \frac{y^3}{3} + C(x) $$
+Derivujeme podle $x$ a porovnáme s $-\dot{y}$:
+$$ \frac{\partial H}{\partial x} = 2xy + C'(x) \quad \text{musí se rovnat} \quad -(-x - 2xy) = x + 2xy $$
+$$ C'(x) = x \implies C(x) = \frac{x^2}{2} $$
+Výsledný Hamiltonián:
+$$ H(x,y) = \frac{1}{2}(x^2 + y^2) + x^2y - \frac{1}{3}y^3 $$
+
+**2. Analýza bodů rovnováhy:**
+Body rovnováhy systému odpovídají stacionárním bodům funkce $H(x,y)$ (kde $\nabla H = 0$).
+Zde BR $[0,0]$.
+Hessián funkce $H$ v $[0,0]$:
+$$ \text{Hess } H = \begin{pmatrix} H_{xx} & H_{xy} \\ H_{yx} & H_{yy} \end{pmatrix}_{(0,0)} = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} $$
+Determinant $> 0$, stopa $> 0$ (nebo vlastní čísla $1, 1 > 0$).
+Bod $[0,0]$ je **lokální minimum** funkce $H$.
+\textbf{Závěr:} Protože $H$ má v počátku ostré lokální minimum, jsou trajektorie $\Gamma$ v okolí uzavřené křivky obíhající počátek. Bod $[0,0]$ je **střed** (Center).
+
+\section{Newtonovské systémy}
+
+Fyzikální systémy popisující pohyb částice v potenciálovém poli $V(x)$.
+Rovnice: $m \ddot{x} = F(x) = -V'(x)$.
+Převedeno na systém 1. řádu (pro $m=1$):
+$$ \dot{x} = y $$
+$$ \dot{y} = -V'(x) $$
+
+\subsection{Hamiltonián (Celková energie)}
+$$ H(x,y) = \text{E}_{kin} + \text{E}_{pot} = \frac{1}{2}y^2 + V(x) $$
+Trajektorie $\Gamma$ jsou dány rovnicí $\frac{1}{2}y^2 + V(x) = E$ (konstanta).
+Odtud lze vyjádřit rychlost $y = \pm \sqrt{2(E - V(x))}$.
+Pohyb je možný jen tam, kde $E \ge V(x)$.
+
+\subsection{Vztah potenciálu $V(x)$ a fázového portrétu}
+Z tvaru funkce $V(x)$ můžeme přímo nakreslit fázový portrét:
+
+\begin{itemize}
+    \item **Lokální minimum $V(x)$:**
+    Odpovídá bodu rovnováhy typu **STŘED**.
+    Částice kmitá v "dolíku" potenciálu. Fázové trajektorie $\Gamma$ jsou uzavřené smyčky kolem tohoto bodu.
+    
+    \item **Lokální maximum $V(x)$:**
+    Odpovídá bodu rovnováhy typu **SEDLO**.
+    Částice je na vrcholu kopce, což je nestabilní poloha. Separatrixy oddělují pohyb na jednu a druhou stranu kopce.
+\end{itemize}
+
+% \begin{figure}[h]
+%     \centering
+%     %\ObrNewton
+%     \caption{Nahoře: Graf potenciálu V(x). Dole: Odpovídající fázový portrét (minima -> středy, maxima -> sedla).}
+% \end{figure}
+
+\section{Gradientní systémy}
+
+Systémy, kde pohyb sleduje největší spád potenciálu (opak konzervativních systémů - zde se energie maximálně "ztrácí").
+$$ \dot{x} = -\nabla V(x) $$
+
+**Vlastnosti:**
+\begin{itemize}
+    \item Trajektorie $\Gamma$ jsou kolmé na vrstevnice $V(x)$.
+    \item Funkce $V(x)$ podél řešení klesá: $\frac{dV}{dt} \le 0$.
+    \item Neexistují žádné uzavřené cykly (limitní cykly).
+    \item Všechna řešení konvergují k bodům rovnováhy (lokálním extrémům $V$).
+    \item **Lokální minima $V$** jsou **asymptoticky stabilní** uzly.
+    \item **Lokální maxima $V$** jsou **nestabilní** uzly (zdroje).
+    \item **Sedlové body $V$** jsou **sedla** ve fázovém portrétu.
+\end{itemize}
+
+\end{document}

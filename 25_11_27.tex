@@ -1,0 +1,141 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+% --- Místo pro obrázky (Volitelné) ---
+% \newcommand{\ObrLimitCycle}{\includegraphics[width=0.6\textwidth]{limit_cycle.jpg}}
+
+\title{Studijní Materiál: Globální chování a Limitní cykly}
+\author{Zpracováno z poznámek: 27.11. (oprava)}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Dynamický systém a Tok}
+
+\subsection{Definice toku}
+Nechť $E \subset \mathbb{R}^n$ je otevřená množina. Zobrazení $\phi: \mathbb{R} \times E \to E$ se nazývá **dynamický systém** (nebo tok), pokud $\phi \in C^1$ a splňuje vlastnosti grupy:
+\begin{enumerate}
+    \item **Identita:** $\phi(0, x) = x$ pro všechna $x \in E$.
+    \item **Grupová vlastnost:** $\phi(t+s, x) = \phi(t, \phi(s, x))$.
+\end{enumerate}
+Zobrazení $\phi(\cdot, x_0): I \to E$ popisuje trajektorii systému procházející bodem $x_0$.
+
+\section{Globální existence a Blow-up (Výbuch)}
+
+U lineárních systémů existuje řešení pro všechna $t \in \mathbb{R}$. U nelineárních systémů to neplatí – řešení může v konečném čase utéct do nekonečna. Tomuto jevu se říká **blow-up**.
+
+\subsection{Příklad: Konečný čas zániku}
+Rovnice:
+$$ \dot{x} = x^2, \quad x(0) = x_0 $$
+Řešení separací proměnných:
+$$ \int x^{-2} dx = \int dt \implies -\frac{1}{x} = t + C $$
+$$ x(t) = -\frac{1}{t+C} $$
+Z počáteční podmínky $x(0)=x_0$ plyne $C = -\frac{1}{x_0}$.
+$$ x(t) = \frac{1}{\frac{1}{x_0} - t} = \frac{x_0}{1 - x_0 t} $$
+
+**Analýza intervalu existence:**
+\begin{itemize}
+    \item Pokud $x_0 > 0$: Jmenovatel se blíží nule pro $t \to \frac{1}{x_0}$. Řešení existuje pouze na intervalu $(-\infty, \frac{1}{x_0})$. V čase $T = 1/x_0$ dochází k "výbuchu" ($x \to \infty$).
+    \item Pokud $x_0 < 0$: Řešení existuje na $(\frac{1}{x_0}, \infty)$. Pro $t \to \infty$ jde $x \to 0$.
+    \item Pokud $x_0 = 0$: $x(t) \equiv 0$ (globální řešení).
+\end{itemize}
+
+\subsection{Barrowův vzorec (Čas zániku)}
+Pokud řešení opustí každý kompakt v konečném čase $T$ (jde do nekonečna), lze tento čas vyjádřit:
+$$ T = \int_{x_0}^{\infty} \frac{1}{F(z)} dz $$
+(V našem příkladu $\int_{x_0}^\infty z^{-2} dz = [-z^{-1}]_{x_0}^\infty = \frac{1}{x_0}$, což odpovídá).
+
+\subsection{Normalizace vektorového pole}
+Každý systém $\dot{x} = F(x)$ lze "zbrzdit", aby měl globální řešení, aniž by se změnily trajektorie (změní se jen rychlost pohybu po nich).
+Nový systém:
+$$ \dot{x} = \frac{F(x)}{1 + |F(x)|} $$
+Tento systém je topologicky ekvivalentní původnímu, ale řešení existují pro všechna $t$.
+
+\section{Limitní množiny}
+
+Definujeme, kam trajektorie směřuje v nekonečnu.
+Označme $\Gamma_{x_0}$ jako trajektorii procházející bodem $x_0$.
+
+\subsection{Definice limitních bodů}
+\begin{itemize}
+    \item **$\omega$-limitní bod ($p$):** Bod $p$ je $\omega$-limitním bodem trajektorie $\phi(t, x)$, pokud existuje posloupnost $t_n \to \infty$ taková, že $\phi(t_n, x) \to p$.
+    \item **$\alpha$-limitní bod ($q$):** Analogicky pro posloupnost $t_n \to -\infty$.
+\end{itemize}
+
+\subsection{Vlastnosti $\omega$-limitní množiny $\omega(\Gamma)$}
+\begin{itemize}
+    \item Je to uzavřená podmnožina $E$.
+    \item Je invariantní (skládá se z celých trajektorií).
+    \item Pokud je trajektorie omezená (leží v kompaktu), pak je $\omega(\Gamma)$ neprázdná, kompaktní a souvislá.
+\end{itemize}
+
+\section{Příklad: Limitní cyklus}
+
+Zkoumáme nelineární systém v rovině:
+\begin{align*}
+    \dot{x} &= -y + x(1 - x^2 - y^2) \\
+    \dot{y} &= x + y(1 - x^2 - y^2)
+\end{align*}
+
+\subsection{Převod do polárních souřadnic}
+Transformace: $x = r \cos \varphi, y = r \sin \varphi$.
+Platí $r^2 = x^2 + y^2$, derivací získáme $r\dot{r} = x\dot{x} + y\dot{y}$.
+
+**Dosazení:**
+$$ r\dot{r} = x[-y + x(1-r^2)] + y[x + y(1-r^2)] $$
+$$ r\dot{r} = -xy + x^2(1-r^2) + yx + y^2(1-r^2) $$
+$$ r\dot{r} = (x^2+y^2)(1-r^2) = r^2(1-r^2) $$
+Vydělením $r$ (pro $r \neq 0$):
+$$ \dot{r} = r(1-r^2) $$
+
+Pro úhel (z poznámek):
+$$ \dot{\varphi} = 1 $$
+
+\subsection{Analýza fázového portrétu}
+\begin{enumerate}
+    \item **Bod rovnováhy $r=0$ (Počátek):**
+    Linearizace $\dot{r} \approx r$ (pro malé $r$). Poloměr exponenciálně roste.
+    Bod $[0,0]$ je **nestabilní ohnisko** (zdroj). Je to $\alpha$-limitní množina pro vnitřek cyklu.
+
+    \item **Kružnice $r=1$ (Limitní cyklus):**
+    Rovnice $\dot{r} = r(1-r^2)$ má stacionární bod $r=1$.
+    \begin{itemize}
+        \item Pro $r < 1$ je $\dot{r} > 0$ (poloměr roste k 1).
+        \item Pro $r > 1$ je $\dot{r} < 0$ (poloměr klesá k 1).
+    \end{itemize}
+    Tato kružnice je **stabilní limitní cyklus**. Je to $\omega$-limitní množina pro všechny trajektorie $x_0 \neq 0$.
+\end{enumerate}
+
+% \begin{figure}[h]
+%     \centering
+%     %\ObrLimitCycle
+%     \caption{Ilustrace stabilního limitního cyklu pro r=1.}
+% \end{figure}
+
+\section{Poincarého zobrazení}
+Poincarého zobrazení (nebo také mapa prvního návratu) je nástroj pro studium stability periodických orbit.
+Uvažujme periodickou orbitu $\Gamma$ v $\mathbb{R}^n$. Zvolíme nadrovinu $\Sigma$ (tzv. transverzální řez), která protíná $\Gamma$ v bodě $p$ a není tečná k trajektoriím.
+Pro bod $x \in \Sigma$ v blízkosti $p$ definujeme $P(x)$ jako první bod, ve kterém trajektorie vycházející z $x$ znovu protne $\Sigma$.
+$$ P: \Sigma \to \Sigma $$
+Bod $p$ je pevným bodem zobrazení $P$, tj. $P(p) = p$.
+Stabilita pevného bodu $p$ pro diskrétní systém $x_{k+1} = P(x_k)$ odpovídá stabilitě periodické orbity $\Gamma$ pro spojitý systém.
+Pokud vlastní čísla linearizace $DP(p)$ leží uvnitř jednotkového kruhu, je orbita asymptoticky stabilní.
+
+\section{Stabilní varieta periodických orbit}
+Podobně jako u bodů rovnováhy, i k periodické orbitě $\Gamma$ může existovat stabilní varieta $W^s(\Gamma)$.
+Je to množina všech bodů $x_0$, jejichž trajektorie se pro $t \to \infty$ blíží k orbitě $\Gamma$.
+$$ W^s(\Gamma) = \{ x_0 \in \mathbb{R}^n : \text{dist}(\phi(t, x_0), \Gamma) \to 0 \text{ pro } t \to \infty \} $$
+Pokud je orbita stabilním limitním cyklem, je její stabilní varietou typicky nějaké její okolí (nebo celý prostor kromě bodu rovnováhy uvnitř).
+
+\end{document}

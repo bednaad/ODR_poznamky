@@ -1,0 +1,149 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+\title{Studijní Materiál: Systémy lineárních ODR}
+\author{Zpracováno z poznámek: 9.10.}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Úvod do lineárních systémů}
+
+Uvažujme systém lineárních diferenciálních rovnic 1. řádu s konstantními koeficienty:
+$$ X' = AX $$
+kde $X(t)$ je vektor neznámých funkcí a $A$ je čtvercová matice $n \times n$.
+
+\textbf{Analogie se skalární rovnicí:}
+\begin{itemize}
+    \item Skalární rovnice: $y' = ay \implies y(t) = C e^{at}$.
+    \item Systém rovnic: $X' = AX \implies X(t) = e^{tA} C$ (kde $e^{tA}$ je maticová exponenciála).
+\end{itemize}
+
+\section{Řešení pomocí vlastních čísel a vektorů}
+
+Hledáme řešení ve tvaru $X(t) = e^{\lambda t} v$. Dosazením do $X' = AX$ získáme podmínku:
+$$ A v = \lambda v $$
+To znamená, že $\lambda$ je vlastní číslo a $v$ je vlastní vektor matice $A$.
+
+\subsection{Příklad 1: Reálná různá vlastní čísla}
+\textbf{Zadání:}
+$$ X' = \begin{pmatrix} 10 & -6 \\ 18 & -11 \end{pmatrix} X $$
+
+1. **Charakteristická rovnice:**
+   $$ \det(A - \lambda I) = \begin{vmatrix} 10-\lambda & -6 \\ 18 & -11-\lambda \end{vmatrix} = 0 $$
+   $$ (10-\lambda)(-11-\lambda) - (-108) = \lambda^2 + \lambda - 110 + 108 = \lambda^2 + \lambda - 2 = 0 $$
+   $$ (\lambda + 2)(\lambda - 1) = 0 $$
+   Vlastní čísla: $\lambda_1 = 1, \quad \lambda_2 = -2$.
+
+2. **Vlastní vektory:**
+   \begin{itemize}
+       \item Pro $\lambda_1 = 1$:
+       $$ (A - I)v = \begin{pmatrix} 9 & -6 \\ 18 & -12 \end{pmatrix} \begin{pmatrix} v_x \\ v_y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} $$
+       Rovnice $9v_x - 6v_y = 0 \implies 3v_x = 2v_y$. Volíme $v_1 = \begin{pmatrix} 2 \\ 3 \end{pmatrix}$.
+       
+       \item Pro $\lambda_2 = -2$:
+       $$ (A + 2I)v = \begin{pmatrix} 12 & -6 \\ 18 & -9 \end{pmatrix} v = 0 $$
+       Rovnice $2v_x - v_y = 0 \implies v_y = 2v_x$. Volíme $v_2 = \begin{pmatrix} 1 \\ 2 \end{pmatrix}$.
+   \end{itemize}
+
+3. **Obecné řešení:**
+   $$ X(t) = C_1 e^{t} \begin{pmatrix} 2 \\ 3 \end{pmatrix} + C_2 e^{-2t} \begin{pmatrix} 1 \\ 2 \end{pmatrix} $$
+
+\textbf{Poznámka k fundamentálnímu systému:}
+Vektory $X_1(t) = e^{t} \begin{pmatrix} 2 \\ 3 \end{pmatrix}$ a $X_2(t) = e^{-2t} \begin{pmatrix} 1 \\ 2 \end{pmatrix}$ jsou lineárně nezávislá řešení.
+Tyto vektory tvoří tzv. \textbf{fundamentální systém řešení}. Fundamentální matice $\Phi(t)$ by měla tyto vektory jako své sloupce.
+
+\section{Maticová exponenciála $e^{tA}$}
+
+\subsection{Definice a vlastnosti}
+Maticová exponenciála je definována mocninnou řadou (analogicky k $e^x$):
+$$ e^{tA} = \sum_{k=0}^{\infty} \frac{t^k A^k}{k!} = I + tA + \frac{t^2 A^2}{2!} + \dots $$
+
+\textbf{Klíčové vlastnosti:}
+\begin{enumerate}
+    \item $\frac{d}{dt} e^{tA} = A e^{tA}$
+    \item $e^{(t+s)A} = e^{tA} e^{sA}$
+    \item $e^{0} = I$ (jednotková matice)
+    \item Je vždy invertibilní: $(e^{tA})^{-1} = e^{-tA}$
+\end{enumerate}
+
+\subsection{Řešení počáteční úlohy a vztah k vlastním vektorům}
+Pro systém $X' = AX$ s podmínkou $X(0) = X_0$ je řešení dáno vzorcem:
+$$ X(t) = e^{tA} X_0 $$
+
+\textbf{Důležitý vztah pro vlastní vektor $u_j$:}
+Pokud $u_j$ je vlastní vektor příslušný vlastnímu číslu $\lambda_j$, pak platí:
+$$ e^{At} u_j = e^{\lambda_j t} u_j $$
+\textit{Odvození pomocí řady (z poznámek):}
+$$ e^{At} u_j = e^{\lambda_j t} e^{(A - \lambda_j I)t} u_j = e^{\lambda_j t} \left( I + (A-\lambda_j I)t + \frac{(A-\lambda_j I)^2 t^2}{2!} + \dots \right) u_j $$
+Protože $(A-\lambda_j I)u_j = 0$ (z definice vlastního vektoru), všechny členy řady kromě prvního vypadnou.
+$$ = e^{\lambda_j t} (I \cdot u_j + 0 + \dots) = e^{\lambda_j t} u_j $$
+
+\section{Výpočet $e^{tA}$}
+
+\subsection{Metoda 1: Jordanův tvar (Násobná vlastní čísla)}
+Pokud má matice násobná vlastní čísla a nelze ji diagonalizovat, použijeme rozklad $e^{tA} = e^{\lambda t} e^{Nt}$.
+
+\textbf{Příklad 2:}
+$$ A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix} $$
+Vlastní číslo $\lambda = 1$ (násobnost 2). Matice $A = I + N$, kde $N = \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}$.
+$$ e^{tA} = e^{tI} e^{tN} = e^t \begin{pmatrix} 1 & t \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} e^t & t e^t \\ 0 & e^t \end{pmatrix} $$
+
+\subsection{Metoda 2: Diagonalizace}
+Pokud je $A$ diagonalizovatelná, platí $A = W \Lambda W^{-1}$, a tedy:
+$$ e^{tA} = W e^{t\Lambda} W^{-1} = W \begin{pmatrix} e^{\lambda_1 t} & 0 \\ 0 & e^{\lambda_2 t} \end{pmatrix} W^{-1} $$
+(V poznámkách značeno také jako $W \Lambda(t) W^{-1}$, kde $\Lambda(t) = \text{diag}(e^{\lambda_i t})$).
+
+\textbf{Příklad 3 (kompletní výpočet):}
+Systém: $x' = -2x - 3y, \quad y' = 6x + 7y$. Matice $A = \begin{pmatrix} -2 & -3 \\ 6 & 7 \end{pmatrix}$.
+\begin{enumerate}
+    \item **Vlastní čísla:** $\lambda_1 = 1, \lambda_2 = 4$.
+    \item **Vlastní vektory (tvoří matici $W$):**
+    \begin{itemize}
+        \item Pro $\lambda_1 = 1$: $\begin{pmatrix} -3 & -3 \\ 6 & 6 \end{pmatrix} \implies v_1 = \begin{pmatrix} 1 \\ -1 \end{pmatrix}$.
+        \item Pro $\lambda_2 = 4$: $\begin{pmatrix} -6 & -3 \\ 6 & 3 \end{pmatrix} \implies v_2 = \begin{pmatrix} 1 \\ -2 \end{pmatrix}$.
+    \end{itemize}
+    \item **Sestavení matic:**
+    $$ W = \begin{pmatrix} 1 & 1 \\ -1 & -2 \end{pmatrix}, \quad \Lambda(t) = \begin{pmatrix} e^t & 0 \\ 0 & e^{4t} \end{pmatrix} $$
+    \item **Inverzní matice $W^{-1}$:**
+    $$ \det(W) = 1(-2) - 1(-1) = -1 $$
+    $$ W^{-1} = \frac{1}{-1} \begin{pmatrix} -2 & -1 \\ 1 & 1 \end{pmatrix} = \begin{pmatrix} 2 & 1 \\ -1 & -1 \end{pmatrix} $$
+    \item **Výpočet $e^{tA}$:**
+    $$ e^{tA} = \begin{pmatrix} 1 & 1 \\ -1 & -2 \end{pmatrix} \begin{pmatrix} e^t & 0 \\ 0 & e^{4t} \end{pmatrix} \begin{pmatrix} 2 & 1 \\ -1 & -1 \end{pmatrix} $$
+    $$ = \begin{pmatrix} e^t & e^{4t} \\ -e^t & -2e^{4t} \end{pmatrix} \begin{pmatrix} 2 & 1 \\ -1 & -1 \end{pmatrix} $$
+    $$ = \begin{pmatrix} 2e^t - e^{4t} & e^t - e^{4t} \\ -2e^t + 2e^{4t} & -e^t + 2e^{4t} \end{pmatrix} $$
+\end{enumerate}
+
+\section{Fundamentální matice $\Phi(t)$}
+
+Fundamentální matice $\Phi(t)$ je matice, jejíž sloupce tvoří lineárně nezávislá řešení systému.
+Obecné řešení lze zapsat jako $X(t) = \Phi(t) K$.
+
+\textbf{Vztah k maticové exponenciále:}
+$$ e^{tA} = \Phi(t) \Phi(0)^{-1} $$
+Pokud zvolíme počáteční podmínku v $t=0$ tak, že $\Phi(0) = I$, pak přímo $\Phi(t) = e^{tA}$.
+
+\textbf{Výpočet konstanty $K$ z počátečních podmínek:}
+Pokud máme zadán počáteční vektor $X(0) = I$ (v poznámkách značeno $I$ nebo $L$), pak konstantu $K$ určíme vztahem:
+$$ K = \Phi^{-1}(0) \cdot I $$
+
+\section{Cayley-Hamiltonova věta a polynomy}
+Každá čtvercová matice je kořenem svého charakteristického polynomu $P(\lambda) = \det(A - \lambda I) = 0$.
+$$ P(A) = 0 $$
+Například pro $A = \begin{pmatrix} 1 & 1 \\ 0 & 1 \end{pmatrix}$ je $P(\lambda) = (\lambda-1)^2 = \lambda^2 - 2\lambda + 1$.
+Platí: $A^2 - 2A + I = 0$, tedy $A^2 = 2A - I$.
+Tato vlastnost umožňuje vyjádřit $e^{tA}$ jako polynom matice $A$ stupně $n-1$:
+$$ e^{tA} = b_0(t) I + b_1(t) A $$
+
+\end{document}

@@ -1,0 +1,199 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip} % Pro hezčí formátování bez odsazování prvních řádků
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+% --- Definice pro obrázky ---
+% Pro kompilaci odkomentujte řádky uvnitř figure a ujistěte se, že máte soubory ve složce.
+\newcommand{\GrafYAbs}{\includegraphics[width=0.45\textwidth]{y_abs.png}}
+\newcommand{\GrafStabilita}{\includegraphics[width=0.6\textwidth]{stabilita_diagram.png}}
+
+\title{Studijní Materiál: Obyčejné Diferenciální Rovnice}
+\author{Zpracováno z poznámek (2.10., 25.9., 27.11.)}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Teorie: Existence a Jednoznačnost}
+
+\subsection{Picard-Lindelöfova věta}
+Uvažujme počáteční problém:
+$$ y' = f(x, y), \quad y(x_0) = y_0 $$
+Nechť $G \subseteq \mathbb{R}^2$ je oblast obsahující bod $(x_0, y_0)$.
+\begin{itemize}
+    \item \textbf{Existence:} Pokud je $f(x, y)$ spojitá na $G$, pak existuje alespoň jedno řešení definované na nějakém intervalu $I$ obsahujícím $x_0$.
+    \item \textbf{Jednoznačnost:} Pokud je navíc parciální derivace $\frac{\partial f}{\partial y}$ spojitá na $G$, pak existuje právě jedno \textbf{maximální} řešení.
+\end{itemize}
+\textit{Poznámka: Maximální řešení je takové, které nelze prodloužit na větší interval.}
+
+\subsection{Protipříklad (Porušení jednoznačnosti)}
+$$ y' = \sqrt{|y|} $$
+\begin{itemize}
+    \item Funkce $f(x,y) = \sqrt{|y|}$ je spojitá všude.
+    \item Derivace $\frac{\partial f}{\partial y} = \frac{\text{sgn}(y)}{2\sqrt{|y|}}$ není definována pro $y=0$.
+    \item **Důsledek:** Bodem $(x_0, 0)$ může procházet více řešení (např. triviální $y=0$ a parabolické větve).
+\end{itemize}
+
+% \begin{figure}[h]
+%     \centering
+%     %\GrafYAbs
+%     \caption{Ilustrace nejednoznačnosti řešení v bodě y=0.}
+% \end{figure}
+
+\section{Metody řešení ODR 1. řádu}
+
+\subsection{Separace proměnných}
+Tvar: $y' = g(x)h(y)$.
+Postup: $\int \frac{dy}{h(y)} = \int g(x) dx$.
+
+\subsubsection{Příklad 1: $y' = |y|$}
+Pro $y > 0$:
+$$ \int \frac{dy}{y} = \int dx \implies \ln|y| = x + C \implies y = K e^x $$
+Pro $y < 0$:
+$$ \int \frac{dy}{-y} = \int dx \implies -\ln|y| = x + C \implies y = K e^{-x} $$
+
+\subsubsection{Příklad 2: $y' = \sqrt{1-y^2}$}
+$$ \int \frac{dy}{\sqrt{1-y^2}} = \int dx $$
+$$ \arcsin y = x + C $$
+$$ y = \sin(x+C) $$
+Podmínka existence: $x+C \in (-\frac{\pi}{2}, \frac{\pi}{2})$.
+
+\subsection{Lineární rovnice a metoda $y=uv$}
+
+\subsubsection{Příklad: $xy' - y = 3x^2, \quad y(0)=1$}
+Řešíme pomocí substituce $y = u(x) \cdot v(x)$.
+Derivace součinu je $y' = u'v + uv'$.
+
+1. **Dosazení do rovnice:**
+   $$ x(u'v + uv') - uv = 3x^2 $$
+   Roznásobíme a vytkneme $u$ ze členů obsahujících $v$:
+   $$ x u' v + x u v' - uv = 3x^2 $$
+   $$ x u' v + u(\underbrace{xv' - v}_{=0}) = 3x^2 $$
+
+2. **Výpočet $v(x)$ (řešení závorky):**
+   Položíme závorku rovnu nule:
+   $$ xv' - v = 0 \implies x \frac{dv}{dx} = v $$
+   Separace proměnných:
+   $$ \frac{dv}{v} = \frac{dx}{x} \implies \ln|v| = \ln|x| \implies v = x $$
+
+3. **Výpočet $u(x)$ (dosazení $v$):**
+   Vrátíme se k rovnici $x u' v = 3x^2$ a dosadíme $v=x$:
+   $$ x \cdot u' \cdot x = 3x^2 $$
+   $$ x^2 u' = 3x^2 \quad (\text{zde se často chybuje v mocninách}) $$
+   Vydělíme $x^2$ (pro $x \neq 0$):
+   $$ u' = 3 $$
+   Integrací získáme $u$:
+   $$ u = \int 3 \, dx = 3x + C $$
+
+4. **Obecné řešení ($y=uv$):**
+   $$ y(x) = (3x + C) \cdot x = 3x^2 + Cx $$
+
+5. **Počáteční podmínka $y(0)=1$:**
+   Dosadíme $x=0$:
+   $$ y(0) = 3(0)^2 + C(0) = 0 $$
+   To se nerovná zadané hodnotě $1$.
+   \textbf{Závěr:} Úloha nemá řešení (singulární bod v $x=0$, integrální křivky procházejí počátkem 0, nikoliv bodem [0,1]).
+
+\section{Aplikace ODR (Fyzika a Populace)}
+
+\subsection{Dynamika (Odpor vzduchu)}
+Z Newtonova zákona $F = ma$:
+\begin{enumerate}
+    \item **Pouze odpor** ($F = -kv$):
+    $$ m v' = -kv \implies v(t) = v_0 e^{-\frac{k}{m}t} $$
+    \item **Odpor + Gravitace** ($F = -kv - mg$):
+    $$ v' + \frac{k}{m}v = -g $$
+    Řešení: $v(t) = -\frac{mg}{k} + C e^{-\frac{k}{m}t}$.
+\end{enumerate}
+
+\subsection{Míchací model (Nádrž)}
+$$ V \cdot c' = q_{in} C_{in} - q_{out} c(t) $$
+Pokud $q_{in} = q_{out} = q$:
+$$ c' + \frac{q}{V}c = \frac{q}{V}C_{in} $$
+
+\subsection{Malthusův model (Exponenciální růst)}
+Základní rovnice: Rychlost růstu je úměrná velikosti populace.
+$$ P'(t) = k P(t) $$
+Řešení:
+$$ P(t) = P_0 e^{kt} $$
+
+\subsubsection{Konkrétní příklad z poznámek (výpočet k)}
+Zadání: Populace vzrostla o 10 \% za 10 hodin. Jaké je $k$?
+$$ P(10) = 1.1 P_0 $$
+$$ P_0 e^{k \cdot 10} = 1.1 P_0 $$
+$$ e^{10k} = 1.1 $$
+$$ 10k = \ln(1.1) \implies k = \frac{\ln(1.1)}{10} \approx 0.009531 $$
+
+\subsubsection{Aplikace na COVID (data z poznámek)}
+Poznámky uvádí data z roku 2020:
+\begin{itemize}
+    \item 22.8.: 234 případů ($P_0$)
+    \item Předpoklad: Exponenciální růst s konstantou $k \approx 0.00953$ (nebo podobnou vypočtenou z dat).
+    \item Predikce pro 21.9. (cca 30 dní):
+    $$ P(30) = 234 \cdot e^{0.00953 \cdot 30} \approx \dots $$
+    (Poznámky obsahují konkrétní numerické výpočty predikcí pro různé dny).
+\end{itemize}
+
+\subsection{Logistický model (Omezený růst)}
+Růst je brzděn kapacitou prostředí ($K=1$).
+$$ y' = y(1-y) $$
+\textbf{Řešení:}
+1. Separace: $\int \frac{dy}{y(1-y)} = \int dx$.
+2. Rozklad na parciální zlomky: $\frac{1}{y(1-y)} = \frac{1}{y} + \frac{1}{1-y}$.
+3. Integrace:
+   $$ \ln|y| - \ln|1-y| = x + C $$
+   $$ \ln \left| \frac{y}{1-y} \right| = x + C $$
+4. Odlogaritmování a úprava:
+   $$ y(x) = \frac{K e^{x}}{1 + K e^{x}} $$
+   (Grafem je tzv. S-křivka / sigmoida).
+
+\section{Kvalitativní teorie - Stabilita}
+
+Uvažujme autonomní rovnici $y' = f(y)$.
+Stacionární body jsou řešení rovnice $f(y) = 0$.
+
+\subsection{Určení stability z fázové přímky}
+Analyzujeme znaménko $f(y)$ v okolí stacionárního bodu $c$:
+\begin{enumerate}
+    \item \textbf{Stabilní (II):}
+    \begin{itemize}
+        \item Nalevo od $c$: $f(y) > 0$ (řešení roste k $c$).
+        \item Napravo od $c$: $f(y) < 0$ (řešení klesá k $c$).
+        \item Šipky směřují **k bodu**.
+    \end{itemize}
+    
+    \item \textbf{Nestabilní (I):}
+    \begin{itemize}
+        \item Nalevo od $c$: $f(y) < 0$ (řešení klesá pryč).
+        \item Napravo od $c$: $f(y) > 0$ (řešení roste pryč).
+        \item Šipky směřují **od bodu**.
+    \end{itemize}
+    
+    \item \textbf{Semistabilní:} Znaménko se nemění (např. inflexní bod).
+\end{enumerate}
+
+\subsection{Analýza logistické rovnice $y' = y(1-y)$}
+Funkce $f(y) = y - y^2$ (parabola otočená dolů).
+Kořeny: $y=0$ a $y=1$.
+
+\begin{itemize}
+    \item **Bod 0:** $f(y)$ přechází z mínusu do plusu $\implies$ **Nestabilní**.
+    \item **Bod 1:** $f(y)$ přechází z plusu do mínusu $\implies$ **Stabilní**.
+\end{itemize}
+
+% \begin{figure}[h]
+%     \centering
+%     %\GrafStabilita
+%     \caption{Fázový portrét logistické rovnice: 0 je nestabilní, 1 je stabilní.}
+% \end{figure}
+
+\end{document}

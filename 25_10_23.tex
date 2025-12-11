@@ -1,0 +1,149 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+\title{Studijní Materiál: Transformace, Podprostory a Stabilita (23.10.)}
+\author{Kompletní verze vč. příkladů}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Lineární transformace a Ekvivalence systémů}
+
+Systém $X' = AX$ lze transformovat pomocí $X = TY$ na $Y' = BY$, kde $B = T^{-1}AT$.
+Matice $T$ je obvykle sestavena z vlastních vektorů matice $A$.
+
+\subsection{Příklad 1: Transformace $3 \times 3$ matice}
+\textbf{Zadání:} Mějme systém $\dot{X} = AX$, kde:
+$$ A = \begin{pmatrix} -2 & -4 & 2 \\ -2 & 1 & 2 \\ 4 & 2 & 5 \end{pmatrix} $$
+
+1. **Vlastní čísla a vektory:**
+   Z poznámek vyplývají vlastní čísla a příslušné vlastní vektory:
+   \begin{itemize}
+       \item $\lambda_1 = 3 \implies v_1 = (2, -4, -1)^T$ (pozn: v textu je $v_1$ s otazníky, rekonstruováno z kontextu).
+       \item $\lambda_2 = -5 \implies v_2 = (4, -1, 1)^T$.
+       \item $\lambda_3 = 6 \implies v_3 = (1, 0, 1)^T$.
+   \end{itemize}
+
+2. **Sestavení transformační matice $P$ a matice $B$:**
+   Matice $P$ (v textu označena jako $T$ nebo $P$) je tvořena vlastními vektory. Matice $B$ bude diagonální:
+   $$ B = \begin{pmatrix} 3 & 0 & 0 \\ 0 & -5 & 0 \\ 0 & 0 & 6 \end{pmatrix} $$
+
+3. **Řešení transformovaného systému $\dot{Y} = BY$:**
+   Soustava se rozpadne na nezávislé rovnice:
+   $$ \dot{y}_1 = 3y_1 \implies y_1(t) = c_1 e^{3t} $$
+   $$ \dot{y}_2 = -5y_2 \implies y_2(t) = c_2 e^{-5t} $$
+   $$ \dot{y}_3 = 6y_3 \implies y_3(t) = c_3 e^{6t} $$
+
+4. **Zpětná transformace:**
+   Obecné řešení původního systému je $X(t) = P Y(t)$.
+
+\section{Tok lineárního systému (Flow)}
+
+Množina zobrazení $\phi_t: \mathbb{R}^n \to \mathbb{R}^n$ (parametrizovaná časem $t$) se nazývá **tokem** lineárního systému.
+Matematicky je tok dán maticovou exponenciálou:
+$$ \phi(t, X_0) = e^{At} X_0 $$
+
+**Vlastnosti toku:**
+\begin{itemize}
+    \item $\phi_0(x) = x$ (Identita v čase 0).
+    \item $\phi_{t+s}(x) = \phi_t(\phi_s(x))$ (Grupová vlastnost).
+\end{itemize}
+
+\subsection{Hyperbolický systém}
+Lineární systém se nazývá **hyperbolický**, jestliže všechna vlastní čísla matice $A$ mají **nenulovou reálnou část** ($\text{Re}(\lambda_j) \neq 0$).
+U takových systémů neexistují centrální podprostory, pouze stabilní a nestabilní.
+
+\section{Invariantní podprostory}
+
+Množina $M \subseteq \mathbb{R}^n$ je **invariantní** vůči toku, jestliže pro každé $x \in M$ a $t \in \mathbb{R}$ platí $\phi_t(x) \in M$.
+
+Prostor $\mathbb{R}^n$ se rozpadá na součet invariantních podprostorů:
+$$ \mathbb{R}^n = E^s \oplus E^u \oplus E^c $$
+\begin{itemize}
+    \item **$E^s$ (Stabilní):** Generován vektory pro $\text{Re}(\lambda) < 0$.
+    \item **$E^u$ (Nestabilní):** Generován vektory pro $\text{Re}(\lambda) > 0$.
+    \item **$E^c$ (Centrální):** Generován vektory pro $\text{Re}(\lambda) = 0$.
+\end{itemize}
+
+\subsection{Příklad 2: Rozklad na podprostory}
+Mějme matici $A$ v blokovém tvaru:
+$$ A = \begin{pmatrix} -2 & -1 & 0 \\ 1 & -2 & 0 \\ 0 & 0 & 1 \end{pmatrix} $$
+
+1. **Vlastní čísla:**
+   Charakteristický polynom: $( (-2-\lambda)^2 + 1 ) (1-\lambda) = 0$.
+   $$ \lambda_{1,2} = -2 \pm i, \quad \lambda_3 = 1 $$
+
+2. **Podprostory:**
+   \begin{itemize}
+       \item Vlastní čísla $-2 \pm i$ mají zápornou reálnou část ($-2 < 0$). Odpovídající vektory generují **stabilní podprostor $E^s$**. V tomto případě jde o rovinu $xy$ (resp. podprostor generovaný prvními dvěma bázovými vektory). Trajektorie zde spirálovitě konvergují k nule.
+       \item Vlastní číslo $1$ má kladnou reálnou část. Odpovídající vektor $v_3 = (0,0,1)^T$ generuje **nestabilní podprostor $E^u$** (osa $z$).
+   \end{itemize}
+
+\section{Nelineární ODR – Speciální případy (Snížení řádu)}
+
+U rovnic 2. řádu (nebo vyšších) lze často snížit řád pomocí substituce.
+
+\subsection{Typ I: $y'' = f(t, y')$}
+Rovnice neobsahuje explicitně $y$.
+**Substituce:** $z(t) = y'(t) \implies z' = y''$.
+
+\textbf{Příklad 3:} $ty'' + y' = 0$ (Eulerova rovnice typu).
+1. Substituce $z = y'$: $t z' + z = 0$.
+2. Separace proměnných:
+   $$ t \frac{dz}{dt} = -z \implies \frac{dz}{z} = -\frac{dt}{t} $$
+   $$ \ln|z| = -\ln|t| + C \implies z(t) = \frac{K}{t} $$
+3. Návrat k $y$:
+   $$ y' = \frac{K}{t} \implies y(t) = K \ln|t| + C_2 $$
+
+\subsection{Typ II: $y'' = f(y, y')$}
+Rovnice neobsahuje explicitně čas $t$.
+**Substituce:** $z(y) = y'$.
+Derivace složené funkce: $y'' = \frac{d}{dt} z(y(t)) = \frac{dz}{dy} \cdot \frac{dy}{dt} = z \frac{dz}{dy}$.
+
+\textbf{Příklad 4:} $y'' \cdot y = (y')^2$.
+Zadání v poznámkách vede na separaci. Uvažujme příklad s podmínkou $y(0)=1/2$:
+Rovnice po úpravě vede na tvar $\frac{dz}{dy} = y$ (nebo ekvivalentní).
+$$ z = \frac{1}{2}y^2 + C $$
+Protože $z = y'$, řešíme následně $y' = \frac{1}{2}y^2 + C$.
+
+\section{Nelineární systémy a Stabilita (Konec dokumentu)}
+
+Uvažujme nelineární systém $\dot{x} = f(x)$ s bodem rovnováhy $x_R = 0$ (BR).
+
+\subsection{Definice stability}
+Bod rovnováhy $x_R$ se nazývá:
+
+1.  **Stabilní (Ljapunov):**
+    Jestliže pro každé $\epsilon > 0$ existuje $\delta > 0$ tak, že pokud $\|x(0)\| < \delta$, pak $\|x(t)\| < \epsilon$ pro všechna $t \ge 0$.
+    *(Řešení neutíká daleko).*
+
+2.  **Atraktor:**
+    Jestliže existuje okolí, ze kterého všechna řešení konvergují k $x_R$.
+    $\lim_{t \to \infty} x(t) = 0$.
+
+3.  **Asymptoticky stabilní:**
+    Jestliže je stabilní a zároveň atraktor.
+
+4.  **Nestabilní:**
+    Pokud není stabilní.
+
+\subsection{Oblast atraktivity}
+Množina všech bodů $x_0$, pro které řešení $x(t, x_0)$ konverguje k bodu rovnováhy, se nazývá **oblast atraktivity** (nebo pánev atraktivity).
+Pokud je touto oblastí celý prostor $\mathbb{R}^n$, jde o **globální atraktor**.
+
+\subsection{Hurwitzovo kritérium (Poznámka)}
+Pro analýzu stability (polynomu charakteristické rovnice) lze využít Hurwitzovu matici sestavenou z koeficientů polynomu $P(\lambda) = \lambda^n + a_1 \lambda^{n-1} + \dots + a_n$.
+$$ H = \begin{pmatrix} a_1 & 1 & 0 & \dots \\ a_3 & a_2 & a_1 & \dots \\ \vdots & \vdots & \vdots & \ddots \end{pmatrix} $$
+
+\end{document}

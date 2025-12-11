@@ -1,0 +1,206 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+\title{Studijní Materiál: Analýza fázových portrétů a Variety (13.11.)}
+\author{Zpracováno z poznámek: 13.11. (str. 3--7)}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+% --- STRANA 3 ---
+\section{Příklady ve 2D (Strana 3)}
+
+\subsection{Příklad 1: Výpočet řešení a variety}
+\textbf{Zadání:}
+$$ \dot{x} = -x $$
+$$ \dot{y} = y + x^2 $$
+Bod rovnováhy: $[0,0]$.
+
+1. **Řešení první rovnice:**
+   $$ x(t) = x_0 e^{-t} $$
+
+2. **Řešení druhé rovnice (dosazení):**
+   $$ \dot{y} - y = x^2 = (x_0 e^{-t})^2 = x_0^2 e^{-2t} $$
+   Toto je lineární nehomogenní rovnice. Partikulární řešení hledáme ve tvaru $C e^{-2t}$.
+   Po dosazení a výpočtu (metoda variace konstant nebo odhad) a aplikaci počáteční podmínky $y(0)=y_0$ dostáváme v poznámkách uvedený tvar:
+   $$ \begin{pmatrix} x(t) \\ y(t) \end{pmatrix} = \begin{pmatrix} x_0 e^{-t} \\ \left(y_0 + \frac{x_0^2}{3}\right)e^t - \frac{x_0^2}{3}e^{-2t} \end{pmatrix} $$
+
+3. **Analýza chování (Variety):**
+   * Aby řešení konvergovalo k nule pro $t \to \infty$ (leželo na **stabilní varietě**), musí člen u $e^t$ zmizet:
+       $$ y_0 + \frac{x_0^2}{3} = 0 \implies y = -\frac{x^2}{3} $$
+   * Jacobiho matice v $[0,0]$ je $J = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$, což potvrzuje, že jde o **hyperbolický bod (sedlo)**.
+
+\subsection{Příklad 2: Určení bodů rovnováhy a stability}
+\textbf{Zadání:}
+$$ F(x, y) = \begin{pmatrix} x^2 - y^2 - 1 \\ 2y \end{pmatrix} $$
+Hledáme body rovnováhy (BR):
+$$ 2y = 0 \implies y = 0 $$
+$$ x^2 - 0 - 1 = 0 \implies x^2 = 1 \implies x = \pm 1 $$
+Máme dva body rovnováhy: $A=[1,0]$ a $B=[-1,0]$.
+
+**Jacobiho matice obecně:**
+$$ J = \begin{pmatrix} 2x & -2y \\ 0 & 2 \end{pmatrix} $$
+
+1. **Bod $A=[1,0]$:**
+   $$ J_A = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix} \implies \lambda_{1,2} = 2 $$
+   Obě vlastní čísla kladná $\implies$ **Nestabilní uzel (Zdroj)**.
+
+2. **Bod $B=[-1,0]$:**
+   $$ J_B = \begin{pmatrix} -2 & 0 \\ 0 & 2 \end{pmatrix} \implies \lambda_1 = -2, \lambda_2 = 2 $$
+   Vlastní čísla mají různá znaménka $\implies$ **Sedlo**.
+
+% --- STRANA 4 ---
+\section{Příklad ve 3D a Definice variety (Strana 4)}
+
+\subsection{Příklad 3: Trojrozměrný systém (Detailní rozbor)}
+\textbf{Zadání:}
+Uvažujme systém tří diferenciálních rovnic:
+\begin{align*}
+    \dot{x} &= -x \\
+    \dot{y} &= -y + x^2 \\
+    \dot{z} &= z + x^2
+\end{align*}
+Bod rovnováhy je zjevně v počátku $[0,0,0]$.
+Linearizace (Jacobiho matice) je diagonální matice $\text{diag}(-1, -1, 1)$.
+Vlastní čísla jsou $\lambda_1 = -1, \lambda_2 = -1$ (stabilní směr) a $\lambda_3 = 1$ (nestabilní směr).
+
+\textbf{1. Řešení první rovnice:}
+$$ \dot{x} = -x \implies x(t) = C_1 e^{-t} $$
+(Kde $C_1 = x_0$).
+
+\textbf{2. Řešení druhé rovnice (pro $y$):}
+Dosadíme $x(t)$ do rovnice pro $y$:
+$$ \dot{y} + y = x^2 = (C_1 e^{-t})^2 = C_1^2 e^{-2t} $$
+Toto je lineární rovnice 1. řádu s pravou stranou.
+- **Homogenní řešení:** $y_h(t) = C_2 e^{-t}$.
+- **Partikulární řešení:** Hledáme ve tvaru $y_p(t) = A e^{-2t}$.
+  $$ \dot{y}_p + y_p = -2A e^{-2t} + A e^{-2t} = -A e^{-2t} $$
+  Porovnáním s pravou stranou $C_1^2 e^{-2t}$ dostáváme:
+  $$ -A = C_1^2 \implies A = -C_1^2 $$
+- **Obecné řešení pro $y$:**
+  $$ y(t) = C_2 e^{-t} - C_1^2 e^{-2t} $$
+
+\textbf{3. Řešení třetí rovnice (pro $z$):}
+Dosadíme $x(t)$ do rovnice pro $z$:
+$$ \dot{z} - z = x^2 = C_1^2 e^{-2t} $$
+- **Homogenní řešení:** $z_h(t) = C_3 e^{t}$ (pozor na znaménko, $\lambda_3 = 1$).
+- **Partikulární řešení:** Hledáme ve tvaru $z_p(t) = B e^{-2t}$.
+  $$ \dot{z}_p - z_p = -2B e^{-2t} - B e^{-2t} = -3B e^{-2t} $$
+  Porovnáním s pravou stranou $C_1^2 e^{-2t}$ dostáváme:
+  $$ -3B = C_1^2 \implies B = -\frac{C_1^2}{3} $$
+- **Obecné řešení pro $z$:**
+  $$ z(t) = C_3 e^{t} - \frac{C_1^2}{3} e^{-2t} $$
+
+\textbf{4. Analýza stabilní variety ($W^s$):}
+Hledáme podmínku pro počáteční konstanty ($C_1, C_2, C_3$), aby řešení konvergovalo k počátku $[0,0,0]$ pro $t \to \infty$.
+- $x(t) \to 0$ vždy (člen $e^{-t}$).
+- $y(t) \to 0$ vždy (členy $e^{-t}, e^{-2t}$).
+- $z(t)$ obsahuje člen $C_3 e^t$. Tento člen jde do $\pm \infty$, pokud $C_3 \neq 0$.
+Aby řešení konvergovalo, musí být koeficient u nestabilního členu nulový:
+$$ C_3 = 0 $$
+Vyjádřeno pomocí počátečních podmínek v čase $t=0$:
+$$ z(0) = C_3 - \frac{C_1^2}{3} \implies C_3 = z_0 + \frac{x_0^2}{3} $$
+Podmínka $C_3=0$ tedy definuje plochu stabilní variety:
+$$ z + \frac{x^2}{3} = 0 $$
+Toto je parabolická plocha v prostoru, po které se trajektorie blíží k počátku.
+
+\subsection{Definice variety}
+**$n$-rozměrná diferencovatelná varieta** je souvislý metrický prostor $M$ s otevřeným pokrytím $\{U_\alpha\}$, kde:
+\begin{itemize}
+    \item Pro každé $\alpha$ existuje homeomorfismus $h_\alpha$ zobrazující $U_\alpha$ na otevřenou jednotkovou kouli $K \subset \mathbb{R}^n$ ($K = \{x \in \mathbb{R}^n : |x| < 1\}$).
+    \item Přechodová zobrazení jsou diferencovatelná (hladká).
+\end{itemize}
+
+% --- STRANA 5 ---
+\section{Věty o varietách (Strana 5)}
+
+\subsection{Věta o stabilní varietě}
+Nechť $E \subset \mathbb{R}^n$ je otevřená, $F \in C^1(E)$ a $F(0)=0$.
+Nechť $A = DF(0)$ má $k$ vlastních čísel se zápornou reálnou částí a $n-k$ s kladnou (žádné s nulovou).
+
+Potom existuje $k$-rozměrná diferencovatelná varieta $W^s(0)$ (stabilní varieta) procházející počátkem, která je v bodě 0 tečná k podprostoru generovanému stabilními vlastními vektory.
+Trajektorie startující na $W^s(0)$ konvergují k počátku pro $t \to \infty$.
+
+Stejně tak existuje $(n-k)$-rozměrná **nestabilní varieta** $W^u(0)$, tečná k nestabilnímu podprostoru (trajektorie jdou do 0 pro $t \to -\infty$).
+
+\textbf{Diagram z poznámek:}
+Zobrazuje rozdělení prostoru na $W^s$ (stable), $W^u$ (unstable) a případně $W^c$ (central) podle reálné části vlastních čísel.
+
+% --- STRANA 6 ---
+\section{Další příklady a Centrální varieta (Strana 6)}
+
+\subsection{Příklad 4}
+\textbf{Zadání:}
+$$ \dot{x} = -x - y^2 $$
+$$ \dot{y} = y + x^2 $$
+Bod rovnováhy: $[0,0]$. Také $(-1, -1)$.
+Jacobiho matice v $[0,0]$:
+$$ J = \begin{pmatrix} -1 & -2y \\ 2x & 1 \end{pmatrix}_{(0,0)} = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix} $$
+Vlastní čísla: $\lambda_1 = -1, \lambda_2 = 1$.
+Jde o hyperbolický bod (sedlo). Existuje stabilní varieta dimenze 1 a nestabilní varieta dimenze 1.
+
+\subsection{Věta o centrální varietě}
+Pokud má linearizace v bodě rovnováhy vlastní čísla s **nulovou reálnou částí**, existuje **centrální varieta** $W^c(0)$, která je tečná k podprostoru příslušnému těmto vlastním číslům.
+
+\subsection{Příklad 5 (Kritický případ)}
+\textbf{Zadání:}
+$$ \dot{x} = xy \quad (\text{nebo } x^2 \text{ dle kontextu řešení}) $$
+$$ \dot{y} = -y $$
+Linearizace v $[0,0]$:
+$$ J = \begin{pmatrix} 0 & 0 \\ 0 & -1 \end{pmatrix} $$
+Vlastní čísla: $\lambda_1 = 0$ (centrální), $\lambda_2 = -1$ (stabilní).
+
+**Řešení:**
+Z rovnice $\dot{y} = -y$ máme $y(t) = c_2 e^{-t}$.
+Z poznámek pro $x(t)$: Řešení má tvar $x(t) = \frac{-1}{t+c}$. (To odpovídá rovnici $\dot{x} = x^2$).
+- **Vlastní vektor pro $\lambda_1 = 0$:** Vektor $\begin{pmatrix} 1 \\ 0 \end{pmatrix}$ (osa $x$). Odpovídá centrální varietě.
+- **Vlastní vektor pro $\lambda_2 = -1$:** Vektor $\begin{pmatrix} 0 \\ 1 \end{pmatrix}$ (osa $y$). Odpovídá stabilní varietě.
+
+% --- STRANA 7 ---
+\section{Hartman-Grobmanova věta (Strana 7)}
+
+\subsection{Znění věty}
+Nechť $x_0$ je hyperbolický bod rovnováhy ($\text{Re}(\lambda_i) \neq 0$) systému $\dot{x} = F(x)$.
+Pak existuje okolí $U$ bodu $x_0$ a **homeomorfismus** $h$, který převádí trajektorie nelineárního systému na trajektorie jeho linearizace:
+$$ h(\Phi_t(x)) = e^{At} h(x) $$
+Tato věta říká, že v okolí hyperbolického bodu je fázový portrét nelineárního systému "kvalitativně stejný" (topologicky ekvivalentní) jako u lineárního systému.
+
+\subsection{Příklad 6: Jednorozměrný systém (Detailní rozbor)}
+\textbf{Zadání:}
+$$ \dot{x} = x - x^3 $$
+Hledáme body rovnováhy položením pravé strany rovné nule:
+$$ x(1 - x^2) = 0 \implies x_1 = 0, \quad x_2 = 1, \quad x_3 = -1 $$
+
+**Linearizace a stabilita:**
+Derivace funkce $f(x) = x - x^3$ je $f'(x) = 1 - 3x^2$. Toto číslo hraje roli vlastního čísla $\lambda$ v 1D.
+
+1. **Bod $x=0$:**
+   $$ \lambda = f'(0) = 1 - 3(0)^2 = 1 $$
+   Protože $\lambda > 0$, bod 0 je **nestabilní** (zdroj). Trajektorie se od nuly vzdalují.
+
+2. **Bod $x=1$:**
+   $$ \lambda = f'(1) = 1 - 3(1)^2 = -2 $$
+   Protože $\lambda < 0$, bod 1 je **stabilní** (stoka). Trajektorie v okolí konvergují k 1.
+
+3. **Bod $x=-1$:**
+   $$ \lambda = f'(-1) = 1 - 3(-1)^2 = -2 $$
+   Protože $\lambda < 0$, bod -1 je **stabilní** (stoka).
+
+**Globální chování:**
+Systém má dva stabilní stavy ($\pm 1$) a jeden nestabilní stav ($0$) uprostřed.
+- Pro $x \in (-1, 0)$ je $\dot{x} < 0$, pohyb doleva k $-1$.
+- Pro $x \in (0, 1)$ je $\dot{x} > 0$, pohyb doprava k $1$.
+- Pro $|x| > 1$ je $\dot{x}$ opačného znaménka než $x$, pohyb směrem k počátku (tedy k $\pm 1$).
+
+\end{document}

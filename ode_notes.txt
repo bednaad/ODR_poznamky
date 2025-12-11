@@ -1,0 +1,630 @@
+              Obyčejné diferenciální rovnice
+                           Zápisky z přednášek
+                           Zimní semestr 2025/26
+
+
+
+
+Last changed: 2025-12-10
+Obsah
+I. Motivace . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠3
+II. Lineární rovnice prvního řádu . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠3
+     1 Metody řešení . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠3
+        1.i Metoda separace proměnných . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠3
+        1.ii Bernoulliova rovnice . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠3
+        1.iii Metoda variace konstant . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠4
+        1.iv Metoda integračního faktoru . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠4
+     2 Věta o existenci a jednoznačnosti . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠4
+III. Soustava lineárních diferenciálních rovnic . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠5
+     1 Systémy s diagonální maticí A . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠6
+     2 Diagonalizace . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠6
+     3 Princip superpozice řešení pro homogenní soustavy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠6
+        3.i Fundamentální systém . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠7
+     4 Exponenciální matice . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠7
+     5 Metody řešení soustav lineárních rovnic . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠7
+        5.i 1. Eulerova metoda (pro matici s konstantními koeficienty) . . . . . . . . . . . . . . . . . . . . ⁠7
+     6 Rovinné systémy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠8
+        6.i Body rovnováhy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠8
+     7 Obcné řešení nehomogenního problému . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠8
+     8 Tok lineárního systému . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠9
+IV. Nelineární diferenciální rovnice . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠9
+V. Soustava nelineárních diferenciálních rovnic - lokální chování . . . . . . . . . . . . . . . . . . . . . . . . . ⁠10
+     1 Existence a jednoznačnost . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠11
+     2 Maximální interval existence . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠11
+     3 Tok definovaný diferenciální rovnicí . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠11
+     4 Linearizace . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠11
+     5 Stabilní a nestabilní varieta . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠12
+     6 Věta Hartman-Grobman . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠12
+     7 Stabilita . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠12
+     8 Body rovnováhy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠12
+     9 Body rovnováhy nelineárního systému . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠12
+     10 Složené body rovnováhy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠13
+VI. Soustava nelineárních diferenciálních rovnic - globální chování . . . . . . . . . . . . . . . . . . . . . . . . ⁠13
+     1 Dynamické systémy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠13
+     2 Limitní množiny, atraktory . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠14
+     3 Periodické orbity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠14
+     4 Poincarého zobrazéni . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠14
+     5 Stabilní varieta periodických orbit . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . ⁠14
+I. Motivace
+Motivací pro studium obyčejných diferenciálních rovnic (ODR) může být například rovnice
+𝑦′ = 𝑥(𝑦 − 1), kterou lze jednoduše řešit analyticky, pokud se ji ale pokusíme vyřešit pomocí
+nějaké numerické metody, narazíme na spoustu problémů. Je tedy dobré znát a umět analyzovat
+chování různých systémů obyčejných diferenciálních rovnic, abychom se těmto problémům mohli
+vyhýbat nebo aspoň věděli, že mohou nastat.
+
+II. Lineární rovnice prvního řádu
+1 Metody řešení
+1.i Metoda separace proměnných
+Rovnice se separovatelnými proměnnými je rovnice typu
+                                 d𝑦
+                                    = 𝑔(𝑥)ℎ(𝑦), ⟨𝑥, 𝑦⟩ ∈ ℝ
+                                 d𝑥
+Použití separační metody je korektní za těchto předpokladů:
+• 𝑔(𝑥) je spojitá
+• ℎ(𝑥) je spojitá
+Metoda má tři kroky:
+1. Separace
+                                          d𝑦
+                                             = 𝑔(𝑥)ℎ(𝑦)
+                                          d𝑥
+                                         d𝑦
+                                             = 𝑔(𝑥) d𝑥
+                                        ℎ(𝑦)
+   Pozorování         Tato rovnice       je   speciálním   tvarem   rovnice    v   diferenciálech
+   𝑀 (𝑥, 𝑦) d𝑥 + 𝑁 (𝑥, 𝑦) d𝑦 = 0
+2. Integrace
+                                        d𝑦
+                                   ∫        = ∫ 𝑔(𝑥) d𝑥
+                                       ℎ(𝑦)
+                                       𝐻(𝑦) = 𝐺(𝑥) + 𝐶,    𝐶∈ℝ
+   Existence těchto funkcí je zaručena předpoklady.
+3. Inverze
+                                      𝑦 = 𝐻 − 1(𝐺(𝑥) + 𝐶)
+   Existence inverzní funkce k funkci 𝐻 je také zaručena předpoklady.
+
+1.ii Bernoulliova rovnice
+Kanonický tvar Bernoulliovy rovnice je
+                                   𝑦′ + 𝑎(𝑥)𝑦 = 𝑔(𝑥)𝑦𝑝 ,
+kde 𝑎(𝑥), 𝑔(𝑥) jsou spojité na 𝐽 a 𝑝 ∈ ℝ . Jedná se tedy o nelineární rovnici pro 𝑝 různé od
+jedničky a nuly. Je-li 𝑝 = 0 ∨ 𝑝 = 1 je rovnice lineární a separovatelná respektive separovatelná,
+Řešíme tedy případ 𝑝 ∈ ℝ \ {0, 1} . Za hledanou funkci dosadíme součin funkcí 𝑦 = 𝑢𝑣 .
+                                         (𝑢𝑣)′ + 𝑎𝑢𝑣 = 𝑔 ⋅ (𝑢𝑣)𝑝
+                                   𝑢′ 𝑣 + 𝑢𝑣′ + 𝑎𝑢𝑣 = 𝑔 ⋅ (𝑢𝑣)𝑝
+                                  𝑢′ 𝑣 + 𝑢(𝑣′ + 𝑎𝑣) = 𝑔 ⋅ (𝑢𝑣)𝑝
+Zde bychom se chtěli zbavit závorky 𝑣′ + 𝑎𝑣 nalezením vhodné funkce 𝑣 . Položíme tedy
+                                        𝑣′ + 𝑎𝑣 = 0
+Tuto rovnici řešíme separací. Stačí nalézt jakokoliv funkci která této rovnici vyhovuje, můžeme
+tedy konstantu uvažovat nulovou, nebo jakoukoliv jinou která nám vyhovuje. Dalším krokem
+je dosazení 𝑣 do rovinice
+                                         𝑢′ 𝑣 = 𝑔 ⋅ (𝑢𝑣)𝑝
+                                        d𝑢
+                                           = 𝑔𝑣𝑝−1
+                                        𝑢𝑝
+Rovnici pro 𝑢 lze znovu řešit separací. Hledanou funkci teď dostaneme prostou desubstitucí
+𝑦 = 𝑢𝑣 . Můžeme si všimnout, že Bernoulliova metoda se skládá ze dvou metod separace
+proměnných.
+
+1.iii Metoda variace konstant
+Prvně navržena Lagrangem. Znovu řešíme rovnici typu
+                                  𝑦′ + 𝑎(𝑥)𝑦 = 𝑔(𝑥)
+Při metodě variace konstant nejdříve určíme řešní homogenní rovnice (znovu separací)
+                                      𝑦ℎ′ + 𝑎(𝑥)𝑦ℎ = 0
+                                       𝑦ℎ = 𝐶𝑒− ∫ 𝑎 d𝑥
+Nyní uvažujeme 𝐶 = 𝐶(𝑥) a dosadíme 𝑦ℎ do původní rovnice. Tím dostaneme rovnici pro 𝐶(𝑥)
+a neznámá funkce je potom 𝑦 = 𝐶(𝑥)𝑒− ∫ 𝑎 d𝑥 .
+
+1.iv Metoda integračního faktoru
+Navržena Eulerem. Řešíme rovnici typu
+                                    𝑦′ + 𝑎(𝑥)𝑦 = 𝑔(𝑥)
+Metoda integračního faktoru spočívá v tom přenásobit obě strany nějakou vhodnou funkcí
+abychom levou stranu dostali pod společnou derivaci. Pro naši rovnici je vhodným integračním
+faktorem funkce 𝑒∫ 𝑎 d𝑥
+                                 𝑦′ + 𝑎(𝑥)𝑦 = 𝑔(𝑥)   \ ⋅ 𝑒𝐴(𝑥) ,
+kde 𝐴(𝑥) = ∫ 𝑎 d𝑥 . Zde použijeme znalosti že
+                                𝑑 𝐴             d𝐴     d𝑦
+                                  (𝑒 𝑦) = 𝐴𝑒𝐴 𝑦    + 𝑒𝐴 ,
+                               d𝑥               d𝑥     d𝑥
+potom
+                                       d 𝐴
+                                         (𝑒 𝑦) = 𝑔𝑒𝐴
+                                      d𝑥
+                                    d
+                                ∫ (𝑒𝐴 𝑦) d𝑥 = ∫ 𝑔𝑒𝐴 d𝑥
+                                   d𝑥
+
+                                       𝑒𝐴 𝑦 = ∫ 𝑔𝑒𝐴 d𝑥
+
+                                      𝑦 = 𝑒−𝐴 ∫ 𝑔𝑒𝐴 d𝑥
+
+
+2 Věta o existenci a jednoznačnosti
+Chtěli bychom vědět za jakých podmínek má smysl ODR řešit, s tím nám pomůže následující
+věta.
+
+Věta Mějme obyčejnou diferenciální rovnici prvního řádu
+                                      𝑦′ = 𝑓(𝑥, 𝑦).
+Nechť 𝑓 a 𝜕𝑓                      2
+          𝜕𝑦 jsou spojité na 𝐺 ⊆ ℝ a ngjechť [𝑥0 , 𝑦0 ] ∈ 𝐺 , pak existuje právě jedno maximální
+řešení Cauchyovy úlohy
+                                  𝑦′ = 𝑓(𝑥, 𝑦), 𝑦(𝑥0 ) = 𝑦0
+
+  Důležité je si v praxi uvědomit co věta říká a co neříká, to se pokusíme ilustrovat na
+následujících příkladech.
+
+Příklad 2.1 Mějme náldedující Cauchyho úlohu
+                                  𝑦′ = 𝑦, 𝑦(0) = 0
+Funkce 𝑓 a 𝜕𝑓                              2
+            𝜕𝑦 jsou určítě spojité na 𝐺 = ℝ a bod [0, 0] ∈ 𝐺 . Rovnice tedy splňuje podmínky
+existence jednoznačného maximálního řešení. To dostaneme třeba separací proměnných.
+                                    𝑦′ = 𝑦
+                                   d𝑦
+                                      = d𝑥,   𝑦≠0
+                                    𝑦
+                               ln(|𝑦|) = 𝑥 + 𝐶
+                                    𝑦 = ±𝐾𝑒𝑥     𝐾 ∈ ℝ+ , 𝑥 ∈ ℝ
+To je tedy obecné řešení, vidíme ale že pro danou počáteční podmínku řešení neexistuje,
+přitom ale splňujeme požadavky věty o existenci a jednoznačnosti. Věta nám ale neříká, že pro
+každou počáteční podmínku řešení existuje, říká jen že pro nějakou počáteční podmínku rešení
+existovat bude a že bude jednoznačné.
+
+
+
+Příklad 2.2 Mějme následující Cauchyho úlohu
+                                     𝑦′ = √|𝑦|, 𝑦(0) = 0
+Funkce 𝑓 je spojitá na ℝ ale její derivace už jen na ℝ \ {0} množinou na které hledáme řešení
+je 𝐺 = ℝ × ℝ \ {0} . Pro jednoduchost vyřešíme rovnici pouze pro 𝑦 > 0 .
+                                   d𝑦
+                                   √ = d𝑥
+                                     𝑦
+                                   √
+                                  2 𝑦 =𝑥+𝐶
+                                       1
+                                   𝑦 = (𝑥 + 𝐶)2
+                                       2
+                                       1
+                                    0 = (0 + 𝐶)2 ⇒ 𝐶 = 0
+                                       2
+                                       𝑥2
+                                   𝑦=         𝑥∈ℝ
+                                        2
+To je ale v podstatě neočekávaný výsledek, vždyť přece počáteční podmínka neleží v oblasti
+𝐺 . To je ale právě ono, tím že PP neleží v oblasti 𝐺 , pak větu nelze užít a neříká nám o
+řešení nic. Věta neříká právě tehdy když [𝑥0 , 𝑦0 ] ∈ 𝐺 pak rešení existuje a je jednoznačné, to
+je důležité si uvědomit.
+
+
+
+III. Soustava lineárních diferenciálních rovnic
+Máme homogenní soustavu ODR ve tvaru
+                                    𝑋 ′ = 𝐴𝑋.                                                (1)
+Pozorování Každá homogenní soustava má triviální řešení 𝑋 = 0 .
+1 Systémy s diagonální maticí A
+Tedy systémy bez vzájemného propojení (uncoupled systems) jsou rovnice typu
+                                       𝑋 ′ = 𝐴𝑋,                                             (2)
+kde matice 𝐴 je diagonální. Pro takové systémy lze jednoduše najít řešení, při pridání počáteční
+podmínky, pomocí separace proměnných
+                                 𝑥′𝑖 = 𝑎𝑖𝑖 𝑥𝑖 ⟶ 𝑥𝑖 = 𝑐𝑖 𝑒𝑎𝑖𝑖 𝑡 .
+nebo ekvivalentní maticový zápis
+                                     𝑋(𝑡) = diag(𝑒𝑎𝑖𝑖 𝑡 ) ⋅ 𝐶,
+kde 𝐶 = 𝑋(0) .
+
+2 Diagonalizace
+Je technika, která nám pomůže převést obecný hommogenní lineární systém (1) na systém s
+diagonální maticí.
+
+Definice (homeomorfismus) O zobrazení říkáme, že je homeomorfní pokud je bijektivní,
+spojité a inverzní zobrazení je též spojité.
+
+Věta Mějme matici 𝐴 typu 𝑛 × 𝑛, jež má 𝑛 různých reálných vlastních čísel 𝜆𝑖 . Pak {𝑉𝑖 }
+(množina vlastních vektorů) tvoří bázi v ℝ𝑛 . Matice 𝑃 = (𝑉1 | … | 𝑉𝑛 ) je invertibiliní a
+                                 𝑃 −1 𝐴𝑃 = diag(𝜆1 , …, 𝜆𝑛 ).
+
+Věta (Obecněji) Lineární transformace 𝑇 𝑛 -tého řádu, která vektoru 𝑌 ∈ ℝ𝑛 přiřadí stavový
+vektor 𝑋 = 𝑇 𝑌 systému (2), zobrazuje systém (2) na opět lineární systém
+                                        𝑌 ′ = 𝐵𝑌 ,                                      (3)
+kde matice 𝐵 = 𝑇 −1 𝐴𝑇 a systémy (2) a (3) jsou homeomorfní v ℝ𝑛 . Zachovává-li zobrazení i
+orientaci pohybu, říkáme že jsou systémy navzájem topologicky ekvivalentní.
+
+Proces diagonalizace provedeme následovně: definujeme lineární transformaci souřadnic
+                                          𝑌 = 𝑃 −1 𝑋
+kde 𝑃 je invertibilní matice definovaná v předchozí větě. Potom
+                                           𝑋 = 𝑃𝑌
+                              𝑌 = 𝑃 𝑋 = 𝑃 −1 𝐴𝑋 = 𝑃 −1 𝐴𝑃 𝑌
+                               ′     −1 ′
+
+a tím dostaneme diagnoalizovaný systém
+                                    𝑌 ′ = diag(𝜆1 , …, 𝜆𝑛 )𝑌 ,
+který má řešení
+                                𝑌 (𝑡) = diag(𝑒𝜆1 𝑡 , …, 𝑒𝜆𝑛 𝑡 )𝑌 (0)
+A potom, protože 𝑌 (0) = 𝑃 −1 𝑋(0) a 𝑋(𝑡) = 𝑃 𝑌 (𝑡) , lze jednoduše odvodit že (1) má řešení
+                                  𝑋(𝑡) = 𝑃 𝐸(𝑡)𝑃 −1 𝑋(0),
+kde 𝐸(𝑡) je diagonální matice
+                                   𝐸(𝑡) = diag(𝑒𝜆1 𝑡 , …, 𝑒𝜆𝑛 𝑡 ).
+
+3 Princip superpozice řešení pro homogenní soustavy
+Jestliže 𝑋1 , …, 𝑋𝑛 jsou řešení homogenní soustvay ODR na intervalu 𝐽 a 𝐶1 , …, 𝐶𝑛 jsou
+libovolné konstanty, pak lineární kombinace 𝐶1 𝑋1 + … + 𝐶𝑛 𝑋𝑛 je opět řešením soustvay na 𝐽 .
+3.i Fundamentální systém
+
+4 Exponenciální matice
+O lineární rovnici víme, že obecné řešení má tvar 𝑥 = 𝑐𝑒𝑎𝑡 , chtěli bychom najít nějakou paralelu
+k systémům rovnic, přece jenom je jejich zápis velice podobný. K tomu se nám bude hodit
+exponenciální matice.
+                                                                                  ∞    𝑘 𝑘
+
+Věta Je-li 𝐴 typu 𝑛 × 𝑛 reálná či komplexní matice, tak maticová řada 𝑘=0   ∑ 𝐴𝑘!𝑡 konverguje k
+matici 𝑒𝐴𝑡 třídy 𝑛 × 𝑛 , která má valstnosti:
+    d 𝐴𝑡
+1. d𝑡 𝑒 = 𝐴𝑒𝐴𝑡 = 𝑒𝐴𝑡 𝐴
+2. 𝑒(𝑡+𝑠)𝐴 = 𝑒𝐴𝑡 𝑒𝐴𝑠
+3. 𝑒𝐴0 = 𝕀 ∧ 𝑒𝐴𝑡 je invertibilní ∧ 𝑒𝐴𝑡 𝑒−𝐴𝑡 = 𝕀 , kde 𝕀 je jednotková matice.
+
+  Bude-li 𝑋(0) = 𝑢𝑗 pak
+      𝑋 = 𝑒𝐴𝑡 = 𝑒𝜆𝑗 𝑡 𝑒𝐴𝑡 𝑒−𝜆𝑗 𝑡 𝑢𝑗 = 𝑒𝜆𝑗 𝑡 𝑒(𝐴−𝜆𝑗 𝐼)𝑡 = 𝑒𝜆𝑗 𝑡 (𝐼 + (𝐴 − 𝜆𝑗 𝐼)𝑡 + …)𝑢𝑗 = 𝑒𝜆𝑗 𝑡 𝑢𝑗 .
+
+
+Věta (Základní věta pro lineární systémy) Nechť A je typu 𝑛 × 𝑛 . Potom pro dané 𝑋0 ∈ ℝ𝑛 ,
+má Cauchyho problém
+                                         𝑋 ′ = 𝐴𝑋
+                                        𝑋(0) = 𝑋0
+jednoznačné řešení
+                                             𝑋(𝑡) = 𝑒𝐴𝑡 𝑋0 .
+
+Věta (Cayley-Hamilton) Nechť … je charakteristický polynom matice typu …. Pak maticový
+polynom získaný zaměněním … za … do … splňuje ….
+
+5 Metody řešení soustav lineárních rovnic
+5.i 1. Eulerova metoda (pro matici s konstantními koeficienty)
+Řešení odhadujeme ve tvaru 𝑥𝑖 = 𝑢𝑖 𝑒{𝜆𝑖 } , kde (𝑢𝑖 , 𝜆𝑖 ) je vlastní pár matice 𝐴 . Může nastat
+několik případů
+
+5.i.i 𝑛 lineárně nezávislých vektorů
+Věta Nechť matice 𝐴 má 𝑛 lineárně nezávislých vektorů 𝑉 1 , …, 𝑉 𝑛 , které jsou příslušné k
+(ne nutně různým!) vlastním číslům. Potom
+                                  𝑉 1 𝑒{𝜆1 𝑡} , 𝑉 2 𝑒{𝜆2 𝑡} , …, 𝑉 𝑛 𝑒{𝜆𝑛 𝑡} ,
+je fundamentální systém řešení soustavy na ℝ .
+
+To může nastat má-li matice 𝐴 𝑛 různých vlastních čísel, matice 𝐴 je symetrická, …
+
+5.i.ii komplexní vlastní číslo
+Dostaneme-li komplexní vlastní číslo 𝜆𝑖 = 𝛼 + 𝛽𝑖 , výsledkem by mělo být
+                                            𝑋1 = 𝑉 1 𝑒(𝛼+𝛽𝑖)𝑡
+to je ale komplexní funkce a taková nás moc nezajímá, protože jsme řešili reálný problém, chtěli
+bychom tedy reálné výsledky. Zkusíme zda by soustavu neřešila pouze reálná část výsledku.
+          Re(𝑥′ ) = (Re(𝑥))′ = Re(𝐴𝑥) = 𝐴 ⋅ Re(𝑥) \ (Re(𝑥))′ = 𝐴 ⋅ Re(𝑥) \ 𝑋 ′ = 𝐴 ⋅ 𝑋
+to znamená, že reálná část je řešením, to samé platí pro imaginární část. Mějme tedy komplexní
+vlastní číslo 𝜆 = 𝛼 + 𝛽𝑖 a odpovídající vlastní vektor 𝑈 = 𝑉 + 𝑊 𝑖 .
+                𝑋 = 𝑈 𝑒{𝜆𝑡} = (𝑉 + 𝑊 𝑖)𝑒𝛼+𝛽𝑖 = (𝑉 + 𝑊 𝑖)𝑒𝛼𝑡 𝑒𝛽𝑖𝑡 =
+                   = (𝑉 + 𝑊 𝑖)𝑒𝛼𝑡 (cos(𝛽𝑡) + 𝑖 sin(𝛽𝑡)) = 𝑒𝛼𝑡 (𝑉 cos(𝛽𝑡) − 𝑊 sin(𝛽𝑡)) +
+                   +𝑖𝑒𝛼𝑡 (𝑊 cos(𝛽𝑡) + 𝑉 sin(𝛽𝑡))
+
+           Re(𝑋) = 𝑒𝛼𝑡 (𝑉 cos(𝛽𝑡) − 𝑊 sin(𝛽𝑡))
+           Im(𝑋) = 𝑒𝛼𝑡 (𝑊 cos(𝛽𝑡) + 𝑉 sin(𝛽𝑡))
+
+                𝑋 = 𝐶1 Re(𝑋) + 𝐶2 Im(𝑋)
+
+5.i.iii méně než 𝑛 lineárně nezávislých vlastních vektorů
+
+6 Rovinné systémy
+Jsme-li v ℝ2 označujeme systém (1) jako rovinný. Diagonalizujeme-li systém
+                                         𝑋 ′ = 𝐴𝑋
+                                𝑋 ′ = 𝐵𝑋, 𝐵 = 𝑃 𝐴𝑃 −1 ,
+kde 𝑃 = (𝑉1 | 𝑉2 ) , pak nastává právě jedna z možností
+1. 𝐵 = diag(𝜆1 , 𝜆2 ) má-li 𝐴 2 různá vlastní čísla 𝜆1,2 ,
+          𝜆 1
+2. 𝐵 = ( 0 𝜆) je-li 𝜆 dvonásobné reálné vlastní číslo,
+          𝛼 −𝛽
+3. 𝐵 = (𝛽   𝛼
+               ) je-li 𝜆1,2 = 𝛼 ± 𝑖𝛽 sdružené komplexní vlastní číslo.
+Potom lze určit řešení jako
+1. 𝑋(𝑡) = diag(𝑒𝜆1 𝑡 , 𝑒𝜆2 𝑡 )𝑋(0)
+                 1 𝑡
+2. 𝑋(𝑡) = 𝑒𝜆𝑡 (0 1)𝑋(0)
+                 cos(𝛽𝑡) − sin(𝛽𝑡)
+3. 𝑋(𝑡) = 𝑒𝛼𝑡 ( sin(𝛽𝑡)   cos(𝛽𝑡)
+                                   )𝑋(0)
+
+6.i Body rovnováhy
+Bod pro nějž platí 𝐹 (𝑋 ∗ ) = 0 nazýváme bod rovnováhy. Pro lineární systém 𝐹 (𝑋) = 𝐴𝑋 + 𝐵 .
+Pro lineární homogenní systém je bodem rovnováhy počátek. Rozlišujeme následující body
+rovnováhy pro rovinný homogenní systém
+• Uzel: 𝜆1 , 𝜆2 ∈ ℝ ∧ 𝜆1 ≠ 𝜆2
+• Sedlo: 𝜆1 , 𝜆2 ∈ ℝ ∧ 𝜆1 𝜆2 < 0
+• Ohnisko: 𝜆1,2 ∈ ℂ
+• Střed: 𝜆1,2 = ±𝑖𝛽
+
+7 Obcné řešení nehomogenního problému
+Mějme soustavu ve tvaru
+                                           𝑋 ′ = 𝐴𝑋 + 𝐹 (𝑡),                               (4)
+kde A je matice typu 𝑛 × 𝑛 a 𝐹 (𝑡) je spojitá vektorová funkce.
+Definice (Fundamentální matice) Libovolné řešení rovnice
+                                           𝑋 ′ = 𝐴𝑋.
+značíme Φ(𝑡) a nazýváme ho fundamentální systém nebo fundamentální matice. Φ(𝑡) je 𝑛 × 𝑛
+a splňuje
+                                   Φ′ (𝑡) = 𝐴Φ(𝑡) ∀𝑡 ∈ ℝ.
+Věta Je-li Φ(𝑡) fundamentální systém rovnice (1), potom řešení nehomogenní rovnice (4) s
+počáteční podmínkou 𝑋(0) = 𝑋0 je jednoznačné a ve tvaru
+                                                      𝑡
+                       𝑋(𝑡) = Φ(𝑡)Φ−1 (0)𝑋0 + ∫ Φ(𝑡)Φ−1 (𝜏 )𝐹 (𝜏 ) d𝜏 .
+                                                  0
+
+
+Pozorování
+
+Definice (Princip superpozice) Nechť 𝑋𝐶 = 𝐶1 𝑋1 + … + 𝐶𝑛 𝑋𝑛 je obecné řešení homogenního
+problému a nechť 𝑋𝑃 je řešení …. Pak obecné řešení má tvar
+                                      𝑋 = 𝑋𝐶 + 𝑋𝑃
+
+7.n.i Metoda variace konstant
+
+8 Tok lineárního systému
+Uvažujme systém
+                                          𝑋 ′ = 𝐴𝑋.
+
+Definice (Tok lineárního systému) Množina zobrazení 𝑒𝐴𝑡 : ℝ𝑛 ↦ ℝ𝑛 se nazývá tokem lineár­
+ního systému. (Popisuje pohyb bodů … po trajektoriích systém …)
+
+Definice (Hyperbolický lineární systém ODR) Mají-li všechna valstní čísla matice 𝐴 nenulovou
+reálnou část, říkáme o lineárním systému ODR že je hyperbolický
+
+Definice (Invariantní množina) Podnožina 𝐸 ⊂ ℝ𝑛 se nazývá invariantní k toku 𝑒𝐴𝑡 , jestliže
+platí 𝑒𝐴𝑡 𝐸 ∈ 𝐸 pro ∀𝑡 ∈ ℝ
+
+Definice Mějme lineární systém 𝑋̇ = 𝐴𝑋 a nechť 𝑤𝑗 = 𝑢𝑗 + 𝑖𝑣𝑗 je zobecněný vlastní vektor
+matice 𝐴 odpovídající vlastnímu číslu 𝜆𝑗 = 𝛼𝑗 + 𝑖𝛽𝑗 a nechť {𝑢1 , …, 𝑢𝑟 , 𝑣𝑘+1 , …, 𝑣𝑟 } je báze
+ℝ𝑛 , (𝑛 = 2𝑟 − 𝑘) .
+• Pak podprostor vytvořený zobecněnými vlastními vektory jimž odpovídají vlastní
+   čísla se zápornou reálnou částí se nazývá stabilní podprostor a značíme ho
+   𝐸 𝑠 = span{𝑢𝑗 , 𝑣𝑗 : 𝛼𝑗 < 0}
+• Podprostor vytvořený zobecněnými vlastními vektory jimž odpovídají vlastní čísla s kladnou
+   reálnou částí se nazývá nestabilní podprostor a značíme ho 𝐸 𝑢 = span{𝑢𝑗 , 𝑣𝑗 : 𝛼𝑗 > 0}
+• Podprostor vytvořený zobecněnými vlastními vektory jimž odpovídají vlastní čísla s nulovou
+   reálnou částí se nazývá centrální podprostor a značíme ho 𝐸 𝑐 = span{𝑢𝑗 , 𝑣𝑗 : 𝛼𝑗 = 0}
+
+Věta Vlastnosti řešení lineárního systému v invariantních podprostorech
+• Je-li 𝑋0 ∈ 𝐸 𝑠 pak pro ∀𝑡 ∈ ℝ je lim 𝑒𝐴𝑡 𝑋0 = 0 . Bod rovnováhy je asymptoticky stabilní.
+                                   𝑡→∞
+• Je-li 𝑋0 ∈ 𝐸 𝑢 pak pro ∀𝑡 ∈ ℝ je lim 𝑒𝐴𝑡 𝑋0 = ±∞ . Bod rovnováhy je asymptoticky nesta­
+                                   𝑡→∞
+  bilní.
+
+IV. Nelineární diferenciální rovnice
+Nelinární ODR v normálním tvaru nazýváme rovnici
+                              𝑦𝑛 = 𝑓(𝑡, 𝑦𝑛−1 , 𝑦𝑛−2 , …, 𝑦),
+zde 𝑦𝑛 značí 𝑛 -tou derivaci. Tato rovnice má několik jednoduchých řešení ve speciálních
+případech.
+
+1. 𝑦 ̈ = 𝑓(𝑦,̇ 𝑡)
+       Zde provedeme redukci řádu vhodnou substitucí.
+                                   𝑧(𝑡) = 𝑦(𝑡),
+                                           ̇    𝑧(𝑡)
+                                                 ̇ = 𝑦(𝑡)
+                                                      ̈
+   Tím dostaneme systém rovnic, který už je jednoduché vyřešit.
+                                        𝑦̇ = 𝑧
+                                              𝑧 ̇ = 𝑓(𝑡, 𝑧)
+2. 𝑦 ̈ = 𝑓(𝑦,̇ 𝑦)
+       Zde znovu zavedeme vhodnou substituci
+                                       𝑧 = 𝑦̇ → 𝑧 ̇ = 𝑦̈
+   Tady si uvědomíme, že
+                                                      d𝑧   d𝑧 d𝑦   d𝑧
+                              𝑧 ̇ = 𝑦 ̈ = 𝑓(𝑦, 𝑧) =      =       =    𝑧
+                                                      d𝑡   d𝑦 d𝑡   d𝑦
+                                                   d𝑧
+   Našli jsme tedy obyčejnou diferenciální rovnici d𝑦 = 1𝑧 𝑓(𝑦, 𝑧) , jejímž řešením je funkce 𝑧 ,
+   potom pro hledanou funkci víme že 𝑦 = ∫ 𝑧 d𝑡
+
+V. Soustava nelineárních diferenciálních rovnic - lokální
+   chování
+Soustavou nelineárních diferenciálních rovnic nazýváme
+                                 𝑋 ′ = 𝐹 (𝑡, 𝑋), 𝑋(0) = 𝑋0 .                                  (5)
+Nechť 𝐸 je otevřená podmonožina ℝ𝑛 , 𝑋0 ∈ 𝐸 a nechť 𝐹 ∈ 𝒞︀1 (𝐸) pak
+                               𝑋̇ = 𝐹 (𝑋), 𝑋(0) = 𝑋0 ,                                        (6)
+nazýváme nelineárním autonomním systémem obyčejných diferenciálních rovnic. Poznamenej­
+me, že jakýkoliv neautonomní systém lze autonomizovat přidáním jedné proměnné.
+  Oproti lineárním systémům může u nelineárních systémů nastat tzv. blow up. To znamená, že
+řešení utíká do nekonečna v nějakém konečném čase, to je samozřejmě nefyzikální. Ilustrujeme
+to na příkladě.
+
+Příklad V.1
+                                        𝑥̇ = 𝑥2 , 𝑥(0) = 1
+                                         d𝑥
+                                             = d𝑡
+                                          𝑥2
+                                         1
+                                       − =𝑡+𝐶
+                                         𝑥
+                                        1
+                                   𝑥=−      , 𝑡 ∈ (−∞, 1)
+                                       𝑡−1
+Je vidět, že
+                                          lim 𝑥(𝑡) = ∞,
+                                          𝑡→1−
+tomu říkáme blow up řešení.
+1 Existence a jednoznačnost
+
+Věta Nechť 𝐸 je otevřená podmnožina ℝ𝑛 , 𝑋0 ∈ 𝐸 a nechť 𝐹 ∈ 𝒞︀1 (𝐸) . Pak existuje 𝑎 > 0
+takové, že počáteční problém 𝑋̇ = 𝐹 (𝑋), 𝑋(0) = 𝑋0 má jediné řešení na ⟨−𝑎, 𝑎⟩
+
+Věta (Barrowův vzorec) Je-li řešení 𝑥(𝑡) rovnice 𝑋̇ = 𝐹 (𝑋) na intervalu 𝐼 = (𝑡0 , 𝑡1 ), 𝐹 ∈ 𝒞︀1 (𝐼)
+a 𝐹 (𝑋) ≠ 0 na 𝐼 . Označme 𝑎 = lim𝑡→𝑡+0 𝑥(𝑡), 𝑏 = lim𝑡→𝑡−1 𝑥(𝑡) . Pak
+                                                             𝑏
+                                                            1
+                                      𝑡1 − 𝑡0 = ∫               d𝑧
+                                                        𝑎
+                                                          𝐹 (𝑧)
+
+
+  To nám říká pár věcí:
+• Vzorec udává čas, který potřebuje řešení k tomu, aby vystoupalo
+(resp. zklesalo) z hodnoty 𝑎 do hodnoty 𝑏
+• Řešení konvergující k 𝑏 zleva (resp. zprava) pro 𝑡 → 𝑇 (𝑇 je krajní bod
+intervalu, na kterém je řešení definováno) se napojí v konečném čase na stacionární řešení
+𝑥 = 𝑏 , právě tehdy když následující integrál konverguje (pro malé 𝛿 )
+                                               𝑏
+                                                  1
+                                           ∫          d𝑧
+                                            𝑏−𝛿
+                                                𝐹 (𝑧)
+                                                       𝑏−𝛿
+                                                               1
+                                     (resp. ∫                      d𝑧)
+                                                   𝑏
+                                                             𝐹 (𝑧)
+Věta Nechť 𝐸 je otevřená podmnožina ℝ𝑛 obsahující 𝑋0 a nechť 𝐹 ∈ 𝒞︀1 (𝐸) . Nechť
+𝑢1 (𝑡) a 𝑢2 (𝑡) je řešení nelineární soustavy na 𝐼1 respektive na 𝐼2 . Pak 0 ∈ 𝐼1 ∩ 𝐼2 a je-
+-li 𝐼 libovolný otevřený interval obsahující 0 , který je zároveň podintervalem 𝐼1 ∩ 𝐼2 pak
+𝑢1 (𝑡) = 𝑢2 (𝑡) pro ∀𝑡 ∈ 𝐼 .
+Věta Nechť 𝐸 je otevřená podmnožina ℝ𝑛 a 𝐹 ∈ 𝒞︀1 . Pak pro ∀𝑋0 ∈ 𝐸 existuje největší
+otevřený interval (𝛼, 𝛽) na němž má počáteční problém (6) jediné řešení 𝑋(𝑡) . Tzn. má-li (6)
+řešení 𝑌 (𝑡) na 𝐼 ⊂ (𝛼, 𝛽) . Pak 𝑋(𝑡) = 𝑌 (𝑡) pro ∀𝑡 ∈ 𝐼 .
+
+2 Maximální interval existence
+3 Tok definovaný diferenciální rovnicí
+4 Linearizace
+Mějme nelineární autonomní systém:
+                                      𝑋̇ = 𝐹 (𝑋),                𝐹 (0) = 0
+Provedeme Taylorův rozvoj prvního řádu okolo nuly:
+                                    𝜕𝑓𝑖                𝜕𝑓𝑖
+                   𝑓𝑖 (𝑋) = 𝑓𝑖(0) +     (0) ⋅ 𝑥1 + … +     (0) ⋅ 𝑥𝑛 + 𝜔𝑖 ,
+                                    𝜕𝑥1                𝜕𝑥𝑛
+kde 𝜔𝑖 je chyba způsobená zanedbáním členů vyšších řádů a 𝑓𝑖(0) = 0 . Jako 𝐴 označíme
+Jacobiho matici funkce 𝐹 (𝑥)|0 (tedy v bodě 0). Potom soustava
+                                         𝑋̇ = 𝐴 ⋅ 𝑋,
+je linearizovaný systém k původnímu systému.
+
+Věta Jestliže všechna vlastní čísla Jacobiho matice 𝐴 mají záporné reálné části. Pak bod 0 je
+asymptoticky stabilní bod rovnováhy nelinearizované soustavy. Jestliže je alespoň jedna reálná
+část kladná, pak je bod 0 nestabilní bod rovnováhy nelinearizované soustavy.
+  Tato věta nám dává informaci o stabilitě počátku pouze ze znalosti Jacobiho matice soustavy.
+Nedavá nám ale informaci o žádném jiném bodě mimo počátek, chtěli bychom ji proto zobecnit.
+Mějme tedy:
+                                  𝑋̇ = 𝐹 (𝑋), 𝐹 (𝐻) = 0
+Bodem rovnováhy je tady nějaký bod 𝐻 a ne počátek. Provedeme-li znovu Taylorův rozvoj
+dostaneme
+                                   𝜕𝑓𝑖                𝜕𝑓𝑖
+                 𝑓𝑖 (𝑋) = 𝑓𝑖 (𝐻) +     (𝐻) ⋅ 𝑥1 + … +     (𝐻) ⋅ 𝑥𝑛 + 𝜔𝑖 .
+                                   𝜕𝑥1                𝜕𝑥𝑛
+Provedeme transformaci soustavy tak, aby bod 𝐻 byl počátkem soustavy nové.
+                                      𝑢1 = 𝑥1 − ℎ1
+                                         𝑢2 = 𝑥2 − ℎ2
+                                           ⋮
+                                         𝑢𝑖 = 𝑥𝑖 − ℎ𝑖
+Tím dostaneme soustavu 𝑈̇ = 𝐺(𝑈 ) , ve které je bod 𝐻 počátkem. Sestavíme-li Jacobiho matici
+této soustavy, zjistíme že je stejná jako kdybychom vyhodnotili Jacobiho matici původního
+systému v bodě 𝐻 . To znamená, že pro vyhodnocení stability obecného bodu rovnováhy
+nemusíme provádět transformaci, ale stačí jen vyhodnotit Jacobiho matici v daném bodě.
+
+5 Stabilní a nestabilní varieta
+6 Věta Hartman-Grobman
+7 Stabilita
+8 Body rovnováhy
+Definice (Bod rovnováhy) Body rovnováhy jsou body pro něž platí
+                                    𝐹 (𝑋0 ) = 0.
+
+Rozlišujeme několik druhů bodů rovnováhy:
+• stabilní (Lyapunovsky) jestliže pro
+  ∀𝜀 ∃𝛿 > 0 tak, že ‖𝑋 0 ‖ < 𝛿 ⇒ ‖𝑋(𝑡, 𝑋 0 )‖ < 𝜀
+  tzn. řešení neuteče z nějaké oblasti dané 𝜀 .
+• atraktor existuje-li
+    𝛿 > 0 tak, že ‖𝑋 0 ‖ < 𝛿 ⇒ lim 𝑋(𝑡, 𝑋 0 ) = 0
+                                𝑡→∞
+  (je-li bod rovnováhy v nule)
+• asymptoticky stabilní ⟺ je stabilní a atraktor
+• nestabilní není-li stabilní
+
+Definice (Oblast atraktivity)
+
+Věta (Hurwitzovo kriterium)
+
+9 Body rovnováhy nelineárního systému
+Mějme nelineární systém ve tvaru:
+                                            𝑥̇ = 𝑃 (𝑥, 𝑦)
+                                            𝑦 ̇ = 𝑄(𝑥, 𝑦)
+Definice (Topologické sedlo) Jestliže existují trajektorie Γ𝑖 = {𝑥 ∈ 𝐸; 𝑥 = 𝜑(𝑡, 𝑥𝑖 ), 𝑡 ∈ ℝ} ta­
+kové, že lim 𝜑(𝑡, 𝑥𝑖 ) = 𝑥0 , 𝑖 = 1, 2 a dále existují trajektorie Γ𝑖 = {𝑥 ∈ 𝐸; 𝑥 = 𝜑(𝑡, 𝑥𝑖 ), 𝑡 ∈ ℝ}
+         𝑡→+∞
+             lim 𝜑(𝑡, 𝑥) = 𝑥0 , 𝑖 = 3, 4 .
+takové, že 𝑡→−∞
+  A existuje-li 𝛿 -okolí bodu 𝑥0 takové, že ostatní trajektorie systému @system vycházející z
+bodu 𝑋 ∈ 𝑁𝛿 (𝑥0 ) \ {𝑥0 } opustí 𝑁𝛿 (𝑥0 ) při 𝑡 → +∞ či 𝑡 → −∞ . Pak se 𝑥0 nazývá topologické
+sedlo a trajektorie Γ1 , Γ2 , Γ3 , Γ4 , se nazývají separatisy.
+Topologické sedlo má varietey:
+• Stabilní varieta 𝑆 v bodě 𝑥0 : 𝑆 = Γ1 ∪ Γ2 ∪ {𝑥0 }
+• Nestabilní varieta 𝑈 v bodě 𝑥0 : 𝑈 = Γ3 ∪ Γ4 ∪ {𝑥0 }
+Lemma 9.1 Buď 𝐸 ⊂ ℝ𝑛 , E je otevřená množina, 𝐹 ∈ 𝒞︀1 (𝐸) , 𝑥0 ∈ 𝐸 , 𝐹 (𝑥0 ) = 0 .
+• Je-li 𝑥0 hyperbolický bod rovnoováhy systému @system je 𝑥0 topologické sedlo ⇔ 𝑥0 je
+   sedlo linearizace 𝑋̇ = 𝒟︀𝐹 (𝑥0 )
+• 𝐹 ∈ 𝒞︀2 (𝐸)
+   ‣ Bod rovnováhy je stabilní (nestabilní) uzel ⇔ 𝑥0 je stabilní respektive nestabilní uzel
+     linearizace 𝑋̇ = 𝒟︀𝐹 (𝑥0 )
+   ‣ Bod rovnováhy je stabilní (nestabilní) ohnisko ⇔ 𝑥0 je stabilní respektive nestabilní
+     ohnisko linearizace 𝑋̇ = 𝒟︀𝐹 (𝑥0 )
+• Nehyperbolický bod rovnováhy 𝑥0 je střed linearizace. Pak 𝑥0 je je buď
+   1. Střed
+   2. Ohnisko
+   3. Střed-ohnisko
+Definice (Sektor) Sektor je oblast ohraničená separatisami
+Sektorů máme tři typy, budeme je rozlišovat pouze dle obrázků
+• Hyperbolický sektor
+• Parabolický sektor
+• Eliptický sektor
+
+10 Složené body rovnováhy
+
+VI. Soustava nelineárních diferenciálních rovnic - globální
+    chování
+1 Dynamické systémy
+Definice (Dynamický systém) Dynamický systém na 𝐸 je zobrazení
+                                 𝜑 : ℝ × 𝐸 ↦ 𝐸,
+kde 𝐸 je otevřená podmnožina ℝ𝑛 a pokud 𝜑𝑡 (𝑥) = 𝜑(𝑡, 𝑥) , potom 𝜑𝑡 splňuje
+1. 𝜑0 (𝑥) = 𝑥 pro ∀𝑥 ∈ 𝐸
+2. 𝜑𝑡 ∘ 𝜑𝑠 (𝑥) = 𝜑𝑡+𝑠 pro ∀𝑡, 𝑠 ∈ ℝ and 𝑥 ∈ 𝐸
+
+Pozorování Je-li matice 𝐴 typu 𝑛 × 𝑛 potom funkce 𝜑(𝑡, 𝑥) = 𝑒𝐴𝑡 𝑥 definuje dynamický systém
+na ℝ𝑛 a také platí, že pro libovolné 𝑥0 ∈ ℝ𝑛 je funkce 𝜑(𝑡, 𝑥0 ) řešení počáteční úlohy
+                                           𝑥̇ = 𝐴𝑥
+                                          𝑥(0) = 𝑥0 .
+  Obecně, je-li 𝜑(𝑡, 𝑥) dynamický systém na 𝐸 ⊂ ℝ𝑛 , pak funkce
+                                              d
+                                     𝑓(𝑥) = 𝜑(𝑡, 𝑥) |𝑡=0
+                                              d𝑡
+definuje vektorové pole na 𝐸 a pro libovolné 𝑥0 ∈ 𝐸 , je 𝜑(𝑡, 𝑥0 ) řešením počáteční úlohy
+                                           𝑥̇ = 𝑓(𝑥)
+                                          𝑥(0) = 𝑥0 .
+
+Věta (O globální existenci) Pro 𝐹 ∈ 𝒞︀1 (ℝ𝑛 ) a pro ∀𝑥0 ∈ ℝ𝑛 , má počáteční problém
+                                               𝐹 (𝑥)
+                                      𝑥̇ =
+                                           1 + |𝐹 (𝑥)|                                       (7)
+                                          𝑥(0) = 𝑥0 ,
+jednoznačné řešení 𝑥(𝑡) definované pro ∀𝑡 ∈ ℝ , tedy (7) definuje dynamický systém na ℝ𝑛 ,
+dále platí že (7) je topologicky ekvivalentní k 𝑥̇ = 𝐹 (𝑥) na ℝ𝑛 .
+
+2 Limitní množiny, atraktory
+Uvažjme autonomní systém (6) s 𝐹 ∈ 𝒞︀1 (𝐸), kde 𝐸 je otevřená podmnožina ℝ𝑛 . Uvedli jsme
+že tato rovnice definuje dynamický systém 𝜑(𝑡, 𝑥) na 𝐸 . Pro 𝑥 ∈ 𝐸 funkce 𝜑(⋅, 𝑥) : ℝ ↦ 𝐸
+definuje křivku řešení, trajektorii a orbitu systému (6) procházející bodem 𝑥0 ∈ 𝐸 .
+Definice (Trajektorie) Trajektorí bodem 𝑥0 nazýváme množinu
+                              Γ𝑥0 = {𝑥 ∈ 𝐸 : 𝑥 = 𝜑(𝑡, 𝑥0 ), ∀𝑡 ∈ 𝑅},
+speciálně množiny
+                             Γ𝑥+0 = {𝑥 ∈ 𝐸 : 𝑥 = 𝜑(𝑡, 𝑥0 ), ∀𝑡 > 0}
+                             Γ𝑥−0 = {𝑥 ∈ 𝐸 : 𝑥 = 𝜑(𝑡, 𝑥0 ), ∀𝑡 < 0}
+nazýváme pozitivní respektive negativní polotrajektorie.
+
+Definice (Limitní body) Nechť Γ jsou trajektorie (6). Existuje-li posloupnost … tak, že …. Pak
+… se nazývá …-limitní bod trajektorie ….
+  Obobně existuje-li posloupnost … tak, že …. Pak … se nazývá …-limitní bod trajektorie ….
+
+Definice (Limitní trajektorie) Množina všech …-limitních (respektive …) bodů se nazývá …-
+-limitní (respektive …) trajektorie a značí se … (respektive …).
+
+Věta Množiny … a … trajektorie … systému (6) jsou uzavřené podmnožiny … a jsou-li kompaktní
+v … pak jsou i souvislé a neprázdné.
+
+Věta (Atraktující množina)
+
+3 Periodické orbity
+4 Poincarého zobrazéni
+5 Stabilní varieta periodických orbit
+

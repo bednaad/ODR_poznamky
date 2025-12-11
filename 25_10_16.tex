@@ -1,0 +1,137 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+\title{Studijní Materiál: Lineární systémy (Oprava 16.10.)}
+\author{Zpracováno z poznámek: 16.10.}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Násobná vlastní čísla (Jordanův tvar)}
+
+Pokud má matice $A$ násobné vlastní číslo $\lambda$ a k němu existuje pouze jeden lineárně nezávislý vlastní vektor, musíme pro sestavení fundamentálního systému hledat tzv. **zobecněné vlastní vektory**.
+
+\subsection{Postup hledání řešení}
+
+Nechť $\lambda$ je dvojnásobné vlastní číslo.
+\begin{enumerate}
+    \item **První řešení:** Najdeme vlastní vektor $K$ řešením rovnice:
+    $$ (A - \lambda I)K = 0 $$
+    První řešení systému je pak $X_1(t) = K e^{\lambda t}$.
+
+    \item **Druhé řešení:** Hledáme druhé lineárně nezávislé řešení ve tvaru:
+    $$ X_2(t) = (K t + P) e^{\lambda t} $$
+    Dosazením do rovnice $X' = AX$ získáme podmínku pro vektor $P$ (zobecněný vlastní vektor):
+    $$ (A - \lambda I)P = K $$
+\end{enumerate}
+
+\textbf{Obecné řešení} je pak lineární kombinací:
+$$ X(t) = C_1 K e^{\lambda t} + C_2 (K t + P) e^{\lambda t} $$
+
+\subsection{Příklad 1 (z poznámek)}
+\textbf{Zadání:}
+$$ X' = \begin{pmatrix} 3 & -18 \\ 2 & -9 \end{pmatrix} X $$
+
+1. **Vlastní čísla:**
+   $$ \det(A-\lambda I) = \lambda^2 + 6\lambda + 9 = (\lambda + 3)^2 = 0 \implies \lambda_{1,2} = -3 $$
+
+2. **Vlastní vektor $K$:**
+   $$ (A + 3I)K = \begin{pmatrix} 6 & -18 \\ 2 & -6 \end{pmatrix} \begin{pmatrix} k_1 \\ k_2 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} $$
+   $2k_1 - 6k_2 = 0 \implies k_1 = 3k_2$. Volíme $k_2 = 1 \implies K = \begin{pmatrix} 3 \\ 1 \end{pmatrix}$.
+
+3. **Zobecněný vlastní vektor $P$:**
+   Hledáme $P$ řešením $(A + 3I)P = K$:
+   $$ \begin{pmatrix} 6 & -18 \\ 2 & -6 \end{pmatrix} \begin{pmatrix} p_1 \\ p_2 \end{pmatrix} = \begin{pmatrix} 3 \\ 1 \end{pmatrix} $$
+   $2p_1 - 6p_2 = 1$. Volíme $p_2 = 0 \implies p_1 = 1/2$. Tedy $P = \begin{pmatrix} 1/2 \\ 0 \end{pmatrix}$.
+
+4. **Výsledek:**
+   $$ X(t) = C_1 e^{-3t} \begin{pmatrix} 3 \\ 1 \end{pmatrix} + C_2 e^{-3t} \left[ t \begin{pmatrix} 3 \\ 1 \end{pmatrix} + \begin{pmatrix} 1/2 \\ 0 \end{pmatrix} \right] $$
+
+\newpage
+\section{Komplexní vlastní čísla}
+
+Nechť $\lambda = \alpha + i\beta$ je vlastní číslo a $v = u + iw$ je příslušný vlastní vektor.
+Reálný fundamentální systém získáme rozkladem komplexního řešení na reálnou a imaginární část.
+
+\textbf{Obecný tvar řešení:}
+$$ X(t) = C_1 e^{\alpha t} \left( u \cos(\beta t) - w \sin(\beta t) \right) + C_2 e^{\alpha t} \left( u \sin(\beta t) + w \cos(\beta t) \right) $$
+
+\subsection{Příklad 2 (z poznámek)}
+\textbf{Zadání:}
+$$ X' = \begin{pmatrix} 1 & 1 \\ -1 & 1 \end{pmatrix} X $$
+
+1. **Vlastní čísla:**
+   $$ (1-\lambda)^2 + 1 = 0 \implies \lambda_{1,2} = 1 \pm i \quad (\alpha=1, \beta=1) $$
+
+2. **Vlastní vektor pro $\lambda = 1+i$:**
+   $$ (A - (1+i)I)v = \begin{pmatrix} -i & 1 \\ -1 & -i \end{pmatrix} \begin{pmatrix} v_1 \\ v_2 \end{pmatrix} = 0 $$
+   $-i v_1 + v_2 = 0 \implies v_2 = i v_1$. Volíme $v_1 = 1$.
+   $$ v = \begin{pmatrix} 1 \\ i \end{pmatrix} = \begin{pmatrix} 1 \\ 0 \end{pmatrix} + i \begin{pmatrix} 0 \\ 1 \end{pmatrix} $$
+   Tedy reálná část vektoru $u = \begin{pmatrix} 1 \\ 0 \end{pmatrix}$ a imaginární část $w = \begin{pmatrix} 0 \\ 1 \end{pmatrix}$.
+
+3. **Sestavení obecného řešení:**
+   Dosadíme do obecného vzorce:
+   $$ X(t) = C_1 e^t \left[ \begin{pmatrix} 1 \\ 0 \end{pmatrix} \cos t - \begin{pmatrix} 0 \\ 1 \end{pmatrix} \sin t \right] + C_2 e^t \left[ \begin{pmatrix} 1 \\ 0 \end{pmatrix} \sin t + \begin{pmatrix} 0 \\ 1 \end{pmatrix} \cos t \right] $$
+
+   Po úpravě vektorů:
+   $$ X(t) = C_1 e^t \begin{pmatrix} \cos t \\ -\sin t \end{pmatrix} + C_2 e^t \begin{pmatrix} \sin t \\ \cos t \end{pmatrix} $$
+\section{Nehomogenní systémy (Variace konstant)}
+
+Uvažujme systém:
+$$ X' = AX + F(t) $$
+Obecné řešení má tvar $X(t) = X_H(t) + X_P(t)$, kde $X_H$ je řešení homogenního systému a $X_P$ je partikulární řešení.
+
+\subsection{Metoda variace konstant}
+Nechť $\Phi(t)$ je fundamentální matice homogenního systému ($X_H = \Phi(t)C$).
+Hledáme řešení ve tvaru $X_P(t) = \Phi(t) U(t)$, kde $U(t)$ je vektorová funkce.
+
+Dosazením do rovnice získáme vztah pro derivaci $U(t)$:
+$$ \Phi(t) U'(t) = F(t) $$
+$$ U'(t) = \Phi^{-1}(t) F(t) $$
+$$ U(t) = \int \Phi^{-1}(t) F(t) dt $$
+Výsledný vzorec:
+$$ X(t) = \Phi(t) C + \Phi(t) \int \Phi^{-1}(t) F(t) dt $$
+
+\subsection{Příklad 3 (z poznámek)}
+Zadání:
+$$ X' = \begin{pmatrix} -3 & 1 \\ 2 & -4 \end{pmatrix} X + \begin{pmatrix} 3t \\ e^{-t} \end{pmatrix} $$
+
+1. **Homogenní část (Vlastní čísla a vektory):**
+   $\det \begin{pmatrix} -3-\lambda & 1 \\ 2 & -4-\lambda \end{pmatrix} = (-3-\lambda)(-4-\lambda) - 2 = \lambda^2 + 7\lambda + 12 - 2 = \lambda^2 + 7\lambda + 10 = 0$.
+   $$ (\lambda+2)(\lambda+5) = 0 \implies \lambda_1 = -2, \lambda_2 = -5 $$
+
+   Vlastní vektory:
+   \begin{itemize}
+       \item Pro $\lambda_1 = -2$: $\begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \implies v_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$.
+       \item Pro $\lambda_2 = -5$: $\begin{pmatrix} 2 & 1 \\ 2 & 1 \end{pmatrix} \implies v_2 = \begin{pmatrix} 1 \\ -2 \end{pmatrix}$.
+   \end{itemize}
+
+2. **Fundamentální matice $\Phi(t)$:**
+   $$ \Phi(t) = \begin{pmatrix} e^{-2t} & e^{-5t} \\ e^{-2t} & -2e^{-5t} \end{pmatrix} $$
+
+3. **Inverzní matice $\Phi^{-1}(t)$:**
+   Determinant $W(t) = -2e^{-7t} - e^{-7t} = -3e^{-7t}$.
+   $$ \Phi^{-1}(t) = \frac{1}{-3e^{-7t}} \begin{pmatrix} -2e^{-5t} & -e^{-5t} \\ -e^{-2t} & e^{-2t} \end{pmatrix} = \frac{1}{3} \begin{pmatrix} 2e^{2t} & e^{2t} \\ e^{5t} & -e^{5t} \end{pmatrix} $$
+
+4. **Výpočet $U(t)$:**
+   $$ U'(t) = \Phi^{-1}(t) \begin{pmatrix} 3t \\ e^{-t} \end{pmatrix} = \frac{1}{3} \begin{pmatrix} 2e^{2t}(3t) + e^{2t}(e^{-t}) \\ e^{5t}(3t) - e^{5t}(e^{-t}) \end{pmatrix} = \begin{pmatrix} 2t e^{2t} + \frac{1}{3}e^t \\ t e^{5t} - \frac{1}{3}e^{4t} \end{pmatrix} $$
+   (Poznámka: Výpočet integrálů $U(t) = \int U'(t) dt$ se provádí per partes, v poznámkách je naznačen výsledek).
+
+5. **Alternativní zápis soustavy pro variaci:**
+   Místo inverze matice lze řešit soustavu rovnic:
+   $$ e^{-2t} u_1' + e^{-5t} u_2' = 3t $$
+   $$ e^{-2t} u_1' - 2e^{-5t} u_2' = e^{-t} $$
+   Odečtením rovnic získáme $3e^{-5t} u_2' = 3t - e^{-t}$, odkud vyjádříme $u_2'$ a následně $u_1'$.
+
+\end{document}

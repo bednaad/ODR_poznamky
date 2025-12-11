@@ -1,0 +1,158 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage[czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip} % Lepší formátování odstavců
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue}
+
+% --- Definice pro obrázky ---
+% Odkomentujte a upravte název souboru, pokud chcete vložit obrázek
+% \newcommand{\GrafSeparace}{\includegraphics[width=0.45\textwidth]{separace_graf.png}}
+
+\title{Studijní Materiál: Metody řešení ODR 1. řádu}
+\author{Zpracováno z poznámek: 25.9.}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Separace proměnných}
+
+Tato metoda se používá pro rovnice tvaru $y' = g(x)h(y)$.
+
+\textbf{Obecný postup:}
+\begin{enumerate}
+    \item Najdeme konstantní řešení (kde $h(y)=0$).
+    \item Separujeme proměnné: $\frac{1}{h(y)} dy = g(x) dx$.
+    \item Integrujeme obě strany: $\int \frac{1}{h(y)} dy = \int g(x) dx + C$.
+    \item Pokud je to možné, vyjádříme $y$ explicitně.
+\end{enumerate}
+
+\subsection{Příklad 1: $y' = x(y-1)$}
+\textbf{Zadání:} Nalezněte řešení splňující počáteční podmínku $y(-20) = 0$.
+
+1. **Separace:**
+   $$ \frac{dy}{y-1} = x dx $$
+   (Všimneme si, že $y=1$ je konstantní řešení, ale to nesplňuje podmínku $y(-20)=0$).
+
+2. **Integrace:**
+   $$ \int \frac{dy}{y-1} = \int x dx $$
+   $$ \ln|y-1| = \frac{x^2}{2} + C $$
+
+3. **Úprava na explicitní tvar:**
+   $$ |y-1| = e^{\frac{x^2}{2} + C} = e^C \cdot e^{\frac{x^2}{2}} $$
+   Položme $K = \pm e^C$.
+   $$ y - 1 = K e^{\frac{x^2}{2}} \implies y = 1 + K e^{\frac{x^2}{2}} $$
+
+4. **Dosazení počáteční podmínky $y(-20)=0$:**
+   $$ 0 = 1 + K e^{\frac{(-20)^2}{2}} = 1 + K e^{200} $$
+   $$ K = -e^{-200} $$
+
+5. **Výsledek:**
+   $$ y(x) = 1 - e^{-200} \cdot e^{\frac{x^2}{2}} = 1 - e^{\frac{x^2}{2} - 200} $$
+
+\subsection{Příklad 2: $y' = xy^3$}
+\textbf{Zadání:} Nalezněte řešení pro $y(0)=1$.
+
+1. **Separace:**
+   $$ \frac{dy}{y^3} = x dx \implies y^{-3} dy = x dx $$
+
+2. **Integrace:**
+   $$ \frac{y^{-2}}{-2} = \frac{x^2}{2} + C $$
+   $$ -\frac{1}{2y^2} = \frac{x^2}{2} + C $$
+   Vynásobíme $-2$:
+   $$ \frac{1}{y^2} = -x^2 - 2C \quad (\text{označme } C_2 = -2C) $$
+   $$ y^2 = \frac{1}{C_2 - x^2} $$
+
+3. **Explicitní tvar a podmínka:**
+   $$ y = \pm \sqrt{\frac{1}{C_2 - x^2}} $$
+   Pro $y(0)=1$ volíme kladnou větev:
+   $$ 1 = \sqrt{\frac{1}{C_2 - 0}} \implies C_2 = 1 $$
+   **Výsledek:** $y(x) = \sqrt{\frac{1}{1-x^2}}$, definováno pro $x \in (-1, 1)$.
+
+\section{Bernoulliho rovnice a metoda $y=uv$}
+
+Pro rovnice, které nejsou separovatelné, můžeme zkusit substituci $y(x) = u(x)v(x)$.
+
+\subsection{Příklad 3: $y' - \frac{y}{x} = 2x^3$}
+Jde o lineární rovnici, kterou v poznámkách řešíme metodou součinu funkcí (Bernoulliho metodou).
+
+1. **Dosazení $y=uv$:**
+   $$ y' = u'v + uv' $$
+   $$ (u'v + uv') - \frac{uv}{x} = 2x^3 $$
+   $$ u'v + u(v' - \frac{v}{x}) = 2x^3 $$
+
+2. **Nulování závorky (hledáme $v$):**
+   $$ v' - \frac{v}{x} = 0 \implies \frac{v'}{v} = \frac{1}{x} $$
+   $$ \ln|v| = \ln|x| \implies v = x $$
+
+3. **Výpočet $u$ (dosadíme $v=x$):**
+   $$ u' \cdot x = 2x^3 $$
+   $$ u' = 2x^2 $$
+   $$ u = \int 2x^2 dx = \frac{2}{3}x^3 + C $$
+
+4. **Celkové řešení:**
+   $$ y = u \cdot v = \left(\frac{2}{3}x^3 + C\right) x = \frac{2}{3}x^4 + Cx $$
+
+\section{Lineární ODR 1. řádu}
+
+Tvar: $y' + a(x)y = g(x)$.
+
+\subsection{Metoda 1: Variace konstant}
+Postup:
+1. Vyřešíme homogenní rovnici $y' + a(x)y = 0$ (separací).
+2. Konstantu $C$ nahradíme funkcí $C(x)$ a dosadíme do původní rovnice.
+
+\subsubsection{Příklad 4: $xy' + 3y = x^2$}
+Upravíme dělením $x$: $y' + \frac{3}{x}y = x$.
+
+1. **Homogenní řešení:**
+   $$ y' = -\frac{3}{x}y \implies \ln|y| = -3\ln|x| \implies y_h = \frac{C}{x^3} $$
+
+2. **Variace:**
+   Hledáme $y = \frac{C(x)}{x^3}$.
+   Derivace: $y' = C'(x)x^{-3} - 3C(x)x^{-4}$.
+   Dosazení do $xy' + 3y = x^2$:
+   $$ x(C'x^{-3} - 3Cx^{-4}) + 3(Cx^{-3}) = x^2 $$
+   $$ C'x^{-2} - 3Cx^{-3} + 3Cx^{-3} = x^2 $$
+   $$ C'x^{-2} = x^2 \implies C' = x^4 $$
+   $$ C(x) = \frac{x^5}{5} + K $$
+
+3. **Výsledek:**
+   $$ y(x) = \left(\frac{x^5}{5} + K\right)\frac{1}{x^3} = \frac{x^2}{5} + \frac{K}{x^3} $$
+
+\subsection{Metoda 2: Integrační faktor}
+Celou rovnici vynásobíme faktorem $\mu(x) = e^{\int a(x) dx}$, čímž převedeme levou stranu na derivaci součinu.
+
+\subsubsection{Příklad 5: $y' + \frac{1}{x}y = \frac{1}{x^2}$}
+1. **Faktor:** $a(x) = \frac{1}{x} \implies \mu(x) = e^{\ln|x|} = x$.
+2. **Násobení:**
+   $$ x \cdot y' + 1 \cdot y = \frac{1}{x} $$
+   $$ (xy)' = \frac{1}{x} $$
+3. **Integrace:**
+   $$ xy = \ln|x| + C \implies y = \frac{\ln|x| + C}{x} $$
+
+\subsubsection{Příklad 6: Goniometrická rovnice}
+Zadání: $y' + y \tan x = 2 \sin x \cos x$ (s podmínkou $y(0)=...$).
+
+1. **Faktor:**
+   $$ a(x) = \tan x = \frac{\sin x}{\cos x} $$
+   $$ \int \frac{\sin x}{\cos x} dx = -\ln|\cos x| $$
+   $$ \mu(x) = e^{-\ln|\cos x|} = \frac{1}{\cos x} $$
+
+2. **Násobení rovnice faktorem $\frac{1}{\cos x}$:**
+   $$ y' \frac{1}{\cos x} + y \frac{\sin x}{\cos^2 x} = \frac{2 \sin x \cos x}{\cos x} $$
+   Levá strana je derivace součinu $(y \cdot \frac{1}{\cos x})'$.
+   $$ \left( \frac{y}{\cos x} \right)' = 2 \sin x $$
+
+3. **Integrace:**
+   $$ \frac{y}{\cos x} = \int 2 \sin x dx = -2 \cos x + C $$
+   $$ y(x) = -2 \cos^2 x + C \cos x $$
+
+\end{document}
